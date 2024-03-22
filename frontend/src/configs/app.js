@@ -1,4 +1,4 @@
 export default {
-  appNameEN: 'Suekhong - ซื้อของ',
-  appNameTH: 'Suekhong - ซื้อของ',
-}
+  appNameEN: "TDC Home Gallery",
+  appNameTH: "TDC Home Gallery",
+};

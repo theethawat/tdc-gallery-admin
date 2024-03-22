@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { Auth, Home, Management, ShoppingList } from "./views";
+import { Auth, Home, Management } from "./views";
 import * as actions from "./redux/actions";
 
 function App() {
@@ -34,21 +34,7 @@ function App() {
               />{" "}
               <Route path='edit/:id' element={<Management.EditProduct />} />
             </Route>
-            <Route path='shopping-list'>
-              <Route index element={<ShoppingList.ShoppingListManagement />} />
-              <Route
-                path='create'
-                element={<ShoppingList.CreateShoppingList />}
-              />{" "}
-              <Route
-                path='detail/:id'
-                element={<ShoppingList.DetailShoppingList />}
-              />{" "}
-              <Route
-                path='edit/:id'
-                element={<ShoppingList.EditShoppingList />}
-              />{" "}
-            </Route>
+
             <Route path='dashboard'>
               <Route index element={<div>dashboard index</div>} />
             </Route>
