@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  mainapp:
+    container_name: suekhong
+    image: xx
+    environment:
+      - MONGODB_URI=
+      - SECRET=intelligentautomationresearchcenter
+      - PORT=7000
+    ports:
+      - 8801:7000
