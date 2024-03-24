@@ -1,13 +1,13 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 
-import MeReducer from './MeReducers'
-import ProductReducer from './ProductReducers'
-import ShoppingListReducer from './ShoppingListReucers'
+import MeReducer from "./MeReducers";
+import PlaceReducer from "./PlaceReducer";
+import CategoryReducer from "./CategoryReducer";
 
 const rootReducers = combineReducers({
   me: MeReducer,
-  product: ProductReducer,
-  shoppingList: ShoppingListReducer,
-})
+  place: PlaceReducer,
+  category: CategoryReducer,
+});
 
-export default rootReducers
+export default rootReducers;
