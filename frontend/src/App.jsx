@@ -26,6 +26,11 @@ function App() {
                 <Route path='create' element={<Management.CreatePlace />} />
                 <Route path='edit/:id' element={<Management.EditPlace />} />
               </Route>
+              <Route path='category'>
+                <Route index element={<Management.ManagementCategory />} />
+                <Route path='create' element={<Management.CreateCategory />} />
+                <Route path='edit/:id' element={<Management.EditPlace />} />
+              </Route>
             </Route>
             {/* <Route path='product'>
               <Route index element={<Management.ManagementProduct />} />
