@@ -21,7 +21,11 @@ function App() {
           <Routes>
             <Route path='management'>
               <Route path='user' element={<Management.ManagementUser />} />
-              <Route path='place' element={<Management.ManagementPlace />} />
+              <Route path='place'>
+                <Route index element={<Management.ManagementPlace />} />
+                <Route path='create' element={<Management.CreatePlace />} />
+                <Route path='edit/:id' element={<Management.EditPlace />} />
+              </Route>
             </Route>
             {/* <Route path='product'>
               <Route index element={<Management.ManagementProduct />} />

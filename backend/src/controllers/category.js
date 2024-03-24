@@ -37,6 +37,7 @@ export const onReadAll = async (req, res) => {
     const result = await CategoryService.getAll({
       ...req.query,
       query,
+      populateKey: 'place',
     });
     res.status(200).send(result);
   } catch (error) {
@@ -46,7 +47,7 @@ export const onReadAll = async (req, res) => {
 
 export const onReadOne = async (req, res) => {
   try {
-    const result = await CategoryService.getOne(req.params.id);
+    const result = await CategoryService.getOne(req.params.id, 'place');
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });

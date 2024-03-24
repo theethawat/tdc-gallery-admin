@@ -69,7 +69,7 @@ export default function ManagementPlace() {
 
   const rightButton = (
     <div>
-      <Link to='/place/create'>
+      <Link to='/management/place/create'>
         <Button>เพิ่ม</Button>
       </Link>
     </div>
@@ -102,8 +102,8 @@ export default function ManagementPlace() {
           <Table size='lg' stripe='odd'>
             <thead>
               <tr>
-                <th style={{ width: "30%" }}>รหัสสินค้า</th>
-                <th>ชื่อสินค้า</th>
+                <th style={{ width: "30%" }}>รหัสสถานที่</th>
+                <th>ชื่อสถานที่</th>
                 <th>ดำเนินการ</th>
               </tr>
             </thead>
@@ -113,7 +113,7 @@ export default function ManagementPlace() {
                   <td>{each?.type_code}</td>
                   <td>{each?.name}</td>
                   <td className='flex gap-2'>
-                    <Link to={`/place/edit/${each?._id}`}>
+                    <Link to={`/management/place/edit/${each?._id}`}>
                       <Button size='sm' color='warning'>
                         แก้ไข
                       </Button>

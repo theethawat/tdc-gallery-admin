@@ -25,7 +25,7 @@ export default function MainLayout({
       <div className='min-h-screen'>
         <NavHeader userData={me} currentPage={currentPage} />
         <div className='flex flex-wrap'>
-          <div className='lg:w-1/5 hidden lg:block'>
+          <div className='lg:w-1/6 hidden lg:block'>
             <Sidebar menuList={menuList} />
           </div>
           <div className='lg:w-3/4'>
@@ -47,15 +47,20 @@ export default function MainLayout({
                 <div className='w-2/5 flex justify-end'>
                   {rightContainer}
                   {useBackButton && (
-                    <Button
-                      color='neutral'
-                      onClick={() => {
-                        navigate(-1);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faChevronLeft} className='mr-2' />
-                      กลับ
-                    </Button>
+                    <div>
+                      <Button
+                        color='neutral'
+                        onClick={() => {
+                          navigate(-1);
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faChevronLeft}
+                          className='mr-2'
+                        />
+                        กลับ
+                      </Button>
+                    </div>
                   )}
                 </div>
               </div>
