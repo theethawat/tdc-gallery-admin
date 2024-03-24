@@ -15,13 +15,14 @@ class GeneralAction {
     this.name = name
   }
 
-  getAllData({ page = 1, size = 10, name = "" }) {
+  getAllData({ page = 1, size = 10, name = "", ...query }) {
     return async (dispatch) => {
       try {
+        const queryParams = new URLSearchParams({ page, size, name, ...query });
         const { data, status } = await api.get(
           `${import.meta.env.VITE_API_URL}/${
             this.subURL
-          }?page=${page}&size=${size}&name=${name}`
+          }?${queryParams.toString()}`
         );
 
         if (status === 200 && data) {

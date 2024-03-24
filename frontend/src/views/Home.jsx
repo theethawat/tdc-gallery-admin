@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 
 import { Button } from "@mui/joy";
 
-import { MainLayout } from "../components/layouts";
+import { NoSidebarLayout } from "../components/layouts";
 
 function Home() {
   return (
-    <MainLayout title='หน้าแรก' currentPage='Home'>
+    <NoSidebarLayout title='หน้าแรก' currentPage='Home'>
       <div>
         <div className='grid grid-cols-1 md:grid-cols-3  w-full gap-2 my-4'>
           <div className=''>
@@ -29,7 +29,7 @@ function Home() {
             </Link>
           </div>
           <div className=''>
-            <Link to='/product'>
+            <Link to='/management/place'>
               <Button size='lg' color='neutral' fullWidth>
                 <div className='py-8'>
                   <div className='text-center text-2xl'>
@@ -54,7 +54,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </NoSidebarLayout>
   );
 }
 

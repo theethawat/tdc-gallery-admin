@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
@@ -21,9 +21,9 @@ import _ from "lodash";
 import { MainLayout } from "../../components/layouts";
 import * as actions from "../../redux/actions";
 
-export default function ManagementProduct() {
+export default function ManagementPlace() {
   const [isReady, setIsReady] = useState(false);
-  const product = useSelector((state) => state.product);
+  const place = useSelector((state) => state.place);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const [name, setName] = useState("");
@@ -31,7 +31,7 @@ export default function ManagementProduct() {
   const dispatch = useDispatch();
 
   const getAllData = () => {
-    dispatch(actions.getAllProduct({ page, size, name }))
+    dispatch(actions.getAllPlace({ page, size, name }))
       .then(() => {
         setIsReady(true);
       })
@@ -39,6 +39,7 @@ export default function ManagementProduct() {
         alert(err);
       });
   };
+
   useEffect(() => {
     getAllData();
 
@@ -56,7 +57,7 @@ export default function ManagementProduct() {
   const handleDelete = (id) => {
     const confirm = window.confirm("ยืนยันการลบ");
     if (confirm) {
-      dispatch(actions.deleteOneProduct(id))
+      dispatch(actions.deleteOnePlace(id))
         .then(() => {
           getAllData();
         })
@@ -68,7 +69,7 @@ export default function ManagementProduct() {
 
   const rightButton = (
     <div>
-      <Link to='/product/create'>
+      <Link to='/place/create'>
         <Button>เพิ่ม</Button>
       </Link>
     </div>
@@ -85,9 +86,10 @@ export default function ManagementProduct() {
   return (
     <div>
       <MainLayout
-        title='จัดการรายการสินค้า'
+        title='จัดการสถานที่จัดแสดง'
         currentPage='Store'
         rightContainer={rightButton}
+        hirachyList={["หน้าหลัก", "การตั้งค่า"]}
       >
         <div className='my-4 lg:w-1/2'>
           <Input
@@ -106,12 +108,12 @@ export default function ManagementProduct() {
               </tr>
             </thead>
             <tbody>
-              {_.map(product?.rows, (each, index) => (
+              {_.map(place?.rows, (each, index) => (
                 <tr key={index}>
                   <td>{each?.type_code}</td>
                   <td>{each?.name}</td>
                   <td className='flex gap-2'>
-                    <Link to={`/product/edit/${each?._id}`}>
+                    <Link to={`/place/edit/${each?._id}`}>
                       <Button size='sm' color='warning'>
                         แก้ไข
                       </Button>
@@ -126,7 +128,7 @@ export default function ManagementProduct() {
                   </td>
                 </tr>
               ))}
-              {_.isEmpty(product?.rows) && (
+              {_.isEmpty(place?.rows) && (
                 <tr>
                   <td colSpan={3}>ยังไม่มีสินค้า</td>
                 </tr>
@@ -144,10 +146,10 @@ export default function ManagementProduct() {
                 <FontAwesomeIcon icon={faChevronLeft} />
               </Button>
               <Button disabled>
-                หน้า {page} จาก {product?.totalPage}{" "}
+                หน้า {page} จาก {place?.totalPage}{" "}
               </Button>
               <Button
-                disabled={!(product?.totalPage > page)}
+                disabled={!(place?.totalPage > page)}
                 onClick={() => setPage(page + 1)}
               >
                 <FontAwesomeIcon icon={faChevronRight} />

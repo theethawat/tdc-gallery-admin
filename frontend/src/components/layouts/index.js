@@ -1,5 +1,6 @@
-import MainLayout from './MainLayout'
-import AuthLayout from './AuthLayout'
+import MainLayout from "./MainLayout";
+import AuthLayout from "./AuthLayout";
+import NoSidebarLayout from "./NoSideBarLayout";
 
-export { MainLayout, AuthLayout }
-export default { MainLayout, AuthLayout }
+export { MainLayout, AuthLayout, NoSidebarLayout };
+export default { MainLayout, AuthLayout, NoSidebarLayout };
