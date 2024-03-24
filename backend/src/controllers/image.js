@@ -1,6 +1,7 @@
 import Mongoose from 'mongoose';
 import MainService from '../services/MainService';
 import ImageModel from '../models/Image';
+import uploadService from '../services/uploadService';
 
 const ImageService = new MainService(ImageModel, 'image');
 
@@ -17,7 +18,6 @@ export const onReadAll = async (req, res) => {
         ],
       };
     }
-
     const result = await ImageService.getAll({
       ...req.query,
       query,
@@ -64,10 +64,25 @@ export const onDeleteOne = async (req, res) => {
   }
 };
 
+export const onUploadFile = async (req, res) => {
+  try {
+    const fileSize = parseInt(req.headers['content-length'], 10);
+    const imageURL = await uploadService(req?.file, fileSize);
+    const result = await ImageService.createOne({
+      url: imageURL,
+      ...req?.body,
+    });
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 export default {
   onReadAll,
   onReadOne,
   onCreateOne,
   onEditOne,
   onDeleteOne,
+  onUploadFile,
 };
