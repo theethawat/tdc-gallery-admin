@@ -35,6 +35,7 @@ function App() {
             <Route path='article'>
               <Route index element={<Article.ManagementArticle />} />
               <Route path='create' element={<Article.CreateArticle />} />
+              <Route path='view/:id' element={<Article.ViewArticle />} />
               <Route path='edit/:id' element={<Management.EditPlace />} />
             </Route>
             <Route path='dashboard'>

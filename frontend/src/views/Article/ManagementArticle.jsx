@@ -115,7 +115,12 @@ export default function ManagementArticle() {
                   <td>{each?.name}</td>
                   <td>{each?.category?.name}</td>
                   <td className='flex gap-2'>
-                    <Link to={`/management/article/edit/${each?._id}`}>
+                    <Link to={`/article/view/${each?._id}`}>
+                      <Button size='sm' color='primary'>
+                        ดู
+                      </Button>
+                    </Link>
+                    <Link to={`/article/edit/${each?._id}`}>
                       <Button size='sm' color='warning'>
                         แก้ไข
                       </Button>

@@ -1,6 +1,8 @@
 import Mongoose from 'mongoose';
+import _ from 'lodash';
 import MainService from '../services/MainService';
 import ArticleModel from '../models/Article';
+import ImageModel from '../models/Image';
 
 const ArticleService = new MainService(ArticleModel, 'article');
 
@@ -52,6 +54,16 @@ export const onReadOne = async (req, res) => {
 export const onCreateOne = async (req, res) => {
   try {
     const result = await ArticleService.createOne(req.body);
+    if (!_.isEmpty(req?.body?.images)) {
+      for await (const image of req?.body?.images || []) {
+        const imageId = image?._id;
+        await ImageModel.findByIdAndUpdate(imageId, {
+          $set: {
+            article: result?._id,
+          },
+        });
+      }
+    }
     res.status(201).send(result);
   } catch (error) {
     res.status(400).send({ error });

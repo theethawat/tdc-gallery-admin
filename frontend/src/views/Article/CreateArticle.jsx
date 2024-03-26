@@ -13,16 +13,22 @@ import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
 import { MainLayout } from "../../components/layouts";
+import Upload from "../../components/Upload";
 import * as actions from "../../redux/actions";
+import { handleUpload } from "../../util";
 
 export default function CreateArticle() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const category = useSelector((state) => state.category);
   const { control, handleSubmit } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      name: "",
+      description: "",
+    },
   });
   const [isReady, setIsReady] = useState(false);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     dispatch(
@@ -38,15 +44,29 @@ export default function CreateArticle() {
     return () => {};
   }, []);
 
-  const handleCreate = (data) => {
-    console.log("Data", data);
-    dispatch(actions.createOneArticle(data))
-      .then(() => {
-        navigate(-1);
-      })
-      .catch((err) => {
-        window.alert(`ไม่สามารถสร้างได้ ${err?.message}`);
+  const handleCreate = async (data) => {
+    if (!_.isEmpty(images)) {
+      handleUpload(images).then((uploadedImages) => {
+        console.log("Upload Success");
+        const payload = { ...data, images: uploadedImages };
+        console.log("Payload", payload);
+        dispatch(actions.createOneArticle(payload))
+          .then(() => {
+            navigate(-1);
+          })
+          .catch((err) => {
+            window.alert(`ไม่สามารถสร้างได้ ${err?.message}`);
+          });
       });
+    } else {
+      dispatch(actions.createOneArticle({ ...data }))
+        .then(() => {
+          navigate(-1);
+        })
+        .catch((err) => {
+          window.alert(`ไม่สามารถสร้างได้ ${err?.message}`);
+        });
+    }
   };
 
   if (!isReady) {
@@ -75,7 +95,7 @@ export default function CreateArticle() {
             <div className='my-2 w-full'>
               <Controller
                 control={control}
-                name={`place`}
+                name={`category`}
                 render={({ field }) => (
                   <Autocomplete
                     placeholder='เลือกหมวดหมู่'
@@ -98,11 +118,14 @@ export default function CreateArticle() {
                 render={({ field }) => (
                   <Textarea
                     {...field}
-                    minRows={4}
+                    minRows={5}
                     placeholder='คำอธิบายประกอบ'
                   />
                 )}
               />
+            </div>
+            <div className='my-2 w-full'>
+              <Upload fileList={images} setFileList={setImages} />
             </div>
           </div>
 

@@ -65,7 +65,7 @@ export const uploadService = async (file, fileSize) => {
       `Blob was uploaded successfully. requestId: ${uploadBlobResponse.requestId}`,
     );
 
-    return blobServiceClient.url;
+    return blockBlobClient.url;
   } catch (error) {
     console.error('Error', error);
     throw error;
