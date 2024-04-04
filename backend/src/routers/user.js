@@ -19,7 +19,7 @@ router.post(
   userController.onLogin,
 );
 
-router.put('/:id', userController.onEditOne);
-router.delete('/:id', userController.onDeleteOne);
+router.put('/:id', authMiddleWare.verifyRequest, userController.onEditOne);
+router.delete('/:id', authMiddleWare.verifyRequest, userController.onDeleteOne);
 
 export default router;

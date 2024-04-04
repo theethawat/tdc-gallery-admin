@@ -1,10 +1,5 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faList,
-  faSliders,
-  faClockRotateLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faList, faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 import { Button } from "@mui/joy";
@@ -35,19 +30,7 @@ function Home() {
                   <div className='text-center text-2xl'>
                     <FontAwesomeIcon icon={faSliders} />
                   </div>
-                  <div className='font-display'>จัดการหมวดหมู่</div>
-                </div>
-              </Button>
-            </Link>
-          </div>
-          <div className=''>
-            <Link to='/shopping-list/'>
-              <Button size='lg' color='success' fullWidth>
-                <div className='py-8'>
-                  <div className='text-center text-2xl'>
-                    <FontAwesomeIcon icon={faClockRotateLeft} />
-                  </div>
-                  <div className='font-display'>ประวัติการสั่งซื้อ</div>
+                  <div className='font-display'>จัดการหมวดหมู่และสถานที่</div>
                 </div>
               </Button>
             </Link>
