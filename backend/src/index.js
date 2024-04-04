@@ -18,6 +18,10 @@ app.use(passport.initialize());
 
 // Frontend Routing
 app.use('/', staticRoute);
+app.use('/article', staticRoute);
+app.use('/article/*', staticRoute);
+app.use('/management/', staticRoute);
+app.use('/management/*', staticRoute);
 
 // Main Routing (it will behind the API)
 app.use(`/api/v${config.version}`, apiRoute);
