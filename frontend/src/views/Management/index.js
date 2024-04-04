@@ -6,6 +6,7 @@ import ManagementPlace from "./ManagementPlace";
 import EditPlace from "./EditPlace";
 import ManagementCategory from "./ManagementCategory";
 import CreateCategory from "./CreateCategory";
+import EditCategory from "./EditCategory";
 
 export default {
   ManagementUser,
@@ -16,4 +17,5 @@ export default {
   EditPlace,
   ManagementCategory,
   CreateCategory,
+  EditCategory,
 };

@@ -29,14 +29,14 @@ function App() {
               <Route path='category'>
                 <Route index element={<Management.ManagementCategory />} />
                 <Route path='create' element={<Management.CreateCategory />} />
-                <Route path='edit/:id' element={<Management.EditPlace />} />
+                <Route path='edit/:id' element={<Management.EditCategory />} />
               </Route>
             </Route>
             <Route path='article'>
               <Route index element={<Article.ManagementArticle />} />
               <Route path='create' element={<Article.CreateArticle />} />
               <Route path='view/:id' element={<Article.ViewArticle />} />
-              <Route path='edit/:id' element={<Management.EditPlace />} />
+              <Route path='edit/:id' element={<Article.EditArticle />} />
             </Route>
             <Route path='dashboard'>
               <Route index element={<div>dashboard index</div>} />

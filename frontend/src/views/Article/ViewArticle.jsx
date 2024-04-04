@@ -45,7 +45,7 @@ export default function ViewArticle() {
         <p className='p-2'>{article?.description}</p>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
           {_.map(image?.rows, (eachImage, index) => (
-            <img src={eachImage?.url} key={index} className='h-24' />
+            <img src={eachImage?.url} key={index} className='h-48 p-2' />
           ))}
         </div>
       </MainLayout>

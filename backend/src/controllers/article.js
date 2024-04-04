@@ -73,6 +73,16 @@ export const onCreateOne = async (req, res) => {
 export const onEditOne = async (req, res) => {
   try {
     await ArticleService.updateOne(req.params.id, req.body);
+    if (!_.isEmpty(req?.body?.images)) {
+      for await (const image of req?.body?.images || []) {
+        const imageId = image?._id;
+        await ImageModel.findByIdAndUpdate(imageId, {
+          $set: {
+            article: req?.params?.id,
+          },
+        });
+      }
+    }
     res.status(200).send({ message: 'Successfully Update' });
   } catch (error) {
     res.status(400).send({ error });
