@@ -26,7 +26,7 @@ export const onReadAll = async (req, res) => {
       pipeline.push({
         $match: {
           $expr: {
-            $in: ['$categories', Mongoose.Types.ObjectId(req?.query?.category)],
+            $in: [Mongoose.Types.ObjectId(req?.query?.category), '$categories'],
           },
         },
       });
