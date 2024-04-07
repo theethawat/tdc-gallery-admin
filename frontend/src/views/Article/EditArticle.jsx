@@ -10,7 +10,9 @@ import {
   Textarea,
 } from "@mui/joy";
 import { useNavigate, useParams } from "react-router-dom";
+import { DatePicker } from "antd";
 import _ from "lodash";
+import dayjs from "dayjs";
 
 import { MainLayout } from "../../components/layouts";
 import Upload from "../../components/Upload";
@@ -130,6 +132,7 @@ export default function EditArticle() {
               />
             </div>
             <div className='my-2 w-full'>
+              <label className='font-display my-2'>หมวดหมู่</label>
               {_.map(fields, (each, index) => (
                 <div className='flex justify-between my-1' key={each?.id}>
                   <Controller
@@ -177,21 +180,38 @@ export default function EditArticle() {
               </div>
             </div>
             <div className='my-2 w-full'>
-              <Controller
-                control={control}
-                name={`description`}
-                defaultValue={article?.description}
-                render={({ field }) => (
-                  <Textarea
-                    {...field}
-                    minRows={5}
-                    placeholder='คำอธิบายประกอบ'
-                  />
-                )}
-              />
+              <label className='font-display my-2'>รายละเอียด</label>
+              <div>
+                <Controller
+                  control={control}
+                  name={`description`}
+                  defaultValue={article?.description}
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      minRows={5}
+                      placeholder='คำอธิบายประกอบ'
+                    />
+                  )}
+                />
+              </div>
             </div>
             <div className='my-2 w-full'>
-              <Upload fileList={images} setFileList={setImages} />
+              <label className='font-display my-2'>วันที่</label>
+              <div>
+                <Controller
+                  control={control}
+                  name={`date`}
+                  defaultValue={article?.date ? dayjs(article?.date) : dayjs()}
+                  render={({ field }) => <DatePicker {...field} />}
+                />
+              </div>
+            </div>
+            <div className='my-2 w-full'>
+              <label className='font-display my-2'>รูปภาพประกอบ</label>
+              <div>
+                <Upload fileList={images} setFileList={setImages} />
+              </div>
             </div>
           </div>
 

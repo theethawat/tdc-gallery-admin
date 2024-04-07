@@ -18,6 +18,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import _ from "lodash";
+import dayjs from "dayjs";
 
 import { MainLayout } from "../../components/layouts";
 import * as actions from "../../redux/actions";
@@ -103,8 +104,9 @@ export default function ManagementArticle() {
           <Table size='lg' stripe='odd'>
             <thead>
               <tr>
-                <th style={{ width: "30%" }}>ลำดับที่</th>
+                <th>ลำดับที่</th>
                 <th>ชื่อรายการ</th>
+                <th>วันที่</th>
                 <th>หมวดหมู่</th>
                 <th>ดำเนินการ</th>
               </tr>
@@ -114,6 +116,7 @@ export default function ManagementArticle() {
                 <tr key={index}>
                   <td>{size * (page - 1) + index + 1}</td>
                   <td>{each?.name}</td>
+                  <td>{dayjs(each?.date).format("D/MM/YY")}</td>
                   <td>
                     {_.map(each?.categories, (eachCat, catIndex) => (
                       <Chip key={catIndex}>{eachCat?.name}</Chip>

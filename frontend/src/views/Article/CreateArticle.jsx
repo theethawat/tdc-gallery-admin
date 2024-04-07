@@ -9,6 +9,7 @@ import {
   Autocomplete,
   Textarea,
 } from "@mui/joy";
+import { DatePicker } from "antd";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
@@ -97,67 +98,86 @@ export default function CreateArticle() {
               />
             </div>
             <div className='my-2 w-full'>
-              {_.map(fields, (each, index) => (
-                <div className='flex justify-between my-1' key={each?.id}>
-                  <Controller
-                    control={control}
-                    name={`categories[${index}]`}
-                    defaultValue={article?.categories?.[index]}
-                    render={({ field }) => (
-                      <Autocomplete
-                        placeholder='เลือกหมวดหมู่'
-                        {...field}
-                        options={category?.rows}
-                        getOptionLabel={(option) =>
-                          `${option.name} (${option?.place?.name})`
-                        }
-                        onChange={(event, newValue) => {
-                          field.onChange(newValue);
+              <label className='font-display my-2'>หมวดหมู่</label>
+              <div>
+                {_.map(fields, (each, index) => (
+                  <div className='flex justify-between my-1' key={each?.id}>
+                    <Controller
+                      control={control}
+                      name={`categories[${index}]`}
+                      defaultValue={article?.categories?.[index]}
+                      render={({ field }) => (
+                        <Autocomplete
+                          placeholder='เลือกหมวดหมู่'
+                          {...field}
+                          options={category?.rows}
+                          getOptionLabel={(option) =>
+                            `${option.name} (${option?.place?.name})`
+                          }
+                          onChange={(event, newValue) => {
+                            field.onChange(newValue);
+                          }}
+                        />
+                      )}
+                    />
+                    <div>
+                      <Button
+                        type='button'
+                        size='sm'
+                        color='danger'
+                        onClick={() => {
+                          remove(index);
                         }}
-                      />
-                    )}
-                  />
-                  <div>
-                    <Button
-                      type='button'
-                      size='sm'
-                      color='danger'
-                      onClick={() => {
-                        remove(index);
-                      }}
-                    >
-                      ลบ
-                    </Button>
+                      >
+                        ลบ
+                      </Button>
+                    </div>
                   </div>
+                ))}
+                <div className='my-2'>
+                  <Button
+                    type='button'
+                    size='sm'
+                    onClick={() => {
+                      append();
+                    }}
+                  >
+                    เพิ่มหมวดหมู่
+                  </Button>
                 </div>
-              ))}
-              <div className='my-2'>
-                <Button
-                  type='button'
-                  size='sm'
-                  onClick={() => {
-                    append();
-                  }}
-                >
-                  เพิ่มหมวดหมู่
-                </Button>
               </div>
             </div>
             <div className='my-2 w-full'>
-              <Controller
-                control={control}
-                name={`description`}
-                render={({ field }) => (
-                  <Textarea
-                    {...field}
-                    minRows={5}
-                    placeholder='คำอธิบายประกอบ'
-                  />
-                )}
-              />
+              <label className='font-display my-2'>รายละเอียด</label>
+              <div>
+                <Controller
+                  control={control}
+                  name={`description`}
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      minRows={5}
+                      placeholder='คำอธิบายประกอบ'
+                    />
+                  )}
+                />
+              </div>
             </div>
             <div className='my-2 w-full'>
-              <Upload fileList={images} setFileList={setImages} />
+              <label className='font-display my-2'>วันที่</label>
+              <div>
+                <Controller
+                  control={control}
+                  name={`date`}
+                  render={({ field }) => <DatePicker {...field} />}
+                />
+              </div>
+            </div>
+            <div className='my-2 w-full'>
+              <label className='font-display my-2'>รูปภาพประกอบ</label>
+              <div>
+                <Upload fileList={images} setFileList={setImages} />
+              </div>
             </div>
           </div>
 

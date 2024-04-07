@@ -49,7 +49,6 @@ class MainService {
     try {
       const allPipeline = pipeline;
 
-      allPipeline.push({ $sort: { createdAt: 1 } });
       allPipeline.push({ $set: { id: '$_id' } });
       allPipeline.push({
         $facet: {

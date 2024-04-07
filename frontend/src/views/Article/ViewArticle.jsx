@@ -1,8 +1,8 @@
 /* eslint-disable no-alert */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LinearProgress } from "@mui/joy";
-import { useNavigate, useParams } from "react-router-dom";
+import { Button, LinearProgress } from "@mui/joy";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 
 import { MainLayout } from "../../components/layouts";
@@ -41,6 +41,13 @@ export default function ViewArticle() {
         currentPage='Store'
         useBackButton
         hirachyList={["หน้าแรก", "รายการ"]}
+        rightContainer={
+          <div className='mr-2'>
+            <Link to={`/article/edit/${article?._id}`}>
+              <Button color='warning'>แก้ไข</Button>
+            </Link>
+          </div>
+        }
       >
         <p className='p-2'>{article?.description}</p>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
