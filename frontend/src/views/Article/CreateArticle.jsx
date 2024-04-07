@@ -105,7 +105,6 @@ export default function CreateArticle() {
                     <Controller
                       control={control}
                       name={`categories[${index}]`}
-                      defaultValue={article?.categories?.[index]}
                       render={({ field }) => (
                         <Autocomplete
                           placeholder='เลือกหมวดหมู่'
