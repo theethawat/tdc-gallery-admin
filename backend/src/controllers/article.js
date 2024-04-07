@@ -23,8 +23,8 @@ export const onReadAll = async (req, res) => {
     if (req?.query?.category) {
       pipeline.push({
         $match: {
-          category: {
-            $regex: Mongoose.Types.ObjectId(req?.query?.category),
+          $expr: {
+            $in: ['$categories', Mongoose.Types.ObjectId(req?.query?.category)],
           },
         },
       });
@@ -33,31 +33,27 @@ export const onReadAll = async (req, res) => {
     pipeline.push({
       $lookup: {
         from: 'categories',
-        as: 'category',
-        localField: 'category',
+        as: 'categories',
+        localField: 'categories',
         foreignField: '_id',
       },
     });
 
     pipeline.push({
-      $unwind: {
-        path: '$category',
-      },
+      $set: { firstCategory: { $arrayElemAt: ['$categories', 0] } },
     });
 
     pipeline.push({
       $lookup: {
         from: 'places',
         as: 'place',
-        localField: 'category.place',
+        localField: 'firstCategory.place',
         foreignField: '_id',
       },
     });
 
     pipeline.push({
-      $unwind: {
-        path: '$place',
-      },
+      $set: { place: { $arrayElemAt: ['$place', 0] } },
     });
 
     if (req?.query?.place) {
@@ -95,7 +91,7 @@ export const onReadAll = async (req, res) => {
 
 export const onReadOne = async (req, res) => {
   try {
-    const result = await ArticleService.getOne(req.params.id, 'category');
+    const result = await ArticleService.getOne(req.params.id, 'categories');
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });

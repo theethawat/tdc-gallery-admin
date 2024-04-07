@@ -8,6 +8,7 @@ import {
   LinearProgress,
   Input,
   ButtonGroup,
+  Chip,
 } from "@mui/joy";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -113,7 +114,11 @@ export default function ManagementArticle() {
                 <tr key={index}>
                   <td>{size * (page - 1) + index + 1}</td>
                   <td>{each?.name}</td>
-                  <td>{each?.category?.name}</td>
+                  <td>
+                    {_.map(each?.categories, (eachCat, catIndex) => (
+                      <Chip key={catIndex}>{eachCat?.name}</Chip>
+                    ))}
+                  </td>
                   <td className='flex gap-2'>
                     <Link to={`/article/view/${each?._id}`}>
                       <Button size='sm' color='primary'>

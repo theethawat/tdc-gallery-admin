@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Button,
   Input,
@@ -24,8 +24,13 @@ export default function EditArticle() {
   const article = useSelector((state) => state.article);
   const image = useSelector((state) => state.image);
   const params = useParams();
-  const { control, handleSubmit } = useForm({
+
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues: article,
+  });
+  const { append, fields, remove } = useFieldArray({
+    name: "categories",
+    control,
   });
   const [isReady, setIsReady] = useState(false);
   const [images, setImages] = useState([]);
@@ -51,6 +56,14 @@ export default function EditArticle() {
 
     return () => {};
   }, [params]);
+
+  useEffect(() => {
+    if (!article?.rows) {
+      setValue("categories", article?.categories);
+    }
+
+    return () => {};
+  }, [article]);
 
   const handleUpdate = async (data) => {
     if (!_.isEmpty(images)) {
@@ -117,24 +130,51 @@ export default function EditArticle() {
               />
             </div>
             <div className='my-2 w-full'>
-              <Controller
-                control={control}
-                name={`category`}
-                defaultValue={article?.category}
-                render={({ field }) => (
-                  <Autocomplete
-                    placeholder='เลือกหมวดหมู่'
-                    {...field}
-                    options={category?.rows}
-                    getOptionLabel={(option) =>
-                      `${option.name} (${option?.place?.name})`
-                    }
-                    onChange={(event, newValue) => {
-                      field.onChange(newValue);
-                    }}
+              {_.map(fields, (each, index) => (
+                <div className='flex justify-between my-1' key={each?.id}>
+                  <Controller
+                    control={control}
+                    name={`categories[${index}]`}
+                    defaultValue={article?.categories?.[index]}
+                    render={({ field }) => (
+                      <Autocomplete
+                        placeholder='เลือกหมวดหมู่'
+                        {...field}
+                        options={category?.rows}
+                        getOptionLabel={(option) =>
+                          `${option.name} (${option?.place?.name})`
+                        }
+                        onChange={(event, newValue) => {
+                          field.onChange(newValue);
+                        }}
+                      />
+                    )}
                   />
-                )}
-              />
+                  <div>
+                    <Button
+                      type='button'
+                      size='sm'
+                      color='danger'
+                      onClick={() => {
+                        remove(index);
+                      }}
+                    >
+                      ลบ
+                    </Button>
+                  </div>
+                </div>
+              ))}
+              <div className='my-2'>
+                <Button
+                  type='button'
+                  size='sm'
+                  onClick={() => {
+                    append();
+                  }}
+                >
+                  เพิ่มหมวดหมู่
+                </Button>
+              </div>
             </div>
             <div className='my-2 w-full'>
               <Controller

@@ -5,10 +5,12 @@ const { Schema } = Mongoose;
 const ArticleSchema = new Schema(
   {
     name: String,
-    category: {
-      type: Mongoose.Types.ObjectId,
-      ref: 'Category',
-    },
+    categories: [
+      {
+        type: Mongoose.Types.ObjectId,
+        ref: 'Category',
+      },
+    ],
     date: { type: Date },
     description: { type: String },
   },

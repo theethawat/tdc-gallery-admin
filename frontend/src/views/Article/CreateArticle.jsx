@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Button,
   Input,
@@ -26,6 +26,10 @@ export default function CreateArticle() {
       name: "",
       description: "",
     },
+  });
+  const { append, fields, remove } = useFieldArray({
+    name: "categories",
+    control,
   });
   const [isReady, setIsReady] = useState(false);
   const [images, setImages] = useState([]);
@@ -93,23 +97,51 @@ export default function CreateArticle() {
               />
             </div>
             <div className='my-2 w-full'>
-              <Controller
-                control={control}
-                name={`category`}
-                render={({ field }) => (
-                  <Autocomplete
-                    placeholder='เลือกหมวดหมู่'
-                    {...field}
-                    options={category?.rows}
-                    getOptionLabel={(option) =>
-                      `${option.name} (${option?.place?.name})`
-                    }
-                    onChange={(event, newValue) => {
-                      field.onChange(newValue);
-                    }}
+              {_.map(fields, (each, index) => (
+                <div className='flex justify-between my-1' key={each?.id}>
+                  <Controller
+                    control={control}
+                    name={`categories[${index}]`}
+                    defaultValue={article?.categories?.[index]}
+                    render={({ field }) => (
+                      <Autocomplete
+                        placeholder='เลือกหมวดหมู่'
+                        {...field}
+                        options={category?.rows}
+                        getOptionLabel={(option) =>
+                          `${option.name} (${option?.place?.name})`
+                        }
+                        onChange={(event, newValue) => {
+                          field.onChange(newValue);
+                        }}
+                      />
+                    )}
                   />
-                )}
-              />
+                  <div>
+                    <Button
+                      type='button'
+                      size='sm'
+                      color='danger'
+                      onClick={() => {
+                        remove(index);
+                      }}
+                    >
+                      ลบ
+                    </Button>
+                  </div>
+                </div>
+              ))}
+              <div className='my-2'>
+                <Button
+                  type='button'
+                  size='sm'
+                  onClick={() => {
+                    append();
+                  }}
+                >
+                  เพิ่มหมวดหมู่
+                </Button>
+              </div>
             </div>
             <div className='my-2 w-full'>
               <Controller

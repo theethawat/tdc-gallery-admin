@@ -69,7 +69,6 @@ class MainService {
       const rows = result[0]?.data;
       const amount = result[0]?.count?.[0]?.total;
 
-      console.log('Result', result);
       const payload = {
         rows: rows,
         total: amount,
