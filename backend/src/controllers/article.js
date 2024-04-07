@@ -45,6 +45,43 @@ export const onReadAll = async (req, res) => {
       },
     });
 
+    pipeline.push({
+      $lookup: {
+        from: 'places',
+        as: 'place',
+        localField: 'category.place',
+        foreignField: '_id',
+      },
+    });
+
+    pipeline.push({
+      $unwind: {
+        path: '$place',
+      },
+    });
+
+    if (req?.query?.place) {
+      pipeline.push({
+        $match: {
+          'place._id': Mongoose.Types.ObjectId(req?.query?.place),
+        },
+      });
+    }
+
+    // Populating the Images
+    pipeline.push({
+      $lookup: {
+        from: 'images',
+        as: 'image',
+        localField: '_id',
+        foreignField: 'article',
+      },
+    });
+
+    pipeline.push({
+      $set: { image: { $arrayElemAt: ['$image', -1] } },
+    });
+
     const result = await ArticleService.aggregation({
       page: req?.query?.page,
       size: req?.query?.size,
