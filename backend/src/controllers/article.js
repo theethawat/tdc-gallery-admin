@@ -8,33 +8,47 @@ const ArticleService = new MainService(ArticleModel, 'article');
 
 export const onReadAll = async (req, res) => {
   try {
-    let query = {};
+    const pipeline = [];
+
     if (req?.query?.name) {
-      query = {
-        $or: [
-          {
-            name: {
-              $regex: req?.query?.name,
-            },
+      pipeline.push({
+        $match: {
+          name: {
+            $regex: req?.query?.name,
           },
-        ],
-      };
+        },
+      });
     }
 
     if (req?.query?.category) {
-      query = {
-        $or: [
-          {
-            category: Mongoose.Types.ObjectId(req?.query?.category),
+      pipeline.push({
+        $match: {
+          category: {
+            $regex: Mongoose.Types.ObjectId(req?.query?.category),
           },
-        ],
-      };
+        },
+      });
     }
 
-    const result = await ArticleService.getAll({
-      ...req.query,
-      query,
-      populateKey: 'category',
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        as: 'category',
+        localField: 'category',
+        foreignField: '_id',
+      },
+    });
+
+    pipeline.push({
+      $unwind: {
+        path: '$category',
+      },
+    });
+
+    const result = await ArticleService.aggregation({
+      page: req?.query?.page,
+      size: req?.query?.size,
+      pipeline,
     });
     res.status(200).send(result);
   } catch (error) {

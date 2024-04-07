@@ -1,4 +1,6 @@
-# TDC React Template 2022-24
+# TDC Gallery Admin
+
+Admining Control Panel for TDC Galleries like TDC-Collectibles, Theethawat Gallery
 
 ## Development
 

@@ -45,6 +45,44 @@ class MainService {
     }
   }
 
+  async aggregation({ page = 1, size = config.defaultLimit, pipeline = [] }) {
+    try {
+      const allPipeline = pipeline;
+
+      allPipeline.push({ $sort: { createdAt: 1 } });
+      allPipeline.push({ $set: { id: '$_id' } });
+      allPipeline.push({
+        $facet: {
+          count: [{ $count: 'total' }],
+          data: [
+            {
+              $skip: +((size || config.pageLimit) * ((page || 1) - 1)),
+            },
+            {
+              $limit: parseInt(size, 10) || config.pageLimit,
+            },
+          ],
+        },
+      });
+
+      const result = await this.selectedModel.aggregate(allPipeline);
+      const rows = result[0]?.data;
+      const amount = result[0]?.count?.[0]?.total;
+
+      console.log('Result', result);
+      const payload = {
+        rows: rows,
+        total: amount,
+        currPage: page,
+        totalPage: Math.floor(amount / size) + 1,
+      };
+      return payload;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  }
+
   async getOne(id, populateKey = null) {
     try {
       let result;
