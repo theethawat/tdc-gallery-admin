@@ -2,6 +2,8 @@
 
 Admining Control Panel for TDC Galleries like TDC-Collectibles, Theethawat Gallery
 
+Backend Work On Node.js 20+
+
 ## Development
 
 Program Located in frontend and backend
@@ -25,7 +27,7 @@ npm run dev
 
 ### Backend
 
-Using Node.js ExpressJS MongoDB and writing with ES8 Module
+Using Node.js (20) ExpressJS MongoDB and writing with ES8 Module
 
 To Install Dependencies
 

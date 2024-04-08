@@ -10,8 +10,8 @@ const Upload = ({ fileList = [], setFileList = () => {} }) => {
       newFileList.splice(index, 1);
       setFileList(newFileList);
     },
-    beforeUpload: (file) => {
-      setFileList([...fileList, file]);
+    beforeUpload: (file, newFileList) => {
+      setFileList([...fileList, ...newFileList]);
       return false;
     },
     fileList,
