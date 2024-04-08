@@ -10,7 +10,7 @@ export const onReadAll = async (req, res) => {
   try {
     const pipeline = [];
 
-    pipeline.push({ $sort: { date: 1 } });
+    pipeline.push({ $sort: { date: -1 } });
 
     if (req?.query?.name) {
       pipeline.push({
