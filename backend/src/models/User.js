@@ -1,6 +1,5 @@
 import Mongoose from 'mongoose';
 import hash from 'object-hash';
-import uniqueValidator from 'mongoose-unique-validator';
 
 import config from '../configs/app';
 
@@ -17,8 +16,6 @@ const UserSchema = new Schema({
   password: String,
   role: { type: String, default: 'USER' },
 });
-
-UserSchema.plugin(uniqueValidator);
 
 UserSchema.methods.passwordHash = (password) =>
   hash.sha1({
