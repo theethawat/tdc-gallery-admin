@@ -36,7 +36,6 @@ import { dataProvider } from "./providers/data";
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ThemeProvider>
           <DevtoolsProvider>
@@ -71,6 +70,9 @@ function App() {
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
                 projectId: "g6HhTG-DpnKBL-Wgy8L8",
+                title: {
+                  text: "PERMS",
+                },
               }}
             >
               <Routes>

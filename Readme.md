@@ -1,4 +1,4 @@
-# PREM - Personal Memory Management System
+# PERM - Personal Memory Management System
 
 Previously called **TDC Gallery Admin**. That was created for being the control panel for TDC Galleries like TDC-Collectibles, Theethawat Gallery. Now PERM will extend the features not only the gallery but also the memorable things like received gifts, friends, family, together moments, etc. Under the control of ownership and privacy. The main goal is to honor and cherish the memories that we have in our lives, make it more meaningful and enjoyable. 
 

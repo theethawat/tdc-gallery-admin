@@ -43,7 +43,7 @@ export const CategoryCreate = () => {
     optionLabel: "name",
     optionValue: "_id",
     pagination: {
-      current: 1,
+      currentPage: 1,
       pageSize: 1000,
     },
   });
@@ -52,6 +52,8 @@ export const CategoryCreate = () => {
     onFinish({
       name: values.name,
       place: values.place,
+    }).then(() => {
+      navigate(-1);
     });
   }
 
@@ -62,7 +64,6 @@ export const CategoryCreate = () => {
           <FormField
             control={form.control}
             name="place"
-            rules={{ required: "Place is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Place</FormLabel>

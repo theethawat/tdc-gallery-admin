@@ -46,7 +46,7 @@ export const ListViewHeader = ({
     titleFromProps ??
     getUserFriendlyName(
       resource?.meta?.label ?? identifier ?? resource?.name,
-      "plural"
+      "plural",
     );
 
   return (

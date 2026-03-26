@@ -2,27 +2,21 @@ import { useTable } from "@refinedev/react-table";
 import { createColumnHelper } from "@tanstack/react-table";
 import React from "react";
 import { Search } from "lucide-react";
+import { Category } from "@/types";
 
-import { DeleteButton } from "@/components/refine-ui/buttons/delete";
-import { EditButton } from "@/components/refine-ui/buttons/edit";
-import { ShowButton } from "@/components/refine-ui/buttons/show";
+import {
+  DeleteButton,
+  EditButton,
+  ShowButton,
+  CreateButton,
+} from "@/components/refine-ui/buttons";
+
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import {
   ListView,
   ListViewHeader,
 } from "@/components/refine-ui/views/list-view";
 import { Input } from "@/components/ui/input";
-
-type Category = {
-  id?: string;
-  _id?: string;
-  name?: string;
-  place?: {
-    id?: string;
-    _id?: string;
-    name?: string;
-  };
-};
 
 export const CategoryList = () => {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -112,7 +106,11 @@ export const CategoryList = () => {
 
   return (
     <ListView>
-      <ListViewHeader resource="category" title="Categories" canCreate />
+      <ListViewHeader
+        resource="categories"
+        title="Categories / หมวดหมู่"
+        canCreate
+      />
       <div className="relative max-w-md">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input

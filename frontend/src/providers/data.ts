@@ -29,7 +29,14 @@ export const createDataProvider = (): DataProvider => ({
     };
   },
   create: async ({ resource, variables, meta = {} }) => {
-    throw new Error("Create method is not implemented");
+    const { data, status } = await api.post(resource, variables);
+    if (status === 201) {
+      return {
+        data,
+      };
+    } else {
+      throw new Error(data.message || "Failed to create record");
+    }
   },
   update: async ({ resource, id, variables, meta = {} }) => {
     throw new Error("Update method is not implemented");
