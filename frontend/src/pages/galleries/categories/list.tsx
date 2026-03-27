@@ -62,17 +62,17 @@ export const CategoryList = () => {
           return (
             <div className="flex gap-2">
               <EditButton
-                resource="category"
+                resource="categories"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <ShowButton
-                resource="category"
+                resource="categories"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <DeleteButton
-                resource="category"
+                resource="categories"
                 recordItemId={recordItemId}
                 size="sm"
               />

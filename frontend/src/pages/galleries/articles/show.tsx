@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export const CategoryShow = () => {
+export const ArticleShow = () => {
   const { result: record, query } = useShow({});
   const { isLoading } = query;
 

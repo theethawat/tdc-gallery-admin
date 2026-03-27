@@ -15,18 +15,20 @@ import { Layout } from "./components/refine-ui/layout/layout";
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
+import { ImagesIcon, ImageIcon, TagsIcon } from "lucide-react";
+
 import {
   CategoryCreate,
   CategoryEdit,
   CategoryList,
   CategoryShow,
-} from "./pages/categories";
+} from "./pages/galleries/categories";
+import {
+  ArticleCreate,
+  ArticleEdit,
+  ArticleList,
+  ArticleShow,
+} from "./pages/galleries/articles";
 import { ForgotPassword } from "./pages/forgot-password";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -46,23 +48,39 @@ function App() {
               authProvider={authProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "galleries",
                   meta: {
                     canDelete: true,
+                    label: "แกลอรี่",
+                    icon: <ImagesIcon />,
+                  },
+                },
+                {
+                  name: "articles",
+                  list: "/galleries/articles",
+                  create: "/galleries/articles/create",
+                  edit: "/galleries/articles/edit/:id",
+                  show: "/galleries/articles/show/:id",
+                  meta: {
+                    canDelete: true,
+                    label: "รูปภาพ/สิ่งของในแกลอรี่",
+                    dataProviderName: "article",
+                    parent: "galleries",
+                    icon: <ImageIcon />,
                   },
                 },
                 {
                   name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
+                  list: "/galleries/categories",
+                  create: "/galleries/categories/create",
+                  edit: "/galleries/categories/edit/:id",
+                  show: "/galleries/categories/show/:id",
                   meta: {
                     canDelete: true,
+                    label: "หมวดหมู่",
+                    dataProviderName: "category",
+                    parent: "galleries",
+                    icon: <TagsIcon />,
                   },
                 },
               ]}
@@ -90,19 +108,22 @@ function App() {
                 >
                   <Route
                     index
-                    element={<NavigateToResource resource="blog_posts" />}
+                    element={<NavigateToResource resource="galleries" />}
                   />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
-                  </Route>
-                  <Route path="/categories">
+                  <Route path="/galleries">
+                    <Route path="categories">
+                      <Route index element={<CategoryList />} />
+                      <Route path="create" element={<CategoryCreate />} />
+                      <Route path="edit/:id" element={<CategoryEdit />} />
+                      <Route path="show/:id" element={<CategoryShow />} />
+                    </Route>
+                    <Route path="articles">
+                      <Route index element={<ArticleList />} />
+                      <Route path="create" element={<ArticleCreate />} />
+                      <Route path="edit/:id" element={<ArticleEdit />} />
+                      <Route path="show/:id" element={<ArticleShow />} />
+                    </Route>
                     <Route index element={<CategoryList />} />
-                    <Route path="create" element={<CategoryCreate />} />
-                    <Route path="edit/:id" element={<CategoryEdit />} />
-                    <Route path="show/:id" element={<CategoryShow />} />
                   </Route>
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
