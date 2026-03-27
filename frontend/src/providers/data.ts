@@ -20,9 +20,7 @@ export const createDataProvider = (): DataProvider => ({
       // ...query,
     });
 
-    const { data, status } = await api.get(
-      `${resource}?${queryParams.toString()}`,
-    );
+    const { data } = await api.get(`${resource}?${queryParams.toString()}`);
     return {
       data: data?.rows || [],
       total: data?.total || 0,
@@ -39,10 +37,24 @@ export const createDataProvider = (): DataProvider => ({
     }
   },
   update: async ({ resource, id, variables, meta = {} }) => {
-    throw new Error("Update method is not implemented");
+    const { data, status } = await api.put(`/${resource}/${id}`, variables);
+    if (status === 200) {
+      return {
+        data,
+      };
+    } else {
+      throw new Error(data.message || "Failed to update record");
+    }
   },
   deleteOne: async ({ resource, id, meta = {} }) => {
-    throw new Error("Delete method is not implemented");
+    const { data, status } = await api.delete(`/${resource}/${id}`);
+    if (status === 204) {
+      return {
+        data,
+      };
+    } else {
+      throw new Error(data.message || "Failed to delete record");
+    }
   },
   getApiUrl: () => {
     return import.meta.env.VITE_API_URL || "http://localhost:7000/api/v1";
