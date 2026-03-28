@@ -71,6 +71,14 @@ export const CategoryEdit = () => {
     }
   }, [selectedPlaceId, setValue]);
 
+  useEffect(() => {
+    if (record) {
+      setValue("name", record.name);
+    }
+
+    return () => {};
+  }, [record]);
+
   function onSubmit(values: CategoryFormValues) {
     onFinish({
       name: values.name,

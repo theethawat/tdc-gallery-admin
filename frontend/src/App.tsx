@@ -15,7 +15,13 @@ import { Layout } from "./components/refine-ui/layout/layout";
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
-import { ImagesIcon, ImageIcon, TagsIcon } from "lucide-react";
+import {
+  ImagesIcon,
+  ImageIcon,
+  TagsIcon,
+  MapPinCheckIcon,
+  FanIcon,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { I18nProvider } from "@refinedev/core";
 
@@ -31,6 +37,7 @@ import {
   ArticleList,
   ArticleShow,
 } from "./pages/galleries/articles";
+import { PlaceCreate, PlaceEdit, PlaceList } from "./pages/galleries/places";
 import { ForgotPassword } from "./pages/forgot-password";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -96,6 +103,19 @@ function App() {
                     icon: <TagsIcon />,
                   },
                 },
+                {
+                  name: "places",
+                  list: "/galleries/places",
+                  create: "/galleries/places/create",
+                  edit: "/galleries/places/edit/:id",
+                  meta: {
+                    canDelete: true,
+                    label: t("gallery.place"),
+                    dataProviderName: "place",
+                    parent: "galleries",
+                    icon: <MapPinCheckIcon />,
+                  },
+                },
               ]}
               options={{
                 syncWithLocation: true,
@@ -103,6 +123,7 @@ function App() {
                 projectId: "g6HhTG-DpnKBL-Wgy8L8",
                 title: {
                   text: "PERMS",
+                  icon: <FanIcon />,
                 },
               }}
             >
@@ -136,7 +157,13 @@ function App() {
                       <Route path="edit/:id" element={<ArticleEdit />} />
                       <Route path="show/:id" element={<ArticleShow />} />
                     </Route>
-                    <Route index element={<CategoryList />} />
+
+                    <Route path="places">
+                      <Route index element={<PlaceList />} />
+                      <Route path="create" element={<PlaceCreate />} />
+                      <Route path="edit/:id" element={<PlaceEdit />} />
+                    </Route>
+                    <Route index element={<ArticleList />} />
                   </Route>
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

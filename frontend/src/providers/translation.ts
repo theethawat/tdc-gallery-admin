@@ -1,13 +1,18 @@
+import { PlaceEdit } from "@/pages/galleries/places";
+
 const translation = {
   th: {
     translation: {
       gallery: {
         gallery: "แกลอรี่",
         article: "กิจกรรมและสิ่งของในแกลอรี่",
+        articleName: "ชื่อหัวข้อ",
         category: "หมวดหมู่",
         categoryName: "ชื่อหมวดหมู่",
         categoryEdit: "แก้ไขหมวดหมู่",
         place: "สถานที่",
+        placeName: "ชื่อสถานที่",
+        PlaceEdit: "แก้ไขสถานที่",
         title: "หัวข้อ",
       },
       general: {
@@ -38,10 +43,13 @@ const translation = {
       gallery: {
         gallery: "Gallery",
         article: "Activities and Items in Gallery",
+        articleName: "Article Name",
         category: "Category",
         categoryName: "Category Name",
         categoryEdit: "Edit Category",
         place: "Place",
+        placeName: "Place Name",
+        placeEdit: "Edit Place",
         title: "Title",
       },
       general: {
