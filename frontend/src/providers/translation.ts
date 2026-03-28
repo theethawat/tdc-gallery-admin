@@ -18,6 +18,7 @@ const translation = {
       general: {
         actions: "ดำเนินการ",
         date: "วันที่",
+        description: "รายละเอียด",
       },
       buttons: {
         create: "สร้าง",
@@ -55,6 +56,7 @@ const translation = {
       general: {
         actions: "Actions",
         date: "Date",
+        description: "Description",
       },
       buttons: {
         create: "Create",

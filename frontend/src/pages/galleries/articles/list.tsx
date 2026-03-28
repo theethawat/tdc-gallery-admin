@@ -47,11 +47,38 @@ export const ArticleList = () => {
         enableSorting: true,
         cell: ({ getValue }) => getValue() || "-",
       }),
-      columnHelper.accessor("category.name", {
-        id: "category",
+      columnHelper.accessor("description", {
+        id: "description",
+        header: t("general.description") || "Description",
+        enableSorting: false,
+        cell: ({ getValue }) => {
+          const description = getValue();
+          if (!description) return "-";
+          return (
+            <div className="max-w-xs truncate">
+              {description.slice(0, 80)}...
+            </div>
+          );
+        },
+      }),
+      columnHelper.accessor("categories", {
+        id: "categories",
         header: t("gallery.category"),
         enableSorting: false,
-        cell: ({ row }) => row?.original.category?.name || "-",
+        cell: ({ getValue }) => {
+          const categories = getValue();
+          if (!categories || categories.length === 0) return "-";
+          return categories.map((cat: any) => cat?.name).join(", ") || "-";
+        },
+      }),
+      columnHelper.accessor("date", {
+        id: "date",
+        header: t("general.date"),
+        enableSorting: true,
+        cell: ({ getValue }) => {
+          const date = getValue();
+          return date ? new Date(date).toLocaleDateString() : "-";
+        },
       }),
       columnHelper.display({
         id: "actions",
@@ -83,7 +110,7 @@ export const ArticleList = () => {
         size: 290,
       }),
     ];
-  }, []);
+  }, [t]);
 
   const table = useTable({
     columns,
@@ -115,7 +142,7 @@ export const ArticleList = () => {
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           className="pl-9"
-          placeholder="Search by article name"
+          placeholder={`Search by ${t("gallery.articleName").toLowerCase()}`}
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />

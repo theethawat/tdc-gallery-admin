@@ -1,134 +1,57 @@
-import { useSelect } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
 import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-type ArticleFormValue = {
-  name: string;
-  place: string;
-};
+import { ArticleForm, ArticleFormValue } from "./article-form";
 
 export const ArticleCreate = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const {
     refineCore: { onFinish },
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
-      resource: "category",
+      resource: "article",
     },
   });
 
-  const { options: placeOptions } = useSelect({
-    resource: "place",
-    optionLabel: "name",
-    optionValue: "_id",
-    pagination: {
-      currentPage: 1,
-      pageSize: 1000,
-    },
-  });
+  const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
+    try {
+      const payload: Record<string, unknown> = {
+        name: values.name,
+        description: values.description,
+        categories:
+          values.categories?.map((cat) =>
+            typeof cat === "string" ? cat : cat._id,
+          ) || [],
+        date: values.date || new Date(),
+      };
 
-  function onSubmit(values: ArticleFormValue) {
-    onFinish({
-      name: values.name,
-      place: values.place,
-    }).then(() => {
+      await onFinish(payload);
       navigate(-1);
-    });
-  }
+    } catch (error) {
+      console.error("Error creating article:", error);
+    }
+  };
 
   return (
     <CreateView>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="place"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Place</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a place" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {placeOptions?.map((option) => (
-                      <SelectItem
-                        key={String(option.value)}
-                        value={String(option.value)}
-                      >
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="name"
-            rules={{ required: "Category name is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value || ""}
-                    placeholder="Enter category name"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="flex gap-2">
-            <Button
-              type="submit"
-              {...form.saveButtonProps}
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? "Creating..." : "Create"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => navigate(-1)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </Form>
+      <ArticleForm
+        form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
+        onSubmit={onSubmit}
+        isLoading={form.formState.isSubmitting}
+        submitLabel={t("buttons.create")}
+      />
+      <div className="mt-6">
+        <Button type="button" variant="outline" onClick={() => navigate(-1)}>
+          {t("buttons.cancel")}
+        </Button>
+      </div>
     </CreateView>
   );
 };
