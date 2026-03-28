@@ -16,6 +16,8 @@ import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import { ImagesIcon, ImageIcon, TagsIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { I18nProvider } from "@refinedev/core";
 
 import {
   CategoryCreate,
@@ -35,7 +37,17 @@ import { Register } from "./pages/register";
 import { authProvider } from "./providers/auth";
 import { dataProvider } from "./providers/data";
 
+import "./providers/i18n";
+
 function App() {
+  const { t, i18n } = useTranslation();
+  const i18nProvider: I18nProvider = {
+    translate: (key: string, params: object) => {
+      return t(key, params);
+    },
+    changeLocale: (lang: string) => i18n.changeLanguage(lang),
+    getLocale: () => i18n.language,
+  };
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -46,12 +58,13 @@ function App() {
               notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
               authProvider={authProvider}
+              i18nProvider={i18nProvider}
               resources={[
                 {
                   name: "galleries",
                   meta: {
                     canDelete: true,
-                    label: "แกลอรี่",
+                    label: t("gallery.gallery"),
                     icon: <ImagesIcon />,
                   },
                 },
@@ -63,7 +76,7 @@ function App() {
                   show: "/galleries/articles/show/:id",
                   meta: {
                     canDelete: true,
-                    label: "รูปภาพ/สิ่งของในแกลอรี่",
+                    label: t("gallery.article"),
                     dataProviderName: "article",
                     parent: "galleries",
                     icon: <ImageIcon />,
@@ -77,7 +90,7 @@ function App() {
                   show: "/galleries/categories/show/:id",
                   meta: {
                     canDelete: true,
-                    label: "หมวดหมู่",
+                    label: t("gallery.category"),
                     dataProviderName: "category",
                     parent: "galleries",
                     icon: <TagsIcon />,

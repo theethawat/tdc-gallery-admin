@@ -1,4 +1,4 @@
-import { useShow } from "@refinedev/core";
+import { useOne, useResourceParams } from "@refinedev/core";
 
 import { ShowView } from "@/components/refine-ui/views/show-view";
 import {
@@ -8,24 +8,34 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Category } from "@/types";
 
 export const CategoryShow = () => {
-  const { result: record, query } = useShow({ resource: "category" });
-  const { isLoading } = query;
+  const { id } = useResourceParams();
+  const {
+    result: record,
+    query: { error, isError, isLoading, isFetching },
+  } = useOne<Category>({
+    resource: "category",
+    id,
+  });
 
+  if (isLoading || isFetching) {
+    return <div>Loading...</div>;
+  }
   return (
     <ShowView>
       <Card>
         <CardHeader>
-          <CardTitle>{record?.title}</CardTitle>
-          <CardDescription>Category ID: {record?.id}</CardDescription>
+          <CardTitle>{record?.name}</CardTitle>
+          <CardDescription>Category ID: {record?._id}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div>
               <h4 className="text-sm font-medium mb-2">Title</h4>
               <p className="text-sm text-muted-foreground">
-                {record?.title || "-"}
+                {record?.name || "-"}
               </p>
             </div>
           </div>

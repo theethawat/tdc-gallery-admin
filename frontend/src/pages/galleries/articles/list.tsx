@@ -2,7 +2,7 @@ import { useTable } from "@refinedev/react-table";
 import { createColumnHelper } from "@tanstack/react-table";
 import React from "react";
 import { Search } from "lucide-react";
-import { Category } from "@/types";
+import { Article } from "@/types";
 
 import {
   DeleteButton,
@@ -31,7 +31,7 @@ export const ArticleList = () => {
   }, [searchTerm]);
 
   const columns = React.useMemo(() => {
-    const columnHelper = createColumnHelper<Category>();
+    const columnHelper = createColumnHelper<Article>();
 
     return [
       columnHelper.display({
@@ -43,36 +43,36 @@ export const ArticleList = () => {
       }),
       columnHelper.accessor("name", {
         id: "name",
-        header: "Category Name",
+        header: "Name",
         enableSorting: true,
         cell: ({ getValue }) => getValue() || "-",
       }),
-      columnHelper.accessor("place.name", {
-        id: "place",
-        header: "Place Name",
+      columnHelper.accessor("category.name", {
+        id: "category",
+        header: "Category",
         enableSorting: false,
-        cell: ({ row }) => row.original.place?.name || "-",
+        cell: ({ row }) => row?.original.category?.name || "-",
       }),
       columnHelper.display({
         id: "actions",
         header: "Actions",
         cell: ({ row }) => {
-          const recordItemId = row.original.id ?? row.original._id;
+          const recordItemId = row.original._id;
 
           return (
             <div className="flex gap-2">
               <EditButton
-                resource="category"
+                resource="article"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <ShowButton
-                resource="category"
+                resource="article"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <DeleteButton
-                resource="category"
+                resource="article"
                 recordItemId={recordItemId}
                 size="sm"
               />
@@ -88,7 +88,7 @@ export const ArticleList = () => {
   const table = useTable({
     columns,
     refineCoreProps: {
-      resource: "category",
+      resource: "article",
       syncWithLocation: true,
       filters: {
         permanent: debouncedSearch
@@ -115,7 +115,7 @@ export const ArticleList = () => {
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           className="pl-9"
-          placeholder="Search by category name"
+          placeholder="Search by article name"
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />

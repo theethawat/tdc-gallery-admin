@@ -2,15 +2,7 @@ import { UserAvatar } from "@/components/refine-ui/layout/user-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useGetIdentity } from "@refinedev/core";
-
-type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  avatar?: string;
-};
+import { User } from "@/types";
 
 export function UserInfo() {
   const { data: user, isLoading: userIsLoading } = useGetIdentity<User>();
@@ -27,8 +19,6 @@ export function UserInfo() {
     );
   }
 
-  const { firstName, lastName, email } = user;
-
   return (
     <div className={cn("flex", "items-center", "gap-x-2")}>
       <UserAvatar />
@@ -38,13 +28,13 @@ export function UserInfo() {
           "flex-col",
           "justify-between",
           "h-10",
-          "text-left"
+          "text-left",
         )}
       >
         <span className={cn("text-sm", "font-medium", "text-muted-foreground")}>
-          {firstName} {lastName}
+          {user.name}
         </span>
-        <span className={cn("text-xs", "text-muted-foreground")}>{email}</span>
+        {/* <span className={cn("text-xs", "text-muted-foreground")}>{email}</span> */}
       </div>
     </div>
   );

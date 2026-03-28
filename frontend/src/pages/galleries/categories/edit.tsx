@@ -1,4 +1,4 @@
-import { useSelect } from "@refinedev/core";
+import { useSelect, useShow, useOne, useResourceParams } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -21,22 +21,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Category } from "@/types";
+import { ListViewHeader } from "@/components/refine-ui/views/list-view";
+import { useTranslation } from "react-i18next";
 
 type CategoryFormValues = {
   name: string;
   place: string;
 };
 
-type CategoryRecord = {
-  place?: {
-    _id?: string;
-    id?: string;
-  };
-};
-
 export const CategoryEdit = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { id } = useResourceParams();
+  const { result: record } = useOne({ resource: "category", id });
 
+  console.log("Record in Edit:", record);
   const {
     refineCore: { onFinish, query },
     setValue,
@@ -45,9 +45,10 @@ export const CategoryEdit = () => {
     refineCoreProps: {
       resource: "category",
     },
+    defaultValues: record,
   });
 
-  const categoryData = query?.data?.data as CategoryRecord | undefined;
+  const categoryData = query?.data?.data as Category | undefined;
   const selectedPlaceId = categoryData?.place?._id ?? categoryData?.place?.id;
 
   const { options: placeOptions } = useSelect({
@@ -79,6 +80,11 @@ export const CategoryEdit = () => {
 
   return (
     <EditView>
+      <ListViewHeader
+        resource="categories"
+        title={t("gallery.categoryEdit")}
+        canCreate={false}
+      />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

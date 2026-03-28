@@ -36,7 +36,7 @@ export const EditButton = React.forwardRef<
 >(
   (
     { resource, recordItemId, accessControl, meta, children, onClick, ...rest },
-    ref
+    ref,
   ) => {
     const { hidden, disabled, LinkComponent, to, label } = useEditButton({
       resource,
@@ -75,7 +75,7 @@ export const EditButton = React.forwardRef<
         </LinkComponent>
       </Button>
     );
-  }
+  },
 );
 
 EditButton.displayName = "EditButton";

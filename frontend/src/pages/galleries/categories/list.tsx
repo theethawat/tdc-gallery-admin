@@ -3,12 +3,11 @@ import { createColumnHelper } from "@tanstack/react-table";
 import React from "react";
 import { Search } from "lucide-react";
 import { Category } from "@/types";
-
+import { useTranslation } from "react-i18next";
 import {
   DeleteButton,
   EditButton,
   ShowButton,
-  CreateButton,
 } from "@/components/refine-ui/buttons";
 
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
@@ -19,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 export const CategoryList = () => {
+  const { t, i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [debouncedSearch, setDebouncedSearch] = React.useState("");
 
@@ -43,19 +43,19 @@ export const CategoryList = () => {
       }),
       columnHelper.accessor("name", {
         id: "name",
-        header: "Category Name",
+        header: t("gallery.categoryName"),
         enableSorting: true,
         cell: ({ getValue }) => getValue() || "-",
       }),
       columnHelper.accessor("place.name", {
         id: "place",
-        header: "Place Name",
+        header: t("gallery.place"),
         enableSorting: false,
         cell: ({ row }) => row.original.place?.name || "-",
       }),
       columnHelper.display({
         id: "actions",
-        header: "Actions",
+        header: t("general.actions"),
         cell: ({ row }) => {
           const recordItemId = row.original.id ?? row.original._id;
 
@@ -108,7 +108,7 @@ export const CategoryList = () => {
     <ListView>
       <ListViewHeader
         resource="categories"
-        title="Categories / หมวดหมู่"
+        title={t("gallery.category")}
         canCreate
       />
       <div className="relative max-w-md">
