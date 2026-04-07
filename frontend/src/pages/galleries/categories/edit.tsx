@@ -57,7 +57,7 @@ export const CategoryEdit = () => {
     optionValue: "_id",
     defaultValue: selectedPlaceId,
     queryOptions: {
-      enabled: !!selectedPlaceId,
+      enabled: true,
     },
     pagination: {
       current: 1,
