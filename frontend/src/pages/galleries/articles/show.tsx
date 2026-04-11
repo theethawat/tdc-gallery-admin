@@ -1,10 +1,10 @@
-import { useShow } from "@refinedev/core";
+import { useShow, useResourceParams } from "@refinedev/core";
 import { useTranslation } from "react-i18next";
-import { Edit } from "lucide-react";
-import { Link } from "react-router";
 
-import { ShowView } from "@/components/refine-ui/views/show-view";
-import { Button } from "@/components/ui/button";
+import {
+  ShowView,
+  ShowViewHeader,
+} from "@/components/refine-ui/views/show-view";
 import {
   Card,
   CardContent,
@@ -17,11 +17,17 @@ import { Article } from "@/types";
 
 export const ArticleShow = () => {
   const { t } = useTranslation();
-  const { result: record, query } = useShow<Article>({});
+  const { id } = useResourceParams();
+
+  const { result: record, query } = useShow<Article>({
+    resource: "article",
+    id,
+  });
   const { isLoading } = query;
 
   return (
     <ShowView>
+      <ShowViewHeader resource="article" title={t("gallery.article")} />
       <div className="space-y-6">
         <Card>
           <CardHeader>
@@ -30,12 +36,6 @@ export const ArticleShow = () => {
                 <CardTitle>{record?.name}</CardTitle>
                 <CardDescription>ID: {record?._id}</CardDescription>
               </div>
-              <Link to={`/blog-posts/edit/${record?._id}`}>
-                <Button size="sm" variant="outline">
-                  <Edit className="w-4 h-4 mr-2" />
-                  {t("buttons.edit")}
-                </Button>
-              </Link>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -85,7 +85,9 @@ export const ArticleShow = () => {
 
             {/* Description */}
             <div>
-              <h4 className="text-sm font-medium mb-4">Description</h4>
+              <h4 className="text-sm font-medium mb-4">
+                {t("gallery.articleContent")}
+              </h4>
               <div className="prose prose-sm max-w-none">
                 {record?.description ? (
                   <p className="text-sm text-muted-foreground whitespace-pre-wrap">

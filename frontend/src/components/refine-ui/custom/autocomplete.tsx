@@ -26,6 +26,7 @@ export function Autocomplete({
   name,
   options,
   required = false,
+  onChange = null,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturn<any>;
@@ -33,6 +34,7 @@ export function Autocomplete({
   name: string;
   options: AutocompleteOption[];
   required?: boolean;
+  onChange?: ((value: string | number) => void) | null;
 }) {
   const { t } = useTranslation();
   return (
@@ -50,7 +52,10 @@ export function Autocomplete({
         return (
           <FormItem>
             <FormLabel>{label}</FormLabel>
-            <Select onValueChange={field.onChange} value={autocompleteValue}>
+            <Select
+              onValueChange={onChange || field.onChange}
+              value={autocompleteValue}
+            >
               <FormControl>
                 <SelectTrigger>
                   <SelectValue

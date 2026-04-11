@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Autocomplete } from "../custom";
 
 export interface ArticleFormValue {
   name: string;
@@ -65,7 +66,9 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
         <FormField
           control={control}
           name="name"
-          rules={{ required: t("gallery.articleName") + " is required" }}
+          rules={{
+            required: t("gallery.articleName") + " " + t("general.isRequired"),
+          }}
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("gallery.articleName")}</FormLabel>
@@ -73,7 +76,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
                 <Input
                   {...field}
                   value={field.value || ""}
-                  placeholder={`Enter ${t(
+                  placeholder={`${t("buttons.enter")}${t(
                     "gallery.articleName",
                   )?.toLowerCase()}`}
                 />
@@ -84,56 +87,42 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
         />
 
         {/* Category */}
+
         <FormItem>
           <FormLabel>{t("gallery.category")}</FormLabel>
           <div className="space-y-2">
             {fields.map((field, index) => (
-              <FormField
-                key={field.id}
-                control={control}
-                name={`categories.${index}`}
-                render={({ field: categoryField }) => (
-                  <FormItem>
-                    <div className="flex gap-2">
-                      <div className="flex-1">
-                        <Select
-                          onValueChange={categoryField.onChange}
-                          value={
-                            typeof categoryField.value === "string"
-                              ? categoryField.value
-                              : (categoryField.value as Category)?._id || ""
-                          }
+              <FormItem key={field.id}>
+                <FormField
+                  key={field.id}
+                  control={control}
+                  name={`categories.${index}`}
+                  render={({ field: categoryField }) => (
+                    <FormItem>
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+                          <Autocomplete
+                            label={""}
+                            name={`categories.${index}`}
+                            form={form}
+                            options={categoryOptions}
+                            onChange={categoryField.onChange}
+                          />
+                        </div>
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => remove(index)}
                         >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a category" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {categoryOptions?.map((option) => (
-                              <SelectItem
-                                key={String(option.value)}
-                                value={String(option.value)}
-                              >
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          {t("buttons.delete")}
+                        </Button>
                       </div>
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => remove(index)}
-                      >
-                        {t("buttons.delete")}
-                      </Button>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </FormItem>
             ))}
             <Button
               type="button"
@@ -141,7 +130,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
               size="sm"
               onClick={() => append({} as Category)}
             >
-              Add Category
+              {t("buttons.add")} {t("gallery.category")}
             </Button>
           </div>
         </FormItem>
@@ -152,14 +141,9 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{t("gallery.articleContent")}</FormLabel>
               <FormControl>
-                <Textarea
-                  {...field}
-                  value={field.value || ""}
-                  placeholder="Enter article description"
-                  rows={10}
-                />
+                <Textarea {...field} value={field.value || ""} rows={20} />
               </FormControl>
               <FormMessage />
             </FormItem>

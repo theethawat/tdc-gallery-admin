@@ -6,7 +6,10 @@ import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
 import { EditView } from "@/components/refine-ui/views/edit-view";
 import { Button } from "@/components/ui/button";
-import { ArticleForm, ArticleFormValue } from "./article-form";
+import {
+  ArticleForm,
+  ArticleFormValue,
+} from "../../../components/refine-ui/form/article-form";
 
 export const ArticleEdit = () => {
   const navigate = useNavigate();

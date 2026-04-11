@@ -89,17 +89,17 @@ export const ArticleList = () => {
           return (
             <div className="flex gap-2">
               <EditButton
-                resource="article"
+                resource="articles"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <ShowButton
-                resource="article"
+                resource="articles"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <DeleteButton
-                resource="article"
+                resource="articles"
                 recordItemId={recordItemId}
                 size="sm"
               />

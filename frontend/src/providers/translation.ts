@@ -14,6 +14,7 @@ const translation = {
         placeName: "ชื่อสถานที่",
         PlaceEdit: "แก้ไขสถานที่",
         title: "หัวข้อ",
+        articleContent: "เนื้อหา",
       },
       general: {
         actions: "ดำเนินการ",
@@ -40,17 +41,19 @@ const translation = {
         notAccessTitle: "คุณไม่มีสิทธิ์เข้าถึง",
         updating: "กำลังอัปเดต...",
         update: "อัปเดต",
+        add: "เพิ่ม",
+        enter: "กรอก",
       },
       notifications: {
-        success: "Successful",
-        error: "Error (status code: {{statusCode}})",
+        success: "ดำเนินการสำเร็จ",
+        error: "ไม่สำเร็จ (status code: {{statusCode}})",
         undoable: "You have {{seconds}} seconds to undo",
-        createSuccess: "Successfully created {{resource}}",
+        createSuccess: "สร้าง {{resource}} สำเร็จ",
         createError:
-          "There was an error creating {{resource}} (status code: {{statusCode}})",
-        deleteSuccess: "Successfully deleted {{resource}}",
+          "ขออภัย มีการหาในการสร้าง {{resource}} (status code: {{statusCode}})",
+        deleteSuccess: "ดำเนินการลบ {{resource}} สำเร็จ",
         deleteError:
-          "Error when deleting {{resource}} (status code: {{statusCode}})",
+          "เกิดปัญหาในการ ลบ{{resource}} (status code: {{statusCode}})",
         editSuccess: "Successfully edited {{resource}}",
         editError:
           "Error when editing {{resource}} (status code: {{statusCode}})",
@@ -71,6 +74,7 @@ const translation = {
         placeName: "Place Name",
         placeEdit: "Edit Place",
         title: "Title",
+        articleContent: "Content",
       },
       general: {
         actions: "Actions",
@@ -97,17 +101,19 @@ const translation = {
         updating: "Updating...",
         update: "Update",
         notAccessTitle: "You don't have permission to access",
+        add: "Add",
+        enter: "Enter ",
       },
       notifications: {
-        success: "ดำเนินการสำเร็จ",
-        error: "ไม่สำเร็จ (status code: {{statusCode}})",
+        success: "Successful",
+        error: "Error (status code: {{statusCode}})",
         undoable: "You have {{seconds}} seconds to undo",
-        createSuccess: "สร้าง {{resource}} สำเร็จ",
+        createSuccess: "Successfully created {{resource}}",
         createError:
-          "ขออภัย มีการหาในการสร้าง {{resource}} (status code: {{statusCode}})",
-        deleteSuccess: "ดำเนินการลบ {{resource}} สำเร็จ",
+          "There was an error creating {{resource}} (status code: {{statusCode}})",
+        deleteSuccess: "Successfully deleted {{resource}}",
         deleteError:
-          "เกิดปัญหาในการ ลบ{{resource}} (status code: {{statusCode}})",
+          "Error when deleting {{resource}} (status code: {{statusCode}})",
         editSuccess: "Successfully edited {{resource}}",
         editError:
           "Error when editing {{resource}} (status code: {{statusCode}})",
