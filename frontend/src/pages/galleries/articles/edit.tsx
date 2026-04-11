@@ -1,10 +1,14 @@
+import { useResourceParams } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
-import { EditView } from "@/components/refine-ui/views/edit-view";
+import {
+  EditView,
+  EditViewHeader,
+} from "@/components/refine-ui/views/edit-view";
 import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
@@ -14,28 +18,27 @@ import {
 export const ArticleEdit = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-
+  const { id } = useResourceParams();
   const {
     refineCore: { onFinish, query },
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
       resource: "article",
+      action: "edit",
+      id,
+      redirect: "list",
     },
   });
 
-  const articleData = query?.data?.data;
-
   useEffect(() => {
-    if (articleData) {
-      form.reset({
-        name: articleData.name,
-        description: articleData.description,
-        categories: articleData.categories || [],
-        date: articleData.date,
-      });
+    if (query?.data?.data?.date) {
+      const date = new Date(query.data.data.date);
+      form.setValue("date", date);
     }
-  }, [articleData]);
+
+    return () => {};
+  }, [query?.data]);
 
   const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
     try {
@@ -58,6 +61,7 @@ export const ArticleEdit = () => {
 
   return (
     <EditView>
+      <EditViewHeader resource="article" title={t("gallery.articleEdit")} />
       <ArticleForm
         form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
         onSubmit={onSubmit}

@@ -24,10 +24,9 @@ export const ArticleShow = () => {
     id,
   });
   const { isLoading } = query;
-
   return (
     <ShowView>
-      <ShowViewHeader resource="article" title={t("gallery.article")} />
+      <ShowViewHeader resource="articles" title={t("gallery.article")} />
       <div className="space-y-6">
         <Card>
           <CardHeader>

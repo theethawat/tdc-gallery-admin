@@ -13,14 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Autocomplete } from "../custom";
+import { Autocomplete, Datepicker } from "../custom";
 
 export interface ArticleFormValue {
   name: string;
@@ -134,6 +127,9 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
             </Button>
           </div>
         </FormItem>
+
+        {/* Date */}
+        <Datepicker label={t("general.date")} name="date" form={form} />
 
         {/* Description */}
         <FormField

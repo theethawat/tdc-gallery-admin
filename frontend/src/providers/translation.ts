@@ -15,6 +15,7 @@ const translation = {
         PlaceEdit: "แก้ไขสถานที่",
         title: "หัวข้อ",
         articleContent: "เนื้อหา",
+        articleEdit: "แก้ไขกิจกรรมและสิ่งของ",
       },
       general: {
         actions: "ดำเนินการ",
@@ -22,6 +23,7 @@ const translation = {
         description: "รายละเอียด",
         pleaseSelect: "กรุณาเลือก",
         isRequired: "จำเป็นต้องกรอก",
+        pickADate: "เลือกวันที่",
       },
       buttons: {
         create: "สร้าง",
@@ -75,6 +77,7 @@ const translation = {
         placeEdit: "Edit Place",
         title: "Title",
         articleContent: "Content",
+        articleEdit: "Edit Article",
       },
       general: {
         actions: "Actions",
@@ -82,6 +85,7 @@ const translation = {
         description: "Description",
         pleaseSelect: "Please select",
         isRequired: "is required",
+        pickADate: "Pick a date",
       },
       buttons: {
         create: "Create",
