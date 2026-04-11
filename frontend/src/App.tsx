@@ -120,10 +120,15 @@ function App() {
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
+
                 projectId: "g6HhTG-DpnKBL-Wgy8L8",
                 title: {
                   text: "PERMS",
                   icon: <FanIcon />,
+                },
+                redirect: {
+                  afterEdit: "edit",
+                  afterCreate: "list",
                 },
               }}
             >
