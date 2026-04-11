@@ -1,9 +1,10 @@
-import { useSelect, useShow, useOne, useResourceParams } from "@refinedev/core";
+import { useSelect, useOne, useResourceParams } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-import { EditView } from "@/components/refine-ui/views/edit-view";
+import { EditView, ListViewHeader } from "@/components/refine-ui/views";
+import { Autocomplete } from "@/components/refine-ui";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,15 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Category } from "@/types";
-import { ListViewHeader } from "@/components/refine-ui/views/list-view";
 import { useTranslation } from "react-i18next";
 
 type CategoryFormValues = {
@@ -36,7 +30,6 @@ export const CategoryEdit = () => {
   const { id } = useResourceParams();
   const { result: record } = useOne({ resource: "category", id });
 
-  console.log("Record in Edit:", record);
   const {
     refineCore: { onFinish, query },
     setValue,
@@ -44,32 +37,35 @@ export const CategoryEdit = () => {
   } = useForm<CategoryFormValues>({
     refineCoreProps: {
       resource: "category",
+      action: "edit",
+      id,
+      redirect: "list",
     },
-    defaultValues: record,
+    defaultValues: { ...record, place: record?.place?._id || "" },
   });
 
   const categoryData = query?.data?.data as Category | undefined;
-  const selectedPlaceId = categoryData?.place?._id ?? categoryData?.place?.id;
 
   const { options: placeOptions } = useSelect({
     resource: "place",
     optionLabel: "name",
     optionValue: "_id",
-    defaultValue: selectedPlaceId,
+    defaultValue: categoryData?.place?._id,
     queryOptions: {
       enabled: true,
     },
     pagination: {
-      current: 1,
+      currentPage: 1,
       pageSize: 1000,
     },
   });
 
   useEffect(() => {
-    if (selectedPlaceId) {
+    if (categoryData?.place?._id) {
+      const selectedPlaceId = categoryData?.place?._id;
       setValue("place", selectedPlaceId);
     }
-  }, [selectedPlaceId, setValue]);
+  }, [categoryData, setValue]);
 
   useEffect(() => {
     if (record) {
@@ -95,36 +91,12 @@ export const CategoryEdit = () => {
       />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
+          <Autocomplete
+            form={{ ...form, setValue }}
+            label={t("gallery.place")}
             name="place"
-            rules={{ required: "Place is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Place</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a place" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {placeOptions?.map((option) => (
-                      <SelectItem
-                        key={String(option.value)}
-                        value={String(option.value)}
-                      >
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
+            options={placeOptions}
+            required
           />
 
           <FormField
@@ -152,14 +124,16 @@ export const CategoryEdit = () => {
               {...form.saveButtonProps}
               disabled={form.formState.isSubmitting}
             >
-              {form.formState.isSubmitting ? "Updating..." : "Update"}
+              {form.formState.isSubmitting
+                ? t("buttons.updating")
+                : t("buttons.update")}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => navigate(-1)}
             >
-              Cancel
+              {t("buttons.cancel")}
             </Button>
           </div>
         </form>

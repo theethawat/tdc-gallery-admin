@@ -19,6 +19,8 @@ const translation = {
         actions: "ดำเนินการ",
         date: "วันที่",
         description: "รายละเอียด",
+        pleaseSelect: "กรุณาเลือก",
+        isRequired: "จำเป็นต้องกรอก",
       },
       buttons: {
         create: "สร้าง",
@@ -36,6 +38,23 @@ const translation = {
         import: "นำเข้า",
         clone: "โคลน",
         notAccessTitle: "คุณไม่มีสิทธิ์เข้าถึง",
+        updating: "กำลังอัปเดต...",
+        update: "อัปเดต",
+      },
+      notifications: {
+        success: "Successful",
+        error: "Error (status code: {{statusCode}})",
+        undoable: "You have {{seconds}} seconds to undo",
+        createSuccess: "Successfully created {{resource}}",
+        createError:
+          "There was an error creating {{resource}} (status code: {{statusCode}})",
+        deleteSuccess: "Successfully deleted {{resource}}",
+        deleteError:
+          "Error when deleting {{resource}} (status code: {{statusCode}})",
+        editSuccess: "Successfully edited {{resource}}",
+        editError:
+          "Error when editing {{resource}} (status code: {{statusCode}})",
+        importProgress: "Importing: {{processed}}/{{total}}",
       },
     },
   },
@@ -57,6 +76,8 @@ const translation = {
         actions: "Actions",
         date: "Date",
         description: "Description",
+        pleaseSelect: "Please select",
+        isRequired: "is required",
       },
       buttons: {
         create: "Create",
@@ -73,7 +94,24 @@ const translation = {
         undo: "Undo",
         import: "Import",
         clone: "Clone",
+        updating: "Updating...",
+        update: "Update",
         notAccessTitle: "You don't have permission to access",
+      },
+      notifications: {
+        success: "ดำเนินการสำเร็จ",
+        error: "ไม่สำเร็จ (status code: {{statusCode}})",
+        undoable: "You have {{seconds}} seconds to undo",
+        createSuccess: "สร้าง {{resource}} สำเร็จ",
+        createError:
+          "ขออภัย มีการหาในการสร้าง {{resource}} (status code: {{statusCode}})",
+        deleteSuccess: "ดำเนินการลบ {{resource}} สำเร็จ",
+        deleteError:
+          "เกิดปัญหาในการ ลบ{{resource}} (status code: {{statusCode}})",
+        editSuccess: "Successfully edited {{resource}}",
+        editError:
+          "Error when editing {{resource}} (status code: {{statusCode}})",
+        importProgress: "Importing: {{processed}}/{{total}}",
       },
     },
   },

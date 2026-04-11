@@ -34,6 +34,9 @@ export const PlaceEdit = () => {
   } = useForm<PlaceFormValues>({
     refineCoreProps: {
       resource: "place",
+      action: "edit",
+      id,
+      redirect: "list",
     },
     defaultValues: record,
   });
