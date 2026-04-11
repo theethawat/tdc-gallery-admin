@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
   ArticleFormValue,
-} from "../../../components/refine-ui/form/article-form";
+} from "@/components/refine-ui/form/article-form";
+import { handleUpload } from "@/lib/upload";
 
 export const ArticleEdit = () => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ export const ArticleEdit = () => {
       resource: "article",
       action: "edit",
       id,
-      redirect: "list",
     },
   });
 
@@ -51,7 +51,15 @@ export const ArticleEdit = () => {
           ) || [],
         date: values.date || new Date(),
       };
-
+      const images = (values as any).images;
+      if (images) {
+        console.log("Images to upload:", images);
+        // Here you would typically handle the file upload logic,
+        // such as sending the files to your backend or a cloud storage service.
+        const uploadedImages = await handleUpload(Array.from(images));
+        payload.images = uploadedImages; // Assuming the upload function returns an array of image URLs or IDs
+      }
+      console.log("Payload to submit:", payload);
       await onFinish(payload);
       navigate(-1);
     } catch (error) {

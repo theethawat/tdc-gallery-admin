@@ -9,6 +9,7 @@ import {
   ArticleForm,
   ArticleFormValue,
 } from "../../../components/refine-ui/form/article-form";
+import { handleUpload } from "@/lib/upload";
 
 export const ArticleCreate = () => {
   const navigate = useNavigate();
@@ -33,8 +34,18 @@ export const ArticleCreate = () => {
             typeof cat === "string" ? cat : cat._id,
           ) || [],
         date: values.date || new Date(),
+        images: [], // Placeholder for image URLs or IDs after upload
       };
 
+      const images = (values as any).images;
+      if (images) {
+        console.log("Images to upload:", images);
+        // Here you would typically handle the file upload logic,
+        // such as sending the files to your backend or a cloud storage service.
+        const uploadedImages = await handleUpload(Array.from(images));
+        payload.images = uploadedImages; // Assuming the upload function returns an array of image URLs or IDs
+      }
+      console.log("Payload to submit:", payload);
       await onFinish(payload);
       navigate(-1);
     } catch (error) {

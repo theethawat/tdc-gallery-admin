@@ -93,7 +93,27 @@ export const onReadAll = async (req, res) => {
 
 export const onReadOne = async (req, res) => {
   try {
-    const result = await ArticleService.getOne(req.params.id, 'categories');
+    const pipeline = [];
+    pipeline.push({
+      $lookup: {
+        from: 'categories',
+        as: 'categories',
+        localField: 'categories',
+        foreignField: '_id',
+      },
+    });
+    // Populating the Images
+    pipeline.push({
+      $lookup: {
+        from: 'images',
+        as: 'image',
+        localField: '_id',
+        foreignField: 'article',
+      },
+    });
+    const result = await ArticleService.getOneAggregation(req.params.id, {
+      pipeline,
+    });
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });
@@ -109,6 +129,7 @@ export const onCreateOne = async (req, res) => {
         await ImageModel.findByIdAndUpdate(imageId, {
           $set: {
             article: result?._id,
+            type: 'article',
           },
         });
       }
@@ -128,6 +149,7 @@ export const onEditOne = async (req, res) => {
         await ImageModel.findByIdAndUpdate(imageId, {
           $set: {
             article: req?.params?.id,
+            type: 'article',
           },
         });
       }

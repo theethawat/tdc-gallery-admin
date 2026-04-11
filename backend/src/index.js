@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 import passport from './configs/passport';
 import config from './configs/app';
@@ -15,6 +16,7 @@ app.use(cors({}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(morgan('tiny'));
 
 // Frontend Routing
 app.use('/', staticRoute);

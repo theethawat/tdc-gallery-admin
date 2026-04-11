@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import config from '../configs/app';
+import mongoose from 'mongoose';
 
 class MainService {
   constructor(selectedModel, name) {
@@ -81,6 +82,22 @@ class MainService {
     }
   }
 
+  async getOneAggregation(id, { pipeline = [] }) {
+    try {
+      let allPipeline = [];
+      allPipeline.push({ $match: { _id: mongoose.Types.ObjectId(id) } });
+      allPipeline = [...allPipeline, ...pipeline];
+
+      allPipeline.push({ $set: { id: '$_id' } });
+
+      const result = await this.selectedModel.aggregate(allPipeline);
+      const payload = result[0];
+      return payload;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  }
   async getOne(id, populateKey = null) {
     try {
       let result;

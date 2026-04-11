@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Autocomplete, Datepicker } from "../custom";
+import { Autocomplete, Datepicker, Upload } from "../custom";
 
 export interface ArticleFormValue {
   name: string;
@@ -146,6 +146,8 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
           )}
         />
 
+        {/* Upload */}
+        <Upload name="images" form={form} />
         {/* Submit Buttons */}
         <div className="flex gap-2">
           <Button type="submit" disabled={isLoading}>

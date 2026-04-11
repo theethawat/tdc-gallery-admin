@@ -99,7 +99,7 @@ export const ArticleList = () => {
                 size="sm"
               />
               <DeleteButton
-                resource="articles"
+                resource="article"
                 recordItemId={recordItemId}
                 size="sm"
               />

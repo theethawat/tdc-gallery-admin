@@ -72,7 +72,7 @@ export const CategoryList = () => {
                 size="sm"
               />
               <DeleteButton
-                resource="categories"
+                resource="category"
                 recordItemId={recordItemId}
                 size="sm"
               />

@@ -1,4 +1,5 @@
 import { Category } from "./Category";
+import { Image } from "./Image";
 
 export interface Article {
   _id: string;
@@ -8,4 +9,5 @@ export interface Article {
   description: string;
   createdAt?: Date;
   updatedAt?: Date;
+  images?: Image[];
 }
