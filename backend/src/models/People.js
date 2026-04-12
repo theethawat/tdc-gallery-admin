@@ -5,21 +5,22 @@ const { Schema } = Mongoose;
 const PeopleSchema = new Schema(
   {
     name: String,
-    called_name: String,
+    calledName: String,
     nickname: String,
     birthday: Date,
     nationality: String,
-    status: String,
-    known_date: Date,
+    status: { type: String, default: 'colleague' },
+    knownDate: Date,
     image: {
       type: Mongoose.Types.ObjectId,
       ref: 'Image',
     },
-    social_media: {
+    socialMedia: {
       facebook: String,
       instagram: String,
     },
-    meeting_place: String,
+    meetingPlace: String,
+    note: String,
   },
   {
     timestamps: true,

@@ -1,5 +1,3 @@
-import { PlaceEdit } from "@/pages/galleries/places";
-
 const translation = {
   th: {
     translation: {
@@ -24,6 +22,7 @@ const translation = {
         pleaseSelect: "กรุณาเลือก",
         isRequired: "จำเป็นต้องกรอก",
         pickADate: "เลือกวันที่",
+        select: "เลือก",
       },
       buttons: {
         create: "สร้าง",
@@ -61,6 +60,26 @@ const translation = {
           "Error when editing {{resource}} (status code: {{statusCode}})",
         importProgress: "Importing: {{processed}}/{{total}}",
       },
+      relation: {
+        relation: "ความสัมพันธ์",
+        people: "ผู้คนรอบตัว",
+      },
+      people: {
+        name: "ชื่อ นามสกุล",
+        calledName: "ชื่อที่ใช้เรียก",
+        callNameHelper: "เช่น ชื่อเล่น หรือ พี่... น้อง...",
+        nickname: "ชื่อเล่น",
+        birthday: "วันเกิด",
+        nationality: "สัญชาติ",
+        status: "สถานะ",
+        knownDate: "วันที่รู้จัก",
+        meetingPlace: "สถานที่พบกัน",
+        note: "บันทึกเพิ่มเติม",
+        socialMedia: "โซเชียลมีเดีย",
+        peopleCreate: "เพิ่มผู้คน",
+        peopleEdit: "แก้ไขข้อมูลผู้คน",
+        peopleDelete: "ลบผู้คน",
+      },
     },
   },
   en: {
@@ -86,6 +105,7 @@ const translation = {
         pleaseSelect: "Please select",
         isRequired: "is required",
         pickADate: "Pick a date",
+        select: "Select",
       },
       buttons: {
         create: "Create",
@@ -122,6 +142,27 @@ const translation = {
         editError:
           "Error when editing {{resource}} (status code: {{statusCode}})",
         importProgress: "Importing: {{processed}}/{{total}}",
+      },
+      relation: {
+        relation: "Relationship",
+        people: "People",
+      },
+      people: {
+        name: "Full Name",
+        calledName: "Called Name",
+        callNameHelper:
+          "e.g. nickname or with some honorifics like P'... N'...",
+        nickname: "Nickname",
+        birthday: "Birthday",
+        nationality: "Nationality",
+        status: "Status",
+        knownDate: "Known Date",
+        meetingPlace: "Meeting Place",
+        note: "Additional Note",
+        socialMedia: "Social Media",
+        peopleCreate: "Create People",
+        peopleEdit: "Edit People",
+        peopleDelete: "Delete People",
       },
     },
   },

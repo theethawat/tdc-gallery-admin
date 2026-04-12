@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
   ArticleFormValue,
-} from "../../../components/refine-ui/form/article-form";
+} from "@/components/refine-ui/form/article-form";
 import { handleUpload } from "@/lib/upload";
 
 export const ArticleCreate = () => {

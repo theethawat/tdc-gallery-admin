@@ -1,4 +1,4 @@
-import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -21,6 +21,8 @@ import {
   TagsIcon,
   MapPinCheckIcon,
   FanIcon,
+  HeartHandshakeIcon,
+  UsersIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { I18nProvider } from "@refinedev/core";
@@ -37,6 +39,12 @@ import {
   ArticleList,
   ArticleShow,
 } from "./pages/galleries/articles";
+import {
+  PeopleCreate,
+  PeopleEdit,
+  PeopleList,
+  PeopleShow,
+} from "./pages/relations/people";
 import { PlaceCreate, PlaceEdit, PlaceList } from "./pages/galleries/places";
 import { ForgotPassword } from "./pages/forgot-password";
 import { Login } from "./pages/login";
@@ -116,6 +124,27 @@ function App() {
                     icon: <MapPinCheckIcon />,
                   },
                 },
+                {
+                  name: "relations",
+                  meta: {
+                    canDelete: true,
+                    label: t("relation.relation"),
+                    icon: <HeartHandshakeIcon />,
+                  },
+                },
+                {
+                  name: "people",
+                  list: "/relations/people",
+                  create: "/relations/people/create",
+                  edit: "/relations/people/edit/:id",
+                  show: "/relations/people/show/:id",
+                  meta: {
+                    canDelete: true,
+                    label: t("relation.people"),
+                    parent: "relations",
+                    icon: <UsersIcon />,
+                  },
+                },
               ]}
               options={{
                 syncWithLocation: true,
@@ -169,6 +198,16 @@ function App() {
                       <Route path="edit/:id" element={<PlaceEdit />} />
                     </Route>
                     <Route index element={<ArticleList />} />
+                  </Route>
+                  <Route path="/relations">
+                    <Route path="people">
+                      <Route index element={<PeopleList />} />
+                      <Route path="create" element={<PeopleCreate />} />
+                      <Route path="edit/:id" element={<PeopleEdit />} />
+                      <Route path="show/:id" element={<PeopleShow />} />
+                    </Route>
+
+                    <Route index element={<PeopleList />} />
                   </Route>
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>

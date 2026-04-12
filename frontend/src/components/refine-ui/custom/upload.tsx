@@ -5,9 +5,11 @@ import { UseFormReturn } from "react-hook-form";
 export function Upload({
   name,
   form,
+  maxNumber = 15,
 }: {
   name: string;
   form?: UseFormReturn<any> | null;
+  maxNumber?: number;
 }) {
   return (
     <Field>
@@ -18,6 +20,14 @@ export function Upload({
         multiple
         onChange={(event) => {
           const files = event.target.files;
+          const maxFiles = maxNumber; // Set your desired limit
+
+          if (files && files.length > maxFiles) {
+            alert(`You can only upload a maximum of ${maxFiles} images`);
+            event.target.value = ""; // Clear the input
+            return;
+          }
+
           if (form) {
             form.setValue(name, files, {
               shouldDirty: true,
