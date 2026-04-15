@@ -1,44 +1,43 @@
 @import "tailwindcss";
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1.0000 0 0);
-  --foreground: oklch(0.3729 0.0306 259.7328);
-  --card: oklch(1.0000 0 0);
-  --card-foreground: oklch(0.3729 0.0306 259.7328);
-  --popover: oklch(1.0000 0 0);
-  --popover-foreground: oklch(0.3729 0.0306 259.7328);
-  --primary: oklch(0.7827 0.1372 213.6421);
-  --primary-foreground: oklch(1.0000 0 0);
-  --secondary: oklch(0.9010 0.0580 230.9020);
-  --secondary-foreground: oklch(0.4461 0.0263 256.8018);
-  --muted: oklch(0.9510 0.0260 236.8240);
-  --muted-foreground: oklch(0.5510 0.0234 264.3637);
-  --accent: oklch(0.9673 0.0222 203.6956);
-  --accent-foreground: oklch(0.3729 0.0306 259.7328);
-  --destructive: oklch(0.7120 0.1940 13.4280);
-  --destructive-foreground: oklch(1.0000 0 0);
-  --border: oklch(0.8849 0.0085 236.5739);
-  --input: oklch(0.9464 0.0134 233.7467);
-  --ring: oklch(0.6850 0.1690 237.3230);
-  --chart-1: oklch(0.9010 0.0580 230.9020);
-  --chart-2: oklch(0.8280 0.1110 230.3180);
-  --chart-3: oklch(0.7460 0.1600 232.6610);
-  --chart-4: oklch(0.6850 0.1690 237.3230);
-  --chart-5: oklch(0.5880 0.1580 241.9660);
-  --sidebar: oklch(0.9843 0.0011 197.1389);
-  --sidebar-foreground: oklch(0.3729 0.0306 259.7328);
-  --sidebar-primary: oklch(0.7890 0.1540 211.5300);
-  --sidebar-primary-foreground: oklch(1.0000 0 0);
-  --sidebar-accent: oklch(0.9673 0.0222 203.6956);
-  --sidebar-accent-foreground: oklch(0.3729 0.0306 259.7328);
-  --sidebar-border: oklch(0.9510 0.0260 236.8240);
-  --sidebar-ring: oklch(0.6850 0.1690 237.3230);
-  --font-sans: Nunito, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Source Serif 4, serif;
+  --background: #f6f8f7;
+  --foreground: #3a4045;
+  --card: #ffffff;
+  --card-foreground: #3a4045;
+  --popover: #ffffff;
+  --popover-foreground: #3a4045;
+  --primary: #4fa89f;
+  --primary-foreground: #f4fffd;
+  --secondary: #b9afd3;
+  --secondary-foreground: #433760;
+  --muted: #eef2f1;
+  --muted-foreground: #677074;
+  --accent: #f6cfe1;
+  --accent-foreground: #53364a;
+  --destructive: #ac3434;
+  --destructive-foreground: #fff7f6;
+  --border: #e0e7e4;
+  --input: #fbfcfc;
+  --ring: #67b8af;
+  --chart-1: #64b9b0;
+  --chart-2: #beb3d8;
+  --chart-3: #f6cfe1;
+  --chart-4: #9ca6f4;
+  --chart-5: #93bbec;
+  --sidebar: #f9fbfa;
+  --sidebar-foreground: #3a4045;
+  --sidebar-primary: #5caea6;
+  --sidebar-primary-foreground: #f7fffd;
+  --sidebar-accent: #edf1ef;
+  --sidebar-accent-foreground: #3a4045;
+  --sidebar-border: #e6ece9;
+  --sidebar-ring: #67b8af;
+  --font-sans: "Nunito Sans", ui-sans-serif, sans-serif, system-ui;
+  --font-serif: "IBM Plex Sans Thai", ui-sans-serif, sans-serif;
   --font-mono: IBM Plex Mono, monospace;
-  --radius: 0.725rem;
+  --radius: 0.5rem;
   --shadow-x: 0px;
   --shadow-y: 8px;
   --shadow-blur: 16px;
@@ -58,42 +57,42 @@
 }
 
 .dark {
-  --background: oklch(0.2161 0.0061 56.0434);
-  --foreground: oklch(0.9299 0.0334 272.7879);
-  --card: oklch(0.2805 0.0309 307.2326);
-  --card-foreground: oklch(0.9299 0.0334 272.7879);
-  --popover: oklch(0.2805 0.0309 307.2326);
-  --popover-foreground: oklch(0.9299 0.0334 272.7879);
-  --primary: oklch(0.7874 0.1179 295.7538);
-  --primary-foreground: oklch(0.2161 0.0061 56.0434);
-  --secondary: oklch(0.3416 0.0444 308.8496);
-  --secondary-foreground: oklch(0.8717 0.0093 258.3382);
-  --muted: oklch(0.2283 0.0375 302.9006);
-  --muted-foreground: oklch(0.7137 0.0192 261.3246);
-  --accent: oklch(0.3858 0.0509 304.6383);
-  --accent-foreground: oklch(0.8717 0.0093 258.3382);
-  --destructive: oklch(0.8077 0.1035 19.5706);
-  --destructive-foreground: oklch(0.2161 0.0061 56.0434);
-  --border: oklch(0.3416 0.0444 308.8496);
-  --input: oklch(0.3416 0.0444 308.8496);
-  --ring: oklch(0.7874 0.1179 295.7538);
-  --chart-1: oklch(0.7874 0.1179 295.7538);
-  --chart-2: oklch(0.7090 0.1592 293.5412);
-  --chart-3: oklch(0.6056 0.2189 292.7172);
-  --chart-4: oklch(0.5413 0.2466 293.0090);
-  --chart-5: oklch(0.4907 0.2412 292.5809);
-  --sidebar: oklch(0.3416 0.0444 308.8496);
-  --sidebar-foreground: oklch(0.9299 0.0334 272.7879);
-  --sidebar-primary: oklch(0.7874 0.1179 295.7538);
-  --sidebar-primary-foreground: oklch(0.2161 0.0061 56.0434);
-  --sidebar-accent: oklch(0.3858 0.0509 304.6383);
-  --sidebar-accent-foreground: oklch(0.8717 0.0093 258.3382);
-  --sidebar-border: oklch(0.3416 0.0444 308.8496);
-  --sidebar-ring: oklch(0.7874 0.1179 295.7538);
-  --font-sans: Anuphan, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Source Serif 4, serif;
+  --background: #25292e;
+  --foreground: #e7ecea;
+  --card: #2b3136;
+  --card-foreground: #e7ecea;
+  --popover: #2b3136;
+  --popover-foreground: #e7ecea;
+  --primary: #7ecdc5;
+  --primary-foreground: #0e1514;
+  --secondary: #c3badb;
+  --secondary-foreground: #181222;
+  --muted: #30373c;
+  --muted-foreground: #bec8c5;
+  --accent: #dba6c0;
+  --accent-foreground: #200f18;
+  --destructive: #ea7575;
+  --destructive-foreground: #2e0808;
+  --border: #3e484e;
+  --input: #333b40;
+  --ring: #7ecdc5;
+  --chart-1: #7ecdc5;
+  --chart-2: #c3badb;
+  --chart-3: #dba6c0;
+  --chart-4: #818cf8;
+  --chart-5: #60a5fa;
+  --sidebar: #2a3035;
+  --sidebar-foreground: #e7ecea;
+  --sidebar-primary: #7ecdc5;
+  --sidebar-primary-foreground: #0e1514;
+  --sidebar-accent: #353d43;
+  --sidebar-accent-foreground: #e7ecea;
+  --sidebar-border: #3e484e;
+  --sidebar-ring: #7ecdc5;
+  --font-sans: "Nunito Sans", ui-sans-serif, sans-serif, system-ui;
+  --font-serif: "IBM Plex Sans Thai", ui-sans-serif, sans-serif;
   --font-mono: IBM Plex Mono, monospace;
-  --radius: 0.725rem;
+  --radius: 0.5rem;
   --shadow-x: 0px;
   --shadow-y: 8px;
   --shadow-blur: 16px;
@@ -168,6 +167,22 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--primary) 10%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 100% 10%, color-mix(in oklab, var(--accent) 9%, transparent) 0%, transparent 36%),
+      linear-gradient(145deg, color-mix(in oklab, var(--background) 96%, white) 0%, var(--background) 52%, color-mix(in oklab, var(--background) 88%, var(--secondary) 12%) 100%);
+    min-height: 100vh;
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
   }
 }

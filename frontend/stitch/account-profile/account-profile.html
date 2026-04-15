@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Profile | PERMS Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Nunito+Sans:wght@300;400;600;700;800;900&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceeed",
+                    "secondary-fixed-dim": "#cfbef4",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e1e3e2",
+                    "surface-tint": "#006a61",
+                    "on-tertiary-fixed": "#340d23",
+                    "on-secondary-fixed": "#20133e",
+                    "secondary-fixed": "#e9ddff",
+                    "on-primary-fixed": "#00201d",
+                    "primary": "#00685f",
+                    "inverse-on-surface": "#eff1f0",
+                    "primary-container": "#008378",
+                    "surface-bright": "#f8faf9",
+                    "outline-variant": "#bcc9c6",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-fixed-variant": "#005049",
+                    "tertiary-container": "#9a657e",
+                    "on-tertiary-fixed-variant": "#66384f",
+                    "surface-container-low": "#f2f4f3",
+                    "primary-fixed-dim": "#6bd8cb",
+                    "on-background": "#191c1c",
+                    "tertiary": "#7e4d65",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#dac9ff",
+                    "inverse-surface": "#2e3131",
+                    "surface-container-highest": "#e1e3e2",
+                    "outline": "#6d7a77",
+                    "on-primary-container": "#f4fffc",
+                    "surface-dim": "#d8dad9",
+                    "on-surface-variant": "#3d4947",
+                    "tertiary-fixed-dim": "#f4b5d1",
+                    "surface": "#f8faf9",
+                    "on-secondary-fixed-variant": "#4c3f6d",
+                    "on-surface": "#191c1c",
+                    "background": "#f8faf9",
+                    "primary-fixed": "#89f5e7",
+                    "surface-container-high": "#e6e9e8",
+                    "secondary": "#645786",
+                    "inverse-primary": "#6bd8cb",
+                    "tertiary-fixed": "#ffd8e7",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Nunito Sans", "sans-serif"],
+                    "body": ["Nunito Sans", "sans-serif"],
+                    "label": ["Ibm Plex Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Nunito Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-slate-50 border-r border-slate-200 w-64 font-public-sans text-sm font-semibold duration-200 ease-in-out">
+<div class="px-6 py-8">
+<h1 class="text-lg font-black text-teal-700">PERMS Admin</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Users</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+<span>Permissions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span>Audit Logs</span>
+</a>
+<!-- Active State: Settings -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-50 text-teal-700 border-r-4 border-teal-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200">
+<div class="flex items-center gap-3 mb-6 px-2">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-teal-100">
+<img alt="Admin Avatar" data-alt="Professional studio portrait of a male administrator with a clean-cut look and friendly expression, warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSPBPDGbPLfe8MutFAqwlq2dr-yeaQCoCobWMTN2_kgyNs543HdFUEgeaXdlT7Wm8x_v_taPMKhwwYPk7BLUZ7zoUpbj0pVG74_fJj3rtb2jYcBNJ8s27DNYJtayuTFDbTsN9v65PlavYaJK5CZ7WFXjQiazAbJK0nKok1ZfwBpiq3Q57ig1OcRDNCQu4ECndknLsNQRaQD5JoHu53gjJ4e4dTqUBuiclS7Hloakp1BO8NbTh6Bnoz9OElksapMIIrx7qUZyhXCNG0"/>
+</div>
+<div>
+<p class="text-sm font-bold text-teal-800">System Admin</p>
+<p class="text-xs text-slate-500 font-normal">admin@perms.io</p>
+</div>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative">
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center px-6 py-3 w-full sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm font-public-sans text-sm font-medium">
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 bg-slate-50 border-none rounded-lg focus:ring-2 focus:ring-teal-500 text-sm" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-5 text-slate-500">
+<button class="hover:text-teal-600 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+<span>EN</span>
+</button>
+<button class="hover:text-teal-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-teal-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Body -->
+<div class="p-8 max-w-6xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-8">
+<nav class="text-xs text-slate-400 mb-2 font-label flex gap-2">
+<a class="hover:text-teal-600" href="#">Settings</a>
+<span>/</span>
+<span class="text-teal-600">Account Profile</span>
+</nav>
+<h2 class="text-3xl font-bold text-on-surface headline flex items-baseline gap-4">
+                    Profile Settings <span class="text-xl font-normal text-slate-400">/ ตั้งค่าโปรไฟล์</span>
+</h2>
+<p class="text-slate-500 mt-2 body">Manage your personal information and account preferences for the PERMS Admin system.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Profile Card (Asymmetric Layout) -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col items-center text-center">
+<div class="relative group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+<img alt="Profile Picture" data-alt="Close-up of a smiling male professional with short hair, high-key bright white background, crisp details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRcTwVj5OAE5tGi_tQzWCgEVzv-TOu7FioFKHg-UaUO-9RIFhT-M9_pR7nPrvjNIr_jtlhSCJ_6kHv4xK6J3U6R0m56wlf_gL1TfKheNxhprjNGwiqk8YC2MXQg7zqHF7dt_FfLkIl0NAVk6Oat5Dvggvfegjwme8dZsj4JuBaSBlt4vXODO6EoEyxwFHCJdwg9kJcfYmvj3IiJA6zo0zNz-r9DL7YmimqPgKNPQkv2c_IBykCS4lFu1cvvrKl67Tp1PGI57PDzfLD"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full shadow-md">
+<span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="text-lg font-bold text-on-surface">Alex Thompson</h3>
+<p class="text-sm text-slate-400 mb-4">Senior Security Administrator</p>
+<span class="px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-full uppercase tracking-wider">Verified Admin</span>
+</div>
+</div>
+<div class="bg-teal-900 text-white rounded-xl shadow-lg p-6 relative overflow-hidden">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-4xl mb-4 text-teal-300" data-icon="shield">shield</span>
+<h4 class="font-bold text-lg mb-1">Privacy Focused</h4>
+<p class="text-teal-100/80 text-xs leading-relaxed">Your data is secured with enterprise-grade encryption. Ensure your privacy settings are always up to date.</p>
+</div>
+<!-- Abstract texture -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-teal-800 rounded-full opacity-50"></div>
+<div class="absolute right-8 top-4 w-12 h-12 border-2 border-teal-700 rounded-full opacity-30"></div>
+</div>
+</div>
+<!-- Form Section (ShadCN style) -->
+<div class="lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-200 divide-y divide-slate-100">
+<!-- Personal Info Section -->
+<div class="p-8">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-teal-600" data-icon="person_outline">person_outline</span>
+<h4 class="text-lg font-bold">Personal Information</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-tight font-label">Full Name</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary focus:ring-primary/20 text-sm py-2.5" type="text" value="Alex Thompson"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-tight font-label">Email Address</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary focus:ring-primary/20 text-sm py-2.5" type="email" value="alex.thompson@perms.io"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-tight font-label">Bio / ประวัติส่วนตัว</label>
+<textarea class="w-full border-slate-200 rounded-lg focus:border-primary focus:ring-primary/20 text-sm py-2.5" rows="4">Dedicated to maintaining robust security protocols and optimizing administrative workflows across the organization.</textarea>
+<p class="text-[10px] text-slate-400">Write a brief description for your profile (max 200 characters).</p>
+</div>
+</div>
+</div>
+<!-- Preferences Section -->
+<div class="p-8">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-teal-600" data-icon="tune">tune</span>
+<h4 class="text-lg font-bold">Preferences</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-tight font-label">Preferred Language</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-4 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-700 text-sm font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        English (EN)
+                                    </button>
+<button class="flex-1 py-2 px-4 rounded-lg border-2 border-slate-100 hover:border-slate-200 text-slate-600 text-sm font-semibold">
+                                        Thai (TH)
+                                    </button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-tight font-label">Timezone</label>
+<select class="w-full border-slate-200 rounded-lg focus:border-primary focus:ring-primary/20 text-sm py-2.5">
+<option>(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+<option>(GMT+00:00) UTC</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Privacy Section -->
+<div class="p-8">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-teal-600" data-icon="visibility_lock">visibility_lock</span>
+<h4 class="text-lg font-bold">Privacy Settings</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-100">
+<div>
+<p class="text-sm font-bold text-on-surface">Public Profile Visibility</p>
+<p class="text-xs text-slate-500">Allow other administrators to view your bio and contact info.</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 cursor-pointer">
+<div class="bg-white w-4 h-4 rounded-full absolute right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-100">
+<div>
+<p class="text-sm font-bold text-on-surface">Audit Log Inclusion</p>
+<p class="text-xs text-slate-500">Include your name in global activity audit logs.</p>
+</div>
+<div class="w-12 h-6 bg-slate-200 rounded-full relative p-1 cursor-pointer">
+<div class="bg-white w-4 h-4 rounded-full absolute left-1"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-8 bg-slate-50/50 flex justify-end gap-3">
+<button class="px-6 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-sm font-bold hover:bg-slate-50 transition-all">Cancel</button>
+<button class="px-8 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 hover:bg-primary-container transition-all">Save Changes</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Component -->
+<footer class="mt-auto flex justify-between items-center px-8 py-4 w-full bg-white border-t border-slate-200 font-public-sans text-xs text-slate-500">
+<p>© 2024 PERMS Admin Panel. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:underline" href="#">Privacy Policy</a>
+<a class="hover:underline" href="#">Terms of Service</a>
+<div class="flex gap-2">
+<span class="cursor-pointer font-bold text-teal-600">Thai (TH)</span>
+<span class="text-slate-300">|</span>
+<span class="cursor-pointer hover:underline">English (EN)</span>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

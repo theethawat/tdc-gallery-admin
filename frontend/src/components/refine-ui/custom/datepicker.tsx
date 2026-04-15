@@ -28,14 +28,14 @@ export function Datepicker({
   const [date, setDate] = React.useState<Date | undefined>(defaultDate);
 
   return (
-    <FormItem>
+    <FormItem className="w-full">
       <FormLabel>{label}</FormLabel>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             data-empty={!date}
-            className="w-53 justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
+            className="w-full justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
           >
             {date ? format(date, "PPP") : <span>{t("general.pickADate")}</span>}
             <ChevronDownIcon />
