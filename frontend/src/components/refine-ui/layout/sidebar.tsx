@@ -47,7 +47,7 @@ export function Sidebar() {
         "md:mr-0",
         "md:p-1",
         "md:rounded-2xl",
-        "md:shadow-[0_20px_40px_-28px_color-mix(in_oklab,var(--foreground)_48%,transparent)]",
+        "md:shadow-[0_20px_40px_-28px_rgba(55,95,151,0.28)]",
       )}
     >
       <ShadcnSidebarRail />

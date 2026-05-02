@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { ChevronDownIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import DatePickerComponent from "../date-picker/date-picker";
 import {
   Popover,
   PopoverContent,
@@ -25,40 +25,26 @@ export function Datepicker({
   defaultDate?: Date;
 }) {
   const { t } = useTranslation();
-  const [date, setDate] = React.useState<Date | undefined>(defaultDate);
+  const [date, setDate] = React.useState<Date | undefined>(
+    defaultDate || undefined,
+  );
 
   return (
     <FormItem className="w-full">
       <FormLabel>{label}</FormLabel>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            data-empty={!date}
-            className="w-full justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
-          >
-            {date ? format(date, "PPP") : <span>{t("general.pickADate")}</span>}
-            <ChevronDownIcon />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="single"
-            selected={form ? form.watch(name) : date}
-            onSelect={(tempDate) => {
-              setDate(tempDate);
-              if (form) {
-                form.setValue(name, tempDate, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                  shouldValidate: true,
-                });
-              }
-            }}
-            defaultMonth={date}
-          />
-        </PopoverContent>
-      </Popover>
+      <DatePickerComponent
+        selected={form ? form.watch(name) : date}
+        onSelect={(tempDate) => {
+          setDate(tempDate);
+          if (form) {
+            form.setValue(name, tempDate, {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+          }
+        }}
+      />
     </FormItem>
   );
 }

@@ -242,6 +242,7 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
                 label={t("people.birthday")}
                 name="birthday"
                 form={form}
+                defaultDate={new Date()}
               />
               <Datepicker
                 label={t("people.knownDate")}

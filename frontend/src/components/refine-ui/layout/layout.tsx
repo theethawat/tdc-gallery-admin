@@ -38,12 +38,12 @@ export function Layout({ children }: PropsWithChildren) {
                 "flex-1",
                 "rounded-2xl",
                 "border",
-                "border-white/50",
+                "border-border/40",
                 "bg-card/80",
                 "backdrop-blur-md",
                 "p-3",
                 "md:p-5",
-                "shadow-[0_24px_46px_-36px_color-mix(in_oklab,var(--foreground)_45%,transparent)]",
+                "shadow-[0_24px_46px_-36px_rgba(55,95,151,0.22)]",
               )}
             >
               {children}
