@@ -50,19 +50,19 @@ colors:
   surface-variant: '#e0e3e5'
 typography:
   display:
-    fontFamily: IBM Plex Sans Thai
+    fontFamily: IBM Plex Sans
     fontSize: 48px
     fontWeight: '600'
     lineHeight: '1.1'
     letterSpacing: -0.02em
   headline-lg:
-    fontFamily: IBM Plex Sans Thai
+    fontFamily: IBM Plex Sans
     fontSize: 32px
     fontWeight: '500'
     lineHeight: '1.2'
     letterSpacing: -0.01em
   headline-md:
-    fontFamily: IBM Plex Sans Thai
+    fontFamily: IBM Plex Sans
     fontSize: 24px
     fontWeight: '500'
     lineHeight: '1.3'

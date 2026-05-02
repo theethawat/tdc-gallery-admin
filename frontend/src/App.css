@@ -2,111 +2,111 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f6f8f7;
-  --foreground: #3a4045;
+  --background: #f7fafc;
+  --foreground: #181c1e;
   --card: #ffffff;
-  --card-foreground: #3a4045;
+  --card-foreground: #181c1e;
   --popover: #ffffff;
-  --popover-foreground: #3a4045;
-  --primary: #4fa89f;
-  --primary-foreground: #f4fffd;
-  --secondary: #b9afd3;
-  --secondary-foreground: #433760;
-  --muted: #eef2f1;
-  --muted-foreground: #677074;
-  --accent: #f6cfe1;
-  --accent-foreground: #53364a;
-  --destructive: #ac3434;
-  --destructive-foreground: #fff7f6;
-  --border: #e0e7e4;
-  --input: #fbfcfc;
-  --ring: #67b8af;
-  --chart-1: #64b9b0;
-  --chart-2: #beb3d8;
-  --chart-3: #f6cfe1;
-  --chart-4: #9ca6f4;
-  --chart-5: #93bbec;
-  --sidebar: #f9fbfa;
-  --sidebar-foreground: #3a4045;
-  --sidebar-primary: #5caea6;
-  --sidebar-primary-foreground: #f7fffd;
-  --sidebar-accent: #edf1ef;
-  --sidebar-accent-foreground: #3a4045;
-  --sidebar-border: #e6ece9;
-  --sidebar-ring: #67b8af;
-  --font-sans: "Nunito Sans", ui-sans-serif, sans-serif, system-ui;
+  --popover-foreground: #181c1e;
+  --primary: #1c648e;
+  --primary-foreground: #ffffff;
+  --secondary: #d5bffe;
+  --secondary-foreground: #5d4b81;
+  --muted: #ebeef0;
+  --muted-foreground: #41484e;
+  --accent: #d3a6b9;
+  --accent-foreground: #5c3a4b;
+  --destructive: #ba1a1a;
+  --destructive-foreground: #ffffff;
+  --border: #c0c7cf;
+  --input: #f1f4f6;
+  --ring: #7cb9e8;
+  --chart-1: #1c648e;
+  --chart-2: #67558c;
+  --chart-3: #795465;
+  --chart-4: #90cdfd;
+  --chart-5: #e9bacd;
+  --sidebar: #f1f4f6;
+  --sidebar-foreground: #181c1e;
+  --sidebar-primary: #1c648e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e5e9eb;
+  --sidebar-accent-foreground: #181c1e;
+  --sidebar-border: #c0c7cf;
+  --sidebar-ring: #7cb9e8;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, sans-serif, system-ui;
   --font-serif: "IBM Plex Sans Thai", ui-sans-serif, sans-serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.5rem;
   --shadow-x: 0px;
-  --shadow-y: 8px;
-  --shadow-blur: 16px;
-  --shadow-spread: -4px;
+  --shadow-y: 14px;
+  --shadow-blur: 36px;
+  --shadow-spread: -18px;
   --shadow-opacity: 0.08;
-  --shadow-color: hsl(0 0% 0%);
-  --shadow-2xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-sm: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow-md: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 2px 4px -5px hsl(0 0% 0% / 0.08);
-  --shadow-lg: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 4px 6px -5px hsl(0 0% 0% / 0.08);
-  --shadow-xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 8px 10px -5px hsl(0 0% 0% / 0.08);
-  --shadow-2xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.20);
+  --shadow-color: rgba(124, 185, 232, 0.35);
+  --shadow-2xs: 0px 8px 20px -16px rgba(124, 185, 232, 0.18);
+  --shadow-xs: 0px 10px 22px -16px rgba(124, 185, 232, 0.22);
+  --shadow-sm: 0px 14px 30px -20px rgba(124, 185, 232, 0.22);
+  --shadow: 0px 16px 34px -20px rgba(124, 185, 232, 0.24);
+  --shadow-md: 0px 18px 40px -20px rgba(124, 185, 232, 0.26);
+  --shadow-lg: 0px 22px 44px -20px rgba(124, 185, 232, 0.28);
+  --shadow-xl: 0px 26px 52px -22px rgba(124, 185, 232, 0.30);
+  --shadow-2xl: 0px 30px 60px -22px rgba(124, 185, 232, 0.36);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
 
 .dark {
-  --background: #25292e;
-  --foreground: #e7ecea;
-  --card: #2b3136;
-  --card-foreground: #e7ecea;
-  --popover: #2b3136;
-  --popover-foreground: #e7ecea;
-  --primary: #7ecdc5;
-  --primary-foreground: #0e1514;
-  --secondary: #c3badb;
-  --secondary-foreground: #181222;
-  --muted: #30373c;
-  --muted-foreground: #bec8c5;
-  --accent: #dba6c0;
-  --accent-foreground: #200f18;
-  --destructive: #ea7575;
-  --destructive-foreground: #2e0808;
-  --border: #3e484e;
-  --input: #333b40;
-  --ring: #7ecdc5;
-  --chart-1: #7ecdc5;
-  --chart-2: #c3badb;
-  --chart-3: #dba6c0;
-  --chart-4: #818cf8;
-  --chart-5: #60a5fa;
-  --sidebar: #2a3035;
-  --sidebar-foreground: #e7ecea;
-  --sidebar-primary: #7ecdc5;
-  --sidebar-primary-foreground: #0e1514;
-  --sidebar-accent: #353d43;
-  --sidebar-accent-foreground: #e7ecea;
-  --sidebar-border: #3e484e;
-  --sidebar-ring: #7ecdc5;
-  --font-sans: "Nunito Sans", ui-sans-serif, sans-serif, system-ui;
+  --background: #2d3133;
+  --foreground: #eef1f3;
+  --card: #353b40;
+  --card-foreground: #eef1f3;
+  --popover: #353b40;
+  --popover-foreground: #eef1f3;
+  --primary: #90cdfd;
+  --primary-foreground: #001e30;
+  --secondary: #d2bcfb;
+  --secondary-foreground: #220f44;
+  --muted: #3a4249;
+  --muted-foreground: #c0c7cf;
+  --accent: #e9bacd;
+  --accent-foreground: #2e1221;
+  --destructive: #ffb4ab;
+  --destructive-foreground: #690005;
+  --border: #566068;
+  --input: #404850;
+  --ring: #90cdfd;
+  --chart-1: #90cdfd;
+  --chart-2: #d2bcfb;
+  --chart-3: #e9bacd;
+  --chart-4: #7cb9e8;
+  --chart-5: #cae6ff;
+  --sidebar: #32383d;
+  --sidebar-foreground: #eef1f3;
+  --sidebar-primary: #90cdfd;
+  --sidebar-primary-foreground: #001e30;
+  --sidebar-accent: #3a4249;
+  --sidebar-accent-foreground: #eef1f3;
+  --sidebar-border: #566068;
+  --sidebar-ring: #90cdfd;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, sans-serif, system-ui;
   --font-serif: "IBM Plex Sans Thai", ui-sans-serif, sans-serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.5rem;
   --shadow-x: 0px;
-  --shadow-y: 8px;
-  --shadow-blur: 16px;
-  --shadow-spread: -4px;
+  --shadow-y: 14px;
+  --shadow-blur: 36px;
+  --shadow-spread: -18px;
   --shadow-opacity: 0.08;
-  --shadow-color: hsl(0 0% 0%);
-  --shadow-2xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-sm: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow-md: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 2px 4px -5px hsl(0 0% 0% / 0.08);
-  --shadow-lg: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 4px 6px -5px hsl(0 0% 0% / 0.08);
-  --shadow-xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 8px 10px -5px hsl(0 0% 0% / 0.08);
-  --shadow-2xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.20);
+  --shadow-color: rgba(144, 205, 253, 0.42);
+  --shadow-2xs: 0px 8px 20px -16px rgba(144, 205, 253, 0.20);
+  --shadow-xs: 0px 10px 22px -16px rgba(144, 205, 253, 0.24);
+  --shadow-sm: 0px 14px 30px -20px rgba(144, 205, 253, 0.26);
+  --shadow: 0px 16px 34px -20px rgba(144, 205, 253, 0.28);
+  --shadow-md: 0px 18px 40px -20px rgba(144, 205, 253, 0.30);
+  --shadow-lg: 0px 22px 44px -20px rgba(144, 205, 253, 0.32);
+  --shadow-xl: 0px 26px 52px -22px rgba(144, 205, 253, 0.34);
+  --shadow-2xl: 0px 30px 60px -22px rgba(144, 205, 253, 0.40);
 }
 
 @theme inline {
@@ -169,9 +169,9 @@
   body {
     @apply bg-background text-foreground antialiased;
     background-image:
-      radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--primary) 10%, transparent) 0%, transparent 45%),
-      radial-gradient(circle at 100% 10%, color-mix(in oklab, var(--accent) 9%, transparent) 0%, transparent 36%),
-      linear-gradient(145deg, color-mix(in oklab, var(--background) 96%, white) 0%, var(--background) 52%, color-mix(in oklab, var(--background) 88%, var(--secondary) 12%) 100%);
+      radial-gradient(circle at 6% 2%, color-mix(in oklab, var(--primary) 12%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 94% 10%, color-mix(in oklab, var(--accent) 12%, transparent) 0%, transparent 36%),
+      linear-gradient(145deg, color-mix(in oklab, var(--background) 95%, white) 0%, var(--background) 52%, color-mix(in oklab, var(--background) 87%, var(--secondary) 13%) 100%);
     min-height: 100vh;
     font-family: var(--font-sans);
   }
@@ -183,6 +183,17 @@
   h5,
   h6 {
     font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.2;
     letter-spacing: -0.01em;
+  }
+
+  p,
+  li,
+  input,
+  textarea,
+  button,
+  label {
+    line-height: 1.6;
   }
 }

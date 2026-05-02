@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PERMS | Global Search</title>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Ibm+Plex+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-fixed-variant": "#4f3d73", "on-tertiary-container": "#5c3a4b", "inverse-surface": "#2d3133", "surface-container-highest": "#e0e3e5", "tertiary-container": "#d3a6b9", "surface-container": "#ebeef0", outline: "#71787f", "tertiary-fixed-dim": "#e9bacd", "tertiary-fixed": "#ffd8e7", "surface-container-low": "#f1f4f6", "error-container": "#ffdad6", "inverse-primary": "#90cdfd", "surface-container-high": "#e5e9eb", "secondary-fixed-dim": "#d2bcfb", "on-secondary": "#ffffff", "on-error-container": "#93000a", "outline-variant": "#c0c7cf", "on-secondary-container": "#5d4b81", "surface-bright": "#f7fafc", primary: "#1c648e", secondary: "#67558c", background: "#f7fafc", "inverse-on-surface": "#eef1f3", "secondary-container": "#d5bffe", "primary-fixed": "#cae6ff", "on-secondary-fixed": "#220f44", "surface-dim": "#d7dadc", "on-surface": "#181c1e", error: "#ba1a1a", "primary-container": "#7cb9e8", "on-surface-variant": "#41484e", "on-primary": "#ffffff", "on-primary-fixed": "#001e30", "on-error": "#ffffff", surface: "#f7fafc", "on-tertiary-fixed-variant": "#5f3c4d", "on-tertiary-fixed": "#2e1221", "surface-variant": "#e0e3e5", "on-tertiary": "#ffffff", "on-background": "#181c1e", "secondary-fixed": "#ebddff", tertiary: "#795465", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#004b70", "on-primary-container": "#00496d", "surface-tint": "#1c648e", "primary-fixed-dim": "#90cdfd"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, fontFamily: {headline: ["Ibm Plex Sans"], body: ["Ibm Plex Sans"], label: ["Ibm Plex Sans"], "headline-md": ["IBM Plex Sans"], "label-sm": ["IBM Plex Sans"], "label-md": ["IBM Plex Sans"], "body-lg": ["IBM Plex Sans"], "body-md": ["IBM Plex Sans"], "headline-lg": ["IBM Plex Sans"], display: ["Ibm Plex Sans"]}, fontSize: {"headline-md": ["24px", {lineHeight: "1.3", fontWeight: "500"}], "label-sm": ["12px", {lineHeight: "1.2", letterSpacing: "0.08em", fontWeight: "600"}], "label-md": ["14px", {lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "500"}], "body-lg": ["18px", {lineHeight: "1.6", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "1.6", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "500"}], display: ["48px", {lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600"}]}, spacing: {md: "1.5rem", margin: "2rem", unit: "8px", gutter: "1.5rem", sm: "1rem", xs: "0.5rem", xl: "4rem", lg: "2.5rem"}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 h-full p-4 gap-2 bg-slate-50 dark:bg-slate-950 h-screen w-64 border-r border-teal-100 dark:border-slate-800 z-50">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+</div>
+<div>
+<h1 class="text-lg font-semibold text-teal-800 dark:text-teal-200 font-headline leading-tight">Personal Memory</h1>
+<p class="text-[10px] uppercase tracking-widest text-teal-600 font-label">Teal Sanctuary</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-teal-50 dark:hover:bg-slate-900 rounded-lg duration-200 ease-in-out font-label" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-teal-50 dark:hover:bg-slate-900 rounded-lg duration-200 ease-in-out font-label" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span>Memories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-teal-100/50 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 rounded-lg duration-200 ease-in-out font-label" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span>Search</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-teal-50 dark:hover:bg-slate-900 rounded-lg duration-200 ease-in-out font-label" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-teal-100 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-teal-50 dark:hover:bg-slate-900 rounded-lg duration-200 ease-in-out font-label" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-64 min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 z-40 w-full flex items-center justify-between px-6 h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md font-['IBM_Plex_Sans'] antialiased shadow-sm border-b border-teal-100 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-teal-700 dark:text-teal-300">PERMS</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:bg-teal-50 p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:bg-teal-50 p-2 rounded-full transition-colors" data-icon="help">help</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary overflow-hidden ring-2 ring-teal-50 ring-offset-2">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a professional man with a friendly expression in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjUZkIt7LFoVvu1u0FqNoESXvgg1-4l3ZDNJQ1bWY8Q0k0G67CAfmpGLM4-28BGCMi35GClSZ6yz5rIaZwNw-hMxxF8YhyWE-k4edmu1SeJf1MrgD-2YsBiWUhLxYoBbaKWuFks2GU9ZXRqEcjElKeX6BRV0bVZ8oF4Tx2qAgJaFAxYlBshM4k6qPESwMRMm41KOXzyoIv9-wbe693N3Xk01ldxBoKsE9c325RwNlzn0P1Y62SsPp6OmZbdORjuh9pi4bZBu7p5tnY"/>
+</div>
+</div>
+</header>
+<!-- Search Experience -->
+<div class="max-w-6xl mx-auto p-6 md:p-10 space-y-8">
+<!-- Central Search Bar Section -->
+<section class="relative z-20">
+<div class="text-center mb-10">
+<h2 class="text-3xl font-headline font-extrabold text-on-surface mb-2">Search your life's moments</h2>
+<p class="text-on-surface-variant font-label text-sm tracking-wide">Find anything from a specific photo to a feeling in your diary</p>
+</div>
+<div class="relative max-w-3xl mx-auto">
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant shadow-xl shadow-teal-900/5 rounded-2xl p-2 focus-within:border-primary transition-all group">
+<span class="material-symbols-outlined text-outline ml-4 mr-2" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-lg font-body placeholder:text-outline/60" placeholder="Search for photos, memories, gifts..." type="text" value="Summer memories with Sarah"/>
+<button class="bg-primary text-on-primary font-label px-6 py-2 rounded-xl hover:bg-primary-container transition-colors shadow-lg shadow-primary/20">
+                            Search
+                        </button>
+</div>
+<!-- Filters Row -->
+<div class="flex flex-wrap gap-3 mt-6 justify-center">
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-teal-100 rounded-full text-xs font-label text-teal-800 shadow-sm cursor-pointer hover:bg-teal-50">
+<span class="material-symbols-outlined text-sm" data-icon="category">category</span>
+                            Category: All
+                            <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-teal-100 rounded-full text-xs font-label text-teal-800 shadow-sm cursor-pointer hover:bg-teal-50">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_month">calendar_month</span>
+                            Date: Last 12 Months
+                            <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-teal-100 rounded-full text-xs font-label text-teal-800 shadow-sm cursor-pointer hover:bg-teal-50">
+<span class="material-symbols-outlined text-sm" data-icon="mood">mood</span>
+                            Sentiment: Positive
+                            <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-primary-fixed text-on-primary-fixed rounded-full text-xs font-label shadow-sm cursor-pointer">
+                            Clear Filters
+                            <span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Results Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- Large Featured Memory (Diary) -->
+<div class="md:col-span-2 lg:col-span-3 bg-white p-6 rounded-3xl border border-teal-50 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase rounded-full">Diary Entry</span>
+<span class="text-xs text-outline font-label">July 15, 2023</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Beach Day with Sarah</h3>
+<p class="text-on-surface-variant line-clamp-4 font-body leading-relaxed">
+                            "Today was absolutely magical. The way the sun hit the water at golden hour made everything look like a painting. Sarah couldn't stop laughing at the seagulls. I want to remember this feeling of pure peace forever..."
+                        </p>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-teal-500" data-icon="sentiment_very_satisfied" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+<span class="text-xs font-label text-teal-700">Sentiment: Highly Joyful</span>
+</div>
+</div>
+<!-- Featured Photo -->
+<div class="md:col-span-2 lg:col-span-3 h-[320px] rounded-3xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="aerial shot of a pristine tropical beach with turquoise water and golden sand at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfxS3OjejWSZ8_cVssjiBnJ_Lprnr3oY78HbitVZX_zz5mi_T_LatbaUQmLDfQQ0hdrFlfgDCdfsT7WQyMTHdmBcf4eH8N9ZiTxA2EvSdLjrOUTcE6evHdGQ5vFEO6lPeWTyIpD7i7gmXTrZnCYiSVFmgswJMsru4GXW3L1Tg4mxZn3DQiZbgyDC6VSssq4SZ7boL6VzIdKi3ghOlh3zidA3dZmA40kPYmKsqRIdM4k1bAMsIluA0aYglbOK7VNCrjpZdwf8ps4-ZV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<p class="text-xs font-label opacity-80">Photo Album</p>
+<h4 class="text-lg font-headline font-bold">Golden Hour Waves</h4>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full text-white cursor-pointer hover:bg-white/40">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<!-- Contact Card -->
+<div class="md:col-span-2 lg:col-span-2 bg-tertiary-fixed text-on-tertiary-fixed p-6 rounded-3xl flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full border-4 border-white mb-4 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a young woman with a warm smile and curly hair outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtUleUwlo3gUa9reiHdCcjYMooHH8Yon7h_5ejE6H90LsQuQih6x6PtYmef3CbDilIVnhhRmFX5hzyNTnQULdeOSESn8-KvPmu5wc60Eozxy6vpbHsJo2RKF-k7jSnIOqIG8kKQqqj_IuA1O-RMmPBYrc_1bh_nKErgd-yBgtQRS8MZJRxuYf2GuVylubJFfQ4HQNp9zvfnWnvhH5_U7ArYUTHKWL6OdiXj3eAbmNFgTwgpLRFLpbH0m3O9rr-0UDOy7fGmBwTmRSo"/>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-widest opacity-70 mb-1">Contact</p>
+<h3 class="text-lg font-headline font-bold">Sarah Jenkins</h3>
+<p class="text-sm font-label opacity-80 mt-1 italic">"Best friend since 2015"</p>
+<div class="mt-4 flex gap-2">
+<button class="p-2 bg-on-tertiary-fixed text-tertiary-fixed rounded-full hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="call">call</span>
+</button>
+<button class="p-2 bg-on-tertiary-fixed text-tertiary-fixed rounded-full hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="mail">mail</span>
+</button>
+</div>
+</div>
+<!-- Gift Card -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-high p-6 rounded-3xl flex flex-col justify-between border border-outline-variant/30">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="card_giftcard">card_giftcard</span>
+<span class="text-xs font-bold uppercase text-secondary font-label">Gift Log</span>
+</div>
+<h4 class="text-base font-headline font-bold text-on-surface">Sea Glass Necklace</h4>
+<p class="text-xs text-on-surface-variant font-label mt-1">Given to Sarah for her birthday</p>
+</div>
+<div class="mt-6 flex items-center justify-between text-[10px] font-label text-outline border-t border-outline-variant/30 pt-3">
+<span>Status: Delivered</span>
+<span>Aug 12, 2023</span>
+</div>
+</div>
+<!-- Small Grid Photos -->
+<div class="md:col-span-1 lg:col-span-1 h-[180px] rounded-3xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" data-alt="overhead view of sea shells and white sand on a bright beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrZDS2V0O7dhhsPAKizvq03LlkRqEf-1aT794Ku9sSh0jwtJOmnHeMu9JUkypp94Z4wnJcoL0BYKtU3WLdatgQ9K8YThF4D8c_xjVeLgcFKVtQFG0R3jFhmyYCBLoMyUMxX-3ARJuLxO_hDJP8uBevkzyZK5rGBP76HV1wj19xyUqfpink1b--MQkEnk0DmLHnRH0OKr8TYxGQc_Eyz_iUV7O33PNr915A_JFS_MpfVpTrgAeXvLinZEX4pbF-uWQGkqHXKzFFt-an"/>
+</div>
+<div class="md:col-span-1 lg:col-span-1 h-[180px] rounded-3xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" data-alt="a pair of sunglasses resting on a striped beach towel with a blurred ocean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARSbNoZosZcOWocnExZbvnmMyX-wTZeSOFn9s5qktroYSr35AEKC2IJQ91AP0nm7TXgDMJq3VcWCToAKHd_4nrXQygESD9SFH5Fo97DsL5K0htprP6XJ54GXNlF8dhW9gPDfk3zmserMNoYWmIMZ33GwfqCuC9h4nlvpLkzCtNid9Wvq4FuyOJrnWCPBZemuPq_ZahBM0wv6MNC3AZcvo0YQ7mgyUgSIU0gufuanYINxooTQg2pSyjZg3W4hvTJAsCDhwHDWPriTcf"/>
+</div>
+<!-- Another Memory -->
+<div class="md:col-span-4 lg:col-span-6 bg-white p-6 rounded-3xl border border-teal-50 shadow-sm flex flex-col md:flex-row gap-6 items-center">
+<div class="w-full md:w-48 h-32 rounded-2xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="wide shot of a coastal road winding along cliffs next to the bright blue ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSU9Geu6gCQrsK8MGRaBobRJRTIuVNXKcHv1JTwuxgUBni20pROh1A_uq4W_cmyYsAr4ml2d1iAXNhL7n6UdHZcRl2Yg0CDtSt_sADwb_RmWzUYOHGu1H7IW1Qq-gfLDsFVeqbhh2sGaeiQWij0sA55-pIX26Bpavqb2gLYUXb2251CAc8xX0wiKacE2vZ5xjiklJ0JpCD9ptFaGsuXQK3qyH68tsrbJsdFtpO-JigP35l8V5Qj2AKn_B9IxaFVJPaytGH4DALNDBr"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="location_on">location_on</span>
+<span class="text-xs font-label text-outline">Highway 1, California</span>
+</div>
+<h3 class="text-lg font-headline font-bold text-on-surface">The Long Drive Home</h3>
+<p class="text-sm font-body text-on-surface-variant line-clamp-2">"The Pacific Coast Highway never gets old. We stopped at three different viewpoints and just watched the waves for hours. Sarah found a piece of sea glass that matched her eyes."</p>
+</div>
+<div class="flex flex-col items-end gap-2 shrink-0">
+<span class="text-xs font-label text-outline">Aug 14, 2023</span>
+<button class="text-primary font-bold text-sm hover:underline">Full Entry →</button>
+</div>
+</div>
+</section>
+<!-- Bottom Pagination/Status -->
+<div class="flex justify-center items-center gap-4 pt-10 pb-20">
+<div class="h-[1px] flex-1 bg-teal-100"></div>
+<div class="flex items-center gap-2 text-outline font-label text-xs">
+<span>Showing 12 of 48 memories matching "Sarah"</span>
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary" data-icon="refresh">refresh</span>
+</div>
+<div class="h-[1px] flex-1 bg-teal-100"></div>
+</div>
+</div>
+</main>
+<!-- FAB for quick action (not suppressed on search per rules as it fits the "central" theme) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</body></html>

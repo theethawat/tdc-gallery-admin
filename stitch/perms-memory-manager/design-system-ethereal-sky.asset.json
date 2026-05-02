@@ -1,0 +1,134 @@
+{
+  "designSystem": {
+    "displayName": "Ethereal Sky",
+    "styleGuidelines": "## Brand & Style\n\nThe visual identity of this design system centers on the concept of \"The Atmospheric Sanctuary.\" It transitions from grounded professionalism to an airy, weightless aesthetic that prioritizes mental clarity and calm. The target audience includes high-level professionals and wellness-oriented users who seek a digital environment that feels like a breath of fresh air.\n\nThe style leverages **Modern Minimalism** fused with **Subtle Glassmorphism**. By using translucent layers and soft-focus backgrounds, the interface avoids the clinical coldness of traditional corporate design, opting instead for a premium, ethereal quality. Visual elements should feel as though they are floating in a high-altitude space, utilizing high-key lighting and delicate tonal transitions to guide the eye without causing cognitive fatigue.\n\n## Layout & Spacing\n\nThe layout philosophy is built on a **Fluid 12-Column Grid** with high margins to allow the content to \"breathe.\" Spacing is rhythmic, based on an 8px base unit, but applied with a preference for larger gaps to emphasize the minimalist aesthetic.\n\nWhitespace is treated as a structural element rather than empty space. Containers should have generous internal padding (MD or LG) to prevent content from feeling cramped. Alignment should be rigorous, favoring left-aligned text for readability, while using centered layouts for high-impact, sparse landing moments.\n\n## Elevation & Depth\n\nHierarchy is established through **Tonal Layers** and **Ambient Shadows** rather than harsh borders. Surfaces are tiered using subtle shifts in background tint:\n- **Level 0 (Base):** Off-white or lightest sky-blue tint.\n- **Level 1 (Card):** Pure white with a delicate, large-radius shadow (#7CB9E8 at 8% opacity) to create a floating effect.\n- **Level 2 (Modals/Popovers):** Semi-transparent white with a background blur (12px to 20px) and a subtle 1px border in a slightly darker blue tint.\n\nShadows must never be black or neutral gray; they should always carry a hint of the primary sky-blue color to maintain the atmospheric theme.\n\n## Components\n\n- **Buttons:** Primary buttons use a very subtle linear gradient (Sky Blue to a slightly lighter tint) with white text. Secondary buttons are ghost-style with a 1px lavender border.\n- **Chips & Tags:** Small, pill-shaped elements using the tertiary light pink or lavender at low saturation (10-15% opacity) for the background.\n- **Cards:** White backgrounds, rounded-lg corners, and ambient sky-blue shadows. Borders should be avoided unless the card is placed on a white background, in which case a 1px \"Ice Blue\" border is used.\n- **Input Fields:** Soft gray-blue backgrounds that shift to white on focus, highlighted by a subtle glow in the primary blue.\n- **Lists:** High-density lists are discouraged. Items should have clear vertical separation and use soft dividers that fade out at the edges.\n- **Glass Overlays:** For navigation bars or headers, use a 70% transparent white background with a backdrop blur to maintain the sense of depth as users scroll content.",
+    "theme": {
+      "bodyFont": "IBM_PLEX_SANS",
+      "bodyFontFamily": "Ibm Plex Sans",
+      "colorMode": "LIGHT",
+      "colorVariant": "FIDELITY",
+      "customColor": "#7CB9E8",
+      "designMd": "---\nname: Ethereal Sky\ncolors:\n  surface: '#f7fafc'\n  surface-dim: '#d7dadc'\n  surface-bright: '#f7fafc'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#f1f4f6'\n  surface-container: '#ebeef0'\n  surface-container-high: '#e5e9eb'\n  surface-container-highest: '#e0e3e5'\n  on-surface: '#181c1e'\n  on-surface-variant: '#41484e'\n  inverse-surface: '#2d3133'\n  inverse-on-surface: '#eef1f3'\n  outline: '#71787f'\n  outline-variant: '#c0c7cf'\n  surface-tint: '#1c648e'\n  primary: '#1c648e'\n  on-primary: '#ffffff'\n  primary-container: '#7cb9e8'\n  on-primary-container: '#00496d'\n  inverse-primary: '#90cdfd'\n  secondary: '#67558c'\n  on-secondary: '#ffffff'\n  secondary-container: '#d5bffe'\n  on-secondary-container: '#5d4b81'\n  tertiary: '#795465'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#d3a6b9'\n  on-tertiary-container: '#5c3a4b'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#cae6ff'\n  primary-fixed-dim: '#90cdfd'\n  on-primary-fixed: '#001e30'\n  on-primary-fixed-variant: '#004b70'\n  secondary-fixed: '#ebddff'\n  secondary-fixed-dim: '#d2bcfb'\n  on-secondary-fixed: '#220f44'\n  on-secondary-fixed-variant: '#4f3d73'\n  tertiary-fixed: '#ffd8e7'\n  tertiary-fixed-dim: '#e9bacd'\n  on-tertiary-fixed: '#2e1221'\n  on-tertiary-fixed-variant: '#5f3c4d'\n  background: '#f7fafc'\n  on-background: '#181c1e'\n  surface-variant: '#e0e3e5'\ntypography:\n  display:\n    fontFamily: IBM Plex Sans\n    fontSize: 48px\n    fontWeight: '600'\n    lineHeight: '1.1'\n    letterSpacing: -0.02em\n  headline-lg:\n    fontFamily: IBM Plex Sans\n    fontSize: 32px\n    fontWeight: '500'\n    lineHeight: '1.2'\n    letterSpacing: -0.01em\n  headline-md:\n    fontFamily: IBM Plex Sans\n    fontSize: 24px\n    fontWeight: '500'\n    lineHeight: '1.3'\n  body-lg:\n    fontFamily: IBM Plex Sans\n    fontSize: 18px\n    fontWeight: '400'\n    lineHeight: '1.6'\n  body-md:\n    fontFamily: IBM Plex Sans\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: '1.6'\n  label-md:\n    fontFamily: IBM Plex Sans\n    fontSize: 14px\n    fontWeight: '500'\n    lineHeight: '1.2'\n    letterSpacing: 0.05em\n  label-sm:\n    fontFamily: IBM Plex Sans\n    fontSize: 12px\n    fontWeight: '600'\n    lineHeight: '1.2'\n    letterSpacing: 0.08em\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  unit: 8px\n  xs: 0.5rem\n  sm: 1rem\n  md: 1.5rem\n  lg: 2.5rem\n  xl: 4rem\n  gutter: 1.5rem\n  margin: 2rem\n---\n\n## Brand & Style\n\nThe visual identity of this design system centers on the concept of \"The Atmospheric Sanctuary.\" It transitions from grounded professionalism to an airy, weightless aesthetic that prioritizes mental clarity and calm. The target audience includes high-level professionals and wellness-oriented users who seek a digital environment that feels like a breath of fresh air.\n\nThe style leverages **Modern Minimalism** fused with **Subtle Glassmorphism**. By using translucent layers and soft-focus backgrounds, the interface avoids the clinical coldness of traditional corporate design, opting instead for a premium, ethereal quality. Visual elements should feel as though they are floating in a high-altitude space, utilizing high-key lighting and delicate tonal transitions to guide the eye without causing cognitive fatigue.\n\n## Colors\n\nThe palette is anchored by a sophisticated sky-blue primary, supported by muted lavender and soft pink to provide warmth without sacrificing professionalism. \n\n- **Primary (Sky Blue):** Used for core interactions and brand presence. It must feel expansive and clear.\n- **Secondary (Lavender):** Employed for supporting elements and soft highlights, providing a gentle contrast to the blue.\n- **Tertiary (Light Pink):** Reserved for delicate accents, notifications, or celebratory UI states.\n- **Neutrals:** Backgrounds utilize very light blue tints (Ice Blue) or soft off-whites to reduce screen glare. \n\nAvoid any saturation of green or teal to prevent the interface from shifting into a \"playful\" or \"tropical\" mood. All gradients should be linear and low-contrast, mimicking the natural transition of a horizon.\n\n## Typography\n\nThis design system uses **IBM Plex Sans** for its exceptional clarity and technical precision in both English and Thai scripts. The typography is balanced between industrial structure and humanistic curves.\n\nLarge display headings use a tighter tracking and medium weights to establish a confident presence. Body text utilizes a generous line-height (1.6) to enhance readability and contribute to the \"airy\" feel of the sanctuary style. Label styles should be primarily uppercase with slight letter spacing to differentiate them from body content, ensuring a clean hierarchy. For Thai characters, ensure line heights are strictly maintained to accommodate tall vowel marks without clipping.\n\n## Layout & Spacing\n\nThe layout philosophy is built on a **Fluid 12-Column Grid** with high margins to allow the content to \"breathe.\" Spacing is rhythmic, based on an 8px base unit, but applied with a preference for larger gaps to emphasize the minimalist aesthetic.\n\nWhitespace is treated as a structural element rather than empty space. Containers should have generous internal padding (MD or LG) to prevent content from feeling cramped. Alignment should be rigorous, favoring left-aligned text for readability, while using centered layouts for high-impact, sparse landing moments.\n\n## Elevation & Depth\n\nHierarchy is established through **Tonal Layers** and **Ambient Shadows** rather than harsh borders. Surfaces are tiered using subtle shifts in background tint:\n- **Level 0 (Base):** Off-white or lightest sky-blue tint.\n- **Level 1 (Card):** Pure white with a delicate, large-radius shadow (#7CB9E8 at 8% opacity) to create a floating effect.\n- **Level 2 (Modals/Popovers):** Semi-transparent white with a background blur (12px to 20px) and a subtle 1px border in a slightly darker blue tint.\n\nShadows must never be black or neutral gray; they should always carry a hint of the primary sky-blue color to maintain the atmospheric theme.\n\n## Shapes\n\nThe shape language is **Rounded**, reflecting the softness of clouds and organic forms found in nature. \n\nPrimary containers and buttons use a 0.5rem base radius. Larger cards and sections should scale up to 1rem or 1.5rem to emphasize the sanctuary-like softness. Avoid sharp 90-degree corners, as they conflict with the \"calm and airy\" goal. Conversely, avoid full pill-shapes for primary buttons to maintain a professional, architectural edge; reserve pill-shapes exclusively for status chips and tags.\n\n## Components\n\n- **Buttons:** Primary buttons use a very subtle linear gradient (Sky Blue to a slightly lighter tint) with white text. Secondary buttons are ghost-style with a 1px lavender border.\n- **Chips & Tags:** Small, pill-shaped elements using the tertiary light pink or lavender at low saturation (10-15% opacity) for the background.\n- **Cards:** White backgrounds, rounded-lg corners, and ambient sky-blue shadows. Borders should be avoided unless the card is placed on a white background, in which case a 1px \"Ice Blue\" border is used.\n- **Input Fields:** Soft gray-blue backgrounds that shift to white on focus, highlighted by a subtle glow in the primary blue.\n- **Lists:** High-density lists are discouraged. Items should have clear vertical separation and use soft dividers that fade out at the edges.\n- **Glass Overlays:** For navigation bars or headers, use a 70% transparent white background with a backdrop blur to maintain the sense of depth as users scroll content.",
+      "font": "IBM_PLEX_SANS",
+      "headlineFont": "IBM_PLEX_SANS",
+      "headlineFontFamily": "Ibm Plex Sans",
+      "labelFont": "IBM_PLEX_SANS",
+      "labelFontFamily": "Ibm Plex Sans",
+      "namedColors": {
+        "background": "#f7fafc",
+        "error": "#ba1a1a",
+        "error_container": "#ffdad6",
+        "inverse_on_surface": "#eef1f3",
+        "inverse_primary": "#90cdfd",
+        "inverse_surface": "#2d3133",
+        "on_background": "#181c1e",
+        "on_error": "#ffffff",
+        "on_error_container": "#93000a",
+        "on_primary": "#ffffff",
+        "on_primary_container": "#00496d",
+        "on_primary_fixed": "#001e30",
+        "on_primary_fixed_variant": "#004b70",
+        "on_secondary": "#ffffff",
+        "on_secondary_container": "#5d4b81",
+        "on_secondary_fixed": "#220f44",
+        "on_secondary_fixed_variant": "#4f3d73",
+        "on_surface": "#181c1e",
+        "on_surface_variant": "#41484e",
+        "on_tertiary": "#ffffff",
+        "on_tertiary_container": "#5c3a4b",
+        "on_tertiary_fixed": "#2e1221",
+        "on_tertiary_fixed_variant": "#5f3c4d",
+        "outline": "#71787f",
+        "outline_variant": "#c0c7cf",
+        "primary": "#1c648e",
+        "primary_container": "#7cb9e8",
+        "primary_fixed": "#cae6ff",
+        "primary_fixed_dim": "#90cdfd",
+        "secondary": "#67558c",
+        "secondary_container": "#d5bffe",
+        "secondary_fixed": "#ebddff",
+        "secondary_fixed_dim": "#d2bcfb",
+        "surface": "#f7fafc",
+        "surface_bright": "#f7fafc",
+        "surface_container": "#ebeef0",
+        "surface_container_high": "#e5e9eb",
+        "surface_container_highest": "#e0e3e5",
+        "surface_container_low": "#f1f4f6",
+        "surface_container_lowest": "#ffffff",
+        "surface_dim": "#d7dadc",
+        "surface_tint": "#1c648e",
+        "surface_variant": "#e0e3e5",
+        "tertiary": "#795465",
+        "tertiary_container": "#d3a6b9",
+        "tertiary_fixed": "#ffd8e7",
+        "tertiary_fixed_dim": "#e9bacd"
+      },
+      "overrideNeutralColor": "#F4F7F9",
+      "overridePrimaryColor": "#7CB9E8",
+      "overrideSecondaryColor": "#B19CD9",
+      "overrideTertiaryColor": "#F8C8DC",
+      "roundness": "ROUND_EIGHT",
+      "spacing": {
+        "gutter": "1.5rem",
+        "lg": "2.5rem",
+        "margin": "2rem",
+        "md": "1.5rem",
+        "sm": "1rem",
+        "unit": "8px",
+        "xl": "4rem",
+        "xs": "0.5rem"
+      },
+      "spacingScale": 2,
+      "typography": {
+        "body-lg": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "lineHeight": "1.6"
+        },
+        "body-md": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "1.6"
+        },
+        "display": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "48px",
+          "fontWeight": "600",
+          "letterSpacing": "-0.02em",
+          "lineHeight": "1.1"
+        },
+        "headline-lg": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "32px",
+          "fontWeight": "500",
+          "letterSpacing": "-0.01em",
+          "lineHeight": "1.2"
+        },
+        "headline-md": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "24px",
+          "fontWeight": "500",
+          "lineHeight": "1.3"
+        },
+        "label-md": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "letterSpacing": "0.05em",
+          "lineHeight": "1.2"
+        },
+        "label-sm": {
+          "fontFamily": "IBM Plex Sans",
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "letterSpacing": "0.08em",
+          "lineHeight": "1.2"
+        }
+      }
+    }
+  },
+  "name": "assets/61d0e8fe8cf845e2a755de6e70c9347a",
+  "version": "1"
+}
