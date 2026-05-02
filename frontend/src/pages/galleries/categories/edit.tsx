@@ -9,7 +9,11 @@ type CategoryFormValues = {
 };
 
 export const CategoryEdit = () => {
-  const { formProps, saveButtonProps, onFinish, query } = useForm<any, any, CategoryFormValues>({
+  const { formProps, saveButtonProps, onFinish, query } = useForm<
+    any,
+    any,
+    CategoryFormValues
+  >({
     resource: "category",
     action: "edit",
     redirect: "list",

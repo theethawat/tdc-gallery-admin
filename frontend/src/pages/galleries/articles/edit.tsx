@@ -5,7 +5,11 @@ import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { handleUpload } from "@/lib/upload";
 
 export const ArticleEdit = () => {
-  const { formProps, saveButtonProps, onFinish, query } = useForm<any, any, any>({
+  const { formProps, saveButtonProps, onFinish, query } = useForm<
+    any,
+    any,
+    any
+  >({
     resource: "article",
     action: "edit",
     redirect: "list",

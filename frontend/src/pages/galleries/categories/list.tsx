@@ -23,9 +23,7 @@ export const CategoryList = () => {
         allowClear
         onSearch={(value) => {
           setFilters(
-            value
-              ? [{ field: "name", operator: "contains", value }]
-              : [],
+            value ? [{ field: "name", operator: "contains", value }] : [],
             "replace",
           );
         }}
@@ -52,9 +50,21 @@ export const CategoryList = () => {
             title: t("general.actions"),
             render: (_value, record) => (
               <Space>
-                <EditButton hideText recordItemId={record._id} resource="categories" />
-                <ShowButton hideText recordItemId={record._id} resource="categories" />
-                <DeleteButton hideText recordItemId={record._id} resource="category" />
+                <EditButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="categories"
+                />
+                <ShowButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="categories"
+                />
+                <DeleteButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="category"
+                />
               </Space>
             ),
           },

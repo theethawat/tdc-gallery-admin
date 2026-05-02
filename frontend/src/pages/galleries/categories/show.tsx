@@ -17,7 +17,9 @@ export const CategoryShow = () => {
       <Descriptions column={1} bordered>
         <Descriptions.Item label="ID">{record?._id}</Descriptions.Item>
         <Descriptions.Item label="Name">{record?.name}</Descriptions.Item>
-        <Descriptions.Item label="Place">{record?.place?.name}</Descriptions.Item>
+        <Descriptions.Item label="Place">
+          {record?.place?.name}
+        </Descriptions.Item>
       </Descriptions>
     </Show>
   );

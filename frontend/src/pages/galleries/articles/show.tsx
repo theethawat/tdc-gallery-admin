@@ -18,7 +18,9 @@ export const ArticleShow = () => {
     <Show isLoading={isLoading}>
       <Descriptions column={1} bordered title={t("gallery.article")}>
         <Descriptions.Item label="ID">{record?._id}</Descriptions.Item>
-        <Descriptions.Item label={t("gallery.articleName")}>{record?.name}</Descriptions.Item>
+        <Descriptions.Item label={t("gallery.articleName")}>
+          {record?.name}
+        </Descriptions.Item>
         <Descriptions.Item label={t("gallery.category")}>
           {record?.categories?.map((cat) => cat?.name).join(", ") || "-"}
         </Descriptions.Item>

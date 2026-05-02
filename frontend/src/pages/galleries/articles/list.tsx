@@ -23,9 +23,7 @@ export const ArticleList = () => {
         allowClear
         onSearch={(value) => {
           setFilters(
-            value
-              ? [{ field: "name", operator: "contains", value }]
-              : [],
+            value ? [{ field: "name", operator: "contains", value }] : [],
             "replace",
           );
         }}
@@ -47,7 +45,8 @@ export const ArticleList = () => {
           {
             title: t("general.description"),
             dataIndex: "description",
-            render: (value: string) => (value ? `${value.slice(0, 80)}...` : "-"),
+            render: (value: string) =>
+              value ? `${value.slice(0, 80)}...` : "-",
           },
           {
             title: t("gallery.category"),
@@ -67,9 +66,21 @@ export const ArticleList = () => {
             title: t("general.actions"),
             render: (_value, record) => (
               <Space>
-                <EditButton hideText recordItemId={record._id} resource="articles" />
-                <ShowButton hideText recordItemId={record._id} resource="articles" />
-                <DeleteButton hideText recordItemId={record._id} resource="article" />
+                <EditButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="articles"
+                />
+                <ShowButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="articles"
+                />
+                <DeleteButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="article"
+                />
               </Space>
             ),
           },

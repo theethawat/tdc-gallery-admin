@@ -8,7 +8,11 @@ import { handleUpload } from "@/lib/upload";
 
 export const PeopleEdit = () => {
   const { t } = useTranslation();
-  const { formProps, saveButtonProps, onFinish, query } = useForm<any, any, any>({
+  const { formProps, saveButtonProps, onFinish, query } = useForm<
+    any,
+    any,
+    any
+  >({
     resource: "people",
     action: "edit",
     redirect: "list",
@@ -42,7 +46,11 @@ export const PeopleEdit = () => {
   return (
     <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={onSubmit}>
-        <Form.Item name="name" label={t("people.name")} rules={[{ required: true }]}>
+        <Form.Item
+          name="name"
+          label={t("people.name")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item name="calledName" label={t("people.calledName")}>
@@ -51,7 +59,11 @@ export const PeopleEdit = () => {
         <Form.Item name="nickname" label={t("people.nickname")}>
           <Input />
         </Form.Item>
-        <Form.Item name="status" label={t("people.status")} rules={[{ required: true }]}>
+        <Form.Item
+          name="status"
+          label={t("people.status")}
+          rules={[{ required: true }]}
+        >
           <Select
             options={Object.values(PeopleStatus).map((value) => ({
               label: value,

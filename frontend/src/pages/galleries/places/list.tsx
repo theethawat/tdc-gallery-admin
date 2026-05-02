@@ -1,11 +1,6 @@
 import { Place } from "@/types";
 import { useTranslation } from "react-i18next";
-import {
-  DeleteButton,
-  EditButton,
-  List,
-  useTable,
-} from "@refinedev/antd";
+import { DeleteButton, EditButton, List, useTable } from "@refinedev/antd";
 import { Input, Space, Table } from "antd";
 
 export const PlaceList = () => {
@@ -22,9 +17,7 @@ export const PlaceList = () => {
         allowClear
         onSearch={(value) => {
           setFilters(
-            value
-              ? [{ field: "name", operator: "contains", value }]
-              : [],
+            value ? [{ field: "name", operator: "contains", value }] : [],
             "replace",
           );
         }}
@@ -47,8 +40,16 @@ export const PlaceList = () => {
             title: t("general.actions"),
             render: (_value, record) => (
               <Space>
-                <EditButton hideText recordItemId={record._id} resource="places" />
-                <DeleteButton hideText recordItemId={record._id} resource="places" />
+                <EditButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="places"
+                />
+                <DeleteButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="places"
+                />
               </Space>
             ),
           },

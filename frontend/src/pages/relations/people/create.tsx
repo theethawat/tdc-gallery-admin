@@ -29,7 +29,11 @@ export const PeopleCreate = () => {
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={onSubmit}>
-        <Form.Item name="name" label={t("people.name")} rules={[{ required: true }]}>
+        <Form.Item
+          name="name"
+          label={t("people.name")}
+          rules={[{ required: true }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item name="calledName" label={t("people.calledName")}>
@@ -38,7 +42,11 @@ export const PeopleCreate = () => {
         <Form.Item name="nickname" label={t("people.nickname")}>
           <Input />
         </Form.Item>
-        <Form.Item name="status" label={t("people.status")} rules={[{ required: true }]}>
+        <Form.Item
+          name="status"
+          label={t("people.status")}
+          rules={[{ required: true }]}
+        >
           <Select
             options={Object.values(PeopleStatus).map((value) => ({
               label: value,

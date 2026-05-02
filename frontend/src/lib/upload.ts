@@ -13,7 +13,8 @@ export const handleUpload = async (fileList: File[]) => {
       console.log("Data", data);
       uploaded.push(data);
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Unknown upload error";
+      const message =
+        error instanceof Error ? error.message : "Unknown upload error";
       console.error("Upload File Error", message);
     }
   }

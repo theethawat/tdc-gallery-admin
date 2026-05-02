@@ -7,7 +7,11 @@ type CategoryFormValues = {
 };
 
 export const CategoryCreate = () => {
-  const { formProps, saveButtonProps, onFinish } = useForm<any, any, CategoryFormValues>({
+  const { formProps, saveButtonProps, onFinish } = useForm<
+    any,
+    any,
+    CategoryFormValues
+  >({
     resource: "category",
     redirect: "list",
   });

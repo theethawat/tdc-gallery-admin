@@ -23,9 +23,7 @@ export const PeopleList = () => {
         allowClear
         onSearch={(value) => {
           setFilters(
-            value
-              ? [{ field: "name", operator: "contains", value }]
-              : [],
+            value ? [{ field: "name", operator: "contains", value }] : [],
             "replace",
           );
         }}
@@ -70,9 +68,21 @@ export const PeopleList = () => {
             title: t("general.actions"),
             render: (_value, record) => (
               <Space>
-                <EditButton hideText recordItemId={record._id} resource="people" />
-                <ShowButton hideText recordItemId={record._id} resource="people" />
-                <DeleteButton hideText recordItemId={record._id} resource="people" />
+                <EditButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="people"
+                />
+                <ShowButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="people"
+                />
+                <DeleteButton
+                  hideText
+                  recordItemId={record._id}
+                  resource="people"
+                />
               </Space>
             ),
           },

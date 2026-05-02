@@ -8,7 +8,11 @@ type PlaceFormValues = {
 
 export const PlaceCreate = () => {
   const { t } = useTranslation();
-  const { formProps, saveButtonProps, onFinish } = useForm<any, any, PlaceFormValues>({
+  const { formProps, saveButtonProps, onFinish } = useForm<
+    any,
+    any,
+    PlaceFormValues
+  >({
     resource: "place",
     redirect: "list",
   });

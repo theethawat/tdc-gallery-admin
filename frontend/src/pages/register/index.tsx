@@ -18,10 +18,18 @@ export const Register = () => {
       <Card style={{ width: 420 }}>
         <Typography.Title level={3}>Sign up</Typography.Title>
         <Form<RegisterFormValues> layout="vertical" onFinish={onFinish}>
-          <Form.Item name="email" label="Email" rules={[{ required: true, type: "email" }]}>
+          <Form.Item
+            name="email"
+            label="Email"
+            rules={[{ required: true, type: "email" }]}
+          >
             <Input />
           </Form.Item>
-          <Form.Item name="password" label="Password" rules={[{ required: true }]}>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[{ required: true }]}
+          >
             <Input.Password />
           </Form.Item>
           <Button type="primary" htmlType="submit" block loading={isPending}>
