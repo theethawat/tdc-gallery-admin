@@ -8,8 +8,8 @@ axios.interceptors.request.use((config) => {
     config.baseURL = API_URL;
 
     return config;
-  } catch (error) {
-    throw new Error("Error On Fetch Value", error);
+  } catch {
+    throw new Error("Error On Fetch Value");
   }
 });
 

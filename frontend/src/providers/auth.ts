@@ -3,6 +3,10 @@ import { TOKEN_KEY, USER_KEY } from "./constants";
 import api from "@/lib/api";
 import type { AxiosError } from "axios";
 
+type ApiErrorPayload = {
+  message?: string;
+};
+
 export const authProvider: AuthProvider = {
   login: async ({ username, email, password }) => {
     if ((username || email) && password) {
@@ -20,7 +24,7 @@ export const authProvider: AuthProvider = {
           redirectTo: "/",
         };
       } catch (error) {
-        const axiosError = error as AxiosError;
+        const axiosError = error as AxiosError<ApiErrorPayload>;
         return {
           success: false,
           error: {
@@ -77,7 +81,7 @@ export const authProvider: AuthProvider = {
           avatar: "https://i.pravatar.cc/300",
         };
       } catch (error) {
-        const axiosError = error as AxiosError;
+        const axiosError = error as AxiosError<ApiErrorPayload>;
         return {
           success: false,
           error: {

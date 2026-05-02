@@ -1,71 +1,63 @@
-import { useForm } from "@refinedev/react-hook-form";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
-import { SubmitHandler, UseFormReturn } from "react-hook-form";
-
-import { CreateView } from "@/components/refine-ui/views/create-view";
-import { Button } from "@/components/ui/button";
-import {
-  ArticleForm,
-  ArticleFormValue,
-} from "@/components/refine-ui/form/article-form";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { DatePicker, Form, Input, Select, Upload } from "antd";
 import { handleUpload } from "@/lib/upload";
+import dayjs from "dayjs";
 
 export const ArticleCreate = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
-  const {
-    refineCore: { onFinish },
-    ...form
-  } = useForm<ArticleFormValue>({
-    refineCoreProps: {
-      resource: "article",
-    },
+  const { formProps, saveButtonProps, onFinish } = useForm<any, any, any>({
+    resource: "article",
+    redirect: "list",
   });
 
-  const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
-    try {
-      const payload: Record<string, unknown> = {
-        name: values.name,
-        description: values.description,
-        categories:
-          values.categories?.map((cat) =>
-            typeof cat === "string" ? cat : cat._id,
-          ) || [],
-        date: values.date || new Date(),
-        images: [], // Placeholder for image URLs or IDs after upload
-      };
+  const { selectProps: categorySelectProps } = useSelect({
+    resource: "category",
+    optionLabel: "name",
+    optionValue: "_id",
+    pagination: { currentPage: 1, pageSize: 1000 },
+  });
 
-      const images = (values as any).images;
-      if (images) {
-        console.log("Images to upload:", images);
-        // Here you would typically handle the file upload logic,
-        // such as sending the files to your backend or a cloud storage service.
-        const uploadedImages = await handleUpload(Array.from(images));
-        payload.images = uploadedImages; // Assuming the upload function returns an array of image URLs or IDs
-      }
-      console.log("Payload to submit:", payload);
-      await onFinish(payload);
-      navigate(-1);
-    } catch (error) {
-      console.error("Error creating article:", error);
-    }
+  const onSubmit = async (values: any) => {
+    const files = (values.images || [])
+      .map((file: any) => file.originFileObj)
+      .filter(Boolean);
+
+    const uploadedImages = files.length ? await handleUpload(files) : [];
+
+    await onFinish({
+      name: values.name,
+      description: values.description,
+      categories: values.categories || [],
+      date: values.date ? values.date.toDate() : new Date(),
+      images: uploadedImages,
+    });
   };
 
   return (
-    <CreateView>
-      <ArticleForm
-        form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
-        onSubmit={onSubmit}
-        isLoading={form.formState.isSubmitting}
-        submitLabel={t("buttons.create")}
-      />
-      <div className="mt-6">
-        <Button type="button" variant="outline" onClick={() => navigate(-1)}>
-          {t("buttons.cancel")}
-        </Button>
-      </div>
-    </CreateView>
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical" onFinish={onSubmit}>
+        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="categories" label="Categories">
+          <Select mode="multiple" {...(categorySelectProps as any)} />
+        </Form.Item>
+        <Form.Item name="date" label="Date" initialValue={dayjs()}>
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item name="description" label="Description">
+          <Input.TextArea rows={6} />
+        </Form.Item>
+        <Form.Item
+          name="images"
+          label="Images"
+          valuePropName="fileList"
+          getValueFromEvent={(event) => event?.fileList}
+        >
+          <Upload beforeUpload={() => false} multiple>
+            <a>Choose files</a>
+          </Upload>
+        </Form.Item>
+      </Form>
+    </Create>
   );
 };

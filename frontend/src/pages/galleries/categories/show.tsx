@@ -1,46 +1,24 @@
-import { useOne, useResourceParams } from "@refinedev/core";
-
-import { ShowView } from "@/components/refine-ui/views/show-view";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { useResourceParams, useShow } from "@refinedev/core";
+import { Show } from "@refinedev/antd";
+import { Descriptions } from "antd";
 import { Category } from "@/types";
 
 export const CategoryShow = () => {
   const { id } = useResourceParams();
-  const {
-    result: record,
-    query: { error, isError, isLoading, isFetching },
-  } = useOne<Category>({
+  const { query } = useShow<Category>({
     resource: "category",
     id,
   });
+  const { data, isLoading } = query;
+  const record = data?.data;
 
-  if (isLoading || isFetching) {
-    return <div>Loading...</div>;
-  }
   return (
-    <ShowView>
-      <Card>
-        <CardHeader>
-          <CardTitle>{record?.name}</CardTitle>
-          <CardDescription>Category ID: {record?._id}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <h4 className="text-sm font-medium mb-2">Title</h4>
-              <p className="text-sm text-muted-foreground">
-                {record?.name || "-"}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </ShowView>
+    <Show isLoading={isLoading}>
+      <Descriptions column={1} bordered>
+        <Descriptions.Item label="ID">{record?._id}</Descriptions.Item>
+        <Descriptions.Item label="Name">{record?.name}</Descriptions.Item>
+        <Descriptions.Item label="Place">{record?.place?.name}</Descriptions.Item>
+      </Descriptions>
+    </Show>
   );
 };

@@ -1,86 +1,75 @@
-import { useResourceParams } from "@refinedev/core";
-import { useForm } from "@refinedev/react-hook-form";
-import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { SubmitHandler, UseFormReturn } from "react-hook-form";
-
-import {
-  EditView,
-  EditViewHeader,
-} from "@/components/refine-ui/views/edit-view";
-import { Button } from "@/components/ui/button";
-import {
-  ArticleForm,
-  ArticleFormValue,
-} from "@/components/refine-ui/form/article-form";
+import { DatePicker, Form, Input, Select, Upload } from "antd";
+import dayjs from "dayjs";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { handleUpload } from "@/lib/upload";
 
 export const ArticleEdit = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-  const { id } = useResourceParams();
-  const {
-    refineCore: { onFinish, query },
-    ...form
-  } = useForm<ArticleFormValue>({
-    refineCoreProps: {
-      resource: "article",
-      action: "edit",
-      id,
-    },
+  const { formProps, saveButtonProps, onFinish, query } = useForm<any, any, any>({
+    resource: "article",
+    action: "edit",
+    redirect: "list",
+  });
+
+  const { selectProps: categorySelectProps } = useSelect({
+    resource: "category",
+    optionLabel: "name",
+    optionValue: "_id",
+    pagination: { currentPage: 1, pageSize: 1000 },
   });
 
   useEffect(() => {
-    if (query?.data?.data?.date) {
-      const date = new Date(query.data.data.date);
-      form.setValue("date", date);
+    const record = query?.data?.data;
+    if (record && formProps.form) {
+      formProps.form.setFieldsValue({
+        ...record,
+        categories: (record.categories || []).map((cat: any) => cat._id),
+        date: record.date ? dayjs(record.date) : null,
+      });
     }
+  }, [query?.data, formProps.form]);
 
-    return () => {};
-  }, [query?.data]);
+  const onSubmit = async (values: any) => {
+    const files = (values.images || [])
+      .map((file: any) => file.originFileObj)
+      .filter(Boolean);
+    const uploadedImages = files.length ? await handleUpload(files) : undefined;
 
-  const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
-    try {
-      const payload: Record<string, unknown> = {
-        name: values.name,
-        description: values.description,
-        categories:
-          values.categories?.map((cat) =>
-            typeof cat === "string" ? cat : cat._id,
-          ) || [],
-        date: values.date || new Date(),
-      };
-      const images = (values as any).images;
-      if (images) {
-        console.log("Images to upload:", images);
-        // Here you would typically handle the file upload logic,
-        // such as sending the files to your backend or a cloud storage service.
-        const uploadedImages = await handleUpload(Array.from(images));
-        payload.images = uploadedImages; // Assuming the upload function returns an array of image URLs or IDs
-      }
-      console.log("Payload to submit:", payload);
-      await onFinish(payload);
-      navigate(-1);
-    } catch (error) {
-      console.error("Error updating article:", error);
-    }
+    await onFinish({
+      name: values.name,
+      description: values.description,
+      categories: values.categories || [],
+      date: values.date ? values.date.toDate() : new Date(),
+      ...(uploadedImages ? { images: uploadedImages } : {}),
+    });
   };
 
   return (
-    <EditView>
-      <EditViewHeader resource="article" title={t("gallery.articleEdit")} />
-      <ArticleForm
-        form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
-        onSubmit={onSubmit}
-        isLoading={form.formState.isSubmitting}
-        submitLabel={t("buttons.save")}
-      />
-      <div className="mt-6">
-        <Button type="button" variant="outline" onClick={() => navigate(-1)}>
-          {t("buttons.cancel")}
-        </Button>
-      </div>
-    </EditView>
+    <Edit saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical" onFinish={onSubmit}>
+        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="categories" label="Categories">
+          <Select mode="multiple" {...(categorySelectProps as any)} />
+        </Form.Item>
+        <Form.Item name="date" label="Date">
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item name="description" label="Description">
+          <Input.TextArea rows={6} />
+        </Form.Item>
+        <Form.Item
+          name="images"
+          label="Images"
+          valuePropName="fileList"
+          getValueFromEvent={(event) => event?.fileList}
+        >
+          <Upload beforeUpload={() => false} multiple>
+            <a>Choose files</a>
+          </Upload>
+        </Form.Item>
+      </Form>
+    </Edit>
   );
 };

@@ -12,12 +12,10 @@ export const createDataProvider = (): DataProvider => ({
     };
   },
 
-  getList: async ({ resource, pagination, filters, meta = {} }) => {
+  getList: async ({ resource, pagination }) => {
     const queryParams = new URLSearchParams({
-      page: pagination?.currentPage,
-      size: pagination?.pageSize,
-      // name,
-      // ...query,
+      page: String(pagination?.currentPage ?? 1),
+      size: String(pagination?.pageSize ?? 10),
     });
 
     const { data } = await api.get(`${resource}?${queryParams.toString()}`);
@@ -26,7 +24,7 @@ export const createDataProvider = (): DataProvider => ({
       total: data?.total || 0,
     };
   },
-  create: async ({ resource, variables, meta = {} }) => {
+  create: async ({ resource, variables }) => {
     const { data, status } = await api.post(resource, variables);
     if (status === 201) {
       return {
@@ -36,7 +34,7 @@ export const createDataProvider = (): DataProvider => ({
       throw new Error(data.message || "Failed to create record");
     }
   },
-  update: async ({ resource, id, variables, meta = {} }) => {
+  update: async ({ resource, id, variables }) => {
     const { data, status } = await api.put(`/${resource}/${id}`, variables);
     if (status === 200) {
       return {
@@ -46,7 +44,7 @@ export const createDataProvider = (): DataProvider => ({
       throw new Error(data.message || "Failed to update record");
     }
   },
-  deleteOne: async ({ resource, id, meta = {} }) => {
+  deleteOne: async ({ resource, id }) => {
     const { data, status } = await api.delete(`/${resource}/${id}`);
     if (status === 204) {
       return {

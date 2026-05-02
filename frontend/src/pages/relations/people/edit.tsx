@@ -1,80 +1,90 @@
-import { useResourceParams } from "@refinedev/core";
-import { useForm } from "@refinedev/react-hook-form";
-import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import dayjs from "dayjs";
+import { DatePicker, Form, Input, Select, Upload } from "antd";
+import { Edit, useForm } from "@refinedev/antd";
 import { useTranslation } from "react-i18next";
-import { SubmitHandler, UseFormReturn } from "react-hook-form";
-
-import {
-  EditView,
-  EditViewHeader,
-} from "@/components/refine-ui/views/edit-view";
-import { Button } from "@/components/ui/button";
-import { PeopleForm, PeopleFormValue } from "@/components/refine-ui/form";
+import { PeopleStatus } from "@/types";
 import { handleUpload } from "@/lib/upload";
 
 export const PeopleEdit = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const { id } = useResourceParams();
-  const {
-    refineCore: { onFinish, query },
-    ...form
-  } = useForm<PeopleFormValue>({
-    refineCoreProps: {
-      resource: "people",
-      action: "edit",
-      id,
-    },
+  const { formProps, saveButtonProps, onFinish, query } = useForm<any, any, any>({
+    resource: "people",
+    action: "edit",
+    redirect: "list",
   });
 
   useEffect(() => {
-    if (query?.data?.data?.birthday) {
-      const date = new Date(query.data.data.birthday);
-      form.setValue("date", date);
+    const record = query?.data?.data;
+    if (record && formProps.form) {
+      formProps.form.setFieldsValue({
+        ...record,
+        birthday: record.birthday ? dayjs(record.birthday) : null,
+        knownDate: record.knownDate ? dayjs(record.knownDate) : null,
+      });
     }
+  }, [query?.data, formProps.form]);
 
-    if (query?.data?.data?.knownDate) {
-      const date = new Date(query.data.data.knownDate);
-      form.setValue("knownDate", date);
-    }
+  const onSubmit = async (values: any) => {
+    const files = (values.image || [])
+      .map((file: any) => file.originFileObj)
+      .filter(Boolean);
+    const uploadedImages = files.length ? await handleUpload(files) : undefined;
 
-    return () => {};
-  }, [query?.data]);
-
-  const onSubmit: SubmitHandler<PeopleFormValue> = async (values) => {
-    try {
-      const payload: Record<string, unknown> = values;
-      const images = (values as any).image;
-      if (images) {
-        console.log("Images to upload:", images);
-        // Here you would typically handle the file upload logic,
-        // such as sending the files to your backend or a cloud storage service.
-        const uploadedImages = await handleUpload(Array.from(images));
-        const uploadedImage = uploadedImages[0]; // Assuming you want to use the first uploaded image
-        payload.image = uploadedImage; // Assuming the upload function returns an array of image URLs or IDs
-      }
-      console.log("Payload to submit:", payload);
-      await onFinish(payload);
-    } catch (error) {
-      console.error("Error updating article:", error);
-    }
+    await onFinish({
+      ...values,
+      birthday: values.birthday ? values.birthday.toDate() : undefined,
+      knownDate: values.knownDate ? values.knownDate.toDate() : undefined,
+      ...(uploadedImages ? { image: uploadedImages[0] } : {}),
+    });
   };
 
   return (
-    <EditView>
-      <EditViewHeader resource="people" title={t("people.peopleEdit")} />
-      <PeopleForm
-        form={form as unknown as UseFormReturn<PeopleFormValue, unknown>}
-        onSubmit={onSubmit}
-        isLoading={form.formState.isSubmitting}
-        submitLabel={t("buttons.save")}
-      />
-      <div className="mt-6">
-        <Button type="button" variant="outline" onClick={() => navigate(-1)}>
-          {t("buttons.cancel")}
-        </Button>
-      </div>
-    </EditView>
+    <Edit saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical" onFinish={onSubmit}>
+        <Form.Item name="name" label={t("people.name")} rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="calledName" label={t("people.calledName")}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="nickname" label={t("people.nickname")}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="status" label={t("people.status")} rules={[{ required: true }]}>
+          <Select
+            options={Object.values(PeopleStatus).map((value) => ({
+              label: value,
+              value,
+            }))}
+          />
+        </Form.Item>
+        <Form.Item name="birthday" label={t("people.birthday")}>
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item name="knownDate" label={t("people.knownDate")}>
+          <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item name="nationality" label={t("people.nationality")}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="meetingPlace" label={t("people.meetingPlace")}>
+          <Input />
+        </Form.Item>
+        <Form.Item name="note" label={t("people.note")}>
+          <Input.TextArea rows={5} />
+        </Form.Item>
+        <Form.Item
+          name="image"
+          label="Image"
+          valuePropName="fileList"
+          getValueFromEvent={(event) => event?.fileList}
+        >
+          <Upload beforeUpload={() => false} maxCount={1}>
+            <a>Choose file</a>
+          </Upload>
+        </Form.Item>
+      </Form>
+    </Edit>
   );
 };

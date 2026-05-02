@@ -1,25 +1,5 @@
-import { useSelect } from "@refinedev/core";
-import { useForm } from "@refinedev/react-hook-form";
-import { useNavigate } from "react-router";
-
-import { CreateView } from "@/components/refine-ui/views/create-view";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, Select } from "antd";
 
 type CategoryFormValues = {
   name: string;
@@ -27,18 +7,12 @@ type CategoryFormValues = {
 };
 
 export const CategoryCreate = () => {
-  const navigate = useNavigate();
-
-  const {
-    refineCore: { onFinish },
-    ...form
-  } = useForm<CategoryFormValues>({
-    refineCoreProps: {
-      resource: "category",
-    },
+  const { formProps, saveButtonProps, onFinish } = useForm<any, any, CategoryFormValues>({
+    resource: "category",
+    redirect: "list",
   });
 
-  const { options: placeOptions } = useSelect({
+  const { selectProps: placeSelectProps } = useSelect({
     resource: "place",
     optionLabel: "name",
     optionValue: "_id",
@@ -48,87 +22,23 @@ export const CategoryCreate = () => {
     },
   });
 
-  function onSubmit(values: CategoryFormValues) {
-    onFinish({
+  const handleFinish = (values: CategoryFormValues) => {
+    return onFinish({
       name: values.name,
       place: values.place,
-    }).then(() => {
-      navigate(-1);
     });
-  }
+  };
 
   return (
-    <CreateView>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="place"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Place</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a place" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {placeOptions?.map((option) => (
-                      <SelectItem
-                        key={String(option.value)}
-                        value={String(option.value)}
-                      >
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="name"
-            rules={{ required: "Category name is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value || ""}
-                    placeholder="Enter category name"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="flex gap-2">
-            <Button
-              type="submit"
-              {...form.saveButtonProps}
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? "Creating..." : "Create"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => navigate(-1)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical" onFinish={handleFinish}>
+        <Form.Item name="place" label="Place" rules={[{ required: true }]}>
+          <Select placeholder="Select a place" {...(placeSelectProps as any)} />
+        </Form.Item>
+        <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+          <Input placeholder="Enter category name" />
+        </Form.Item>
       </Form>
-    </CreateView>
+    </Create>
   );
 };

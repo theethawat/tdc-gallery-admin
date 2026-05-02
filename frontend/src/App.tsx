@@ -1,6 +1,11 @@
 import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import {
+  ErrorComponent,
+  ThemedLayout,
+  useNotificationProvider,
+} from "@refinedev/antd";
 
 import routerProvider, {
   CatchAllNavigate,
@@ -8,13 +13,10 @@ import routerProvider, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
+import { ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
-import { ErrorComponent } from "./components/refine-ui/layout/error-component";
-import { Layout } from "./components/refine-ui/layout/layout";
-import { Toaster } from "./components/refine-ui/notification/toaster";
-import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
-import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
+import "antd/dist/reset.css";
 import {
   ImagesIcon,
   ImageIcon,
@@ -57,8 +59,8 @@ import "./providers/i18n";
 function App() {
   const { t, i18n } = useTranslation();
   const i18nProvider: I18nProvider = {
-    translate: (key: string, params: object) => {
-      return t(key, params);
+    translate: (key: string, params?: object) => {
+      return String(t(key, params as any));
     },
     changeLocale: (lang: string) => i18n.changeLanguage(lang),
     getLocale: () => i18n.language,
@@ -66,11 +68,11 @@ function App() {
   return (
     <BrowserRouter>
       <RefineKbarProvider>
-        <ThemeProvider>
+        <ConfigProvider>
           <DevtoolsProvider>
             <Refine
               dataProvider={dataProvider}
-              notificationProvider={useNotificationProvider()}
+              notificationProvider={useNotificationProvider}
               routerProvider={routerProvider}
               authProvider={authProvider}
               i18nProvider={i18nProvider}
@@ -149,7 +151,6 @@ function App() {
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
-
                 projectId: "g6HhTG-DpnKBL-Wgy8L8",
                 title: {
                   text: "PERMS",
@@ -168,9 +169,9 @@ function App() {
                       key="authenticated-inner"
                       fallback={<CatchAllNavigate to="/login" />}
                     >
-                      <Layout>
+                      <ThemedLayout>
                         <Outlet />
-                      </Layout>
+                      </ThemedLayout>
                     </Authenticated>
                   }
                 >
@@ -227,14 +228,13 @@ function App() {
                 </Route>
               </Routes>
 
-              <Toaster />
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
             <DevtoolsPanel />
           </DevtoolsProvider>
-        </ThemeProvider>
+        </ConfigProvider>
       </RefineKbarProvider>
     </BrowserRouter>
   );
