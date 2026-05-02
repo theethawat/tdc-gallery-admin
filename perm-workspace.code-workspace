@@ -1,0 +1,21 @@
+{
+  "folders": [
+	{
+		"path": "backend"
+	},
+	{
+		"path": "frontend"
+	},
+	{
+		"path": ".github"
+	},
+	{
+		"path": "stitch"
+	}
+],
+"settings": {
+	"i18n-ally.localesPaths": [
+		"D:/tin-dev/tdc-gallery-admin/frontend/src/locales"
+	]
+}
+}

@@ -31,7 +31,7 @@ export const PeopleEdit = () => {
   useEffect(() => {
     if (query?.data?.data?.birthday) {
       const date = new Date(query.data.data.birthday);
-      form.setValue("date", date);
+      form.setValue("birthday", date);
     }
 
     if (query?.data?.data?.knownDate) {

@@ -5,11 +5,9 @@ import { useGetIdentity } from "@refinedev/core";
 
 type User = {
   id: number;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  avatar?: string;
+  name: string;
+  role: string;
+  image?: string;
 };
 
 export function UserAvatar() {
@@ -19,12 +17,12 @@ export function UserAvatar() {
     return <Skeleton className={cn("h-10", "w-10", "rounded-full")} />;
   }
 
-  const { fullName, avatar } = user;
+  const { name, image } = user;
 
   return (
     <Avatar className={cn("h-10", "w-10")}>
-      {avatar && <AvatarImage src={avatar} alt={fullName} />}
-      <AvatarFallback>{getInitials(fullName)}</AvatarFallback>
+      {image && <AvatarImage src={image} alt={fullName} />}
+      <AvatarFallback>{getInitials(name)}</AvatarFallback>
     </Avatar>
   );
 }

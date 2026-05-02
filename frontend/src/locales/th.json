@@ -1,0 +1,79 @@
+{
+  "gallery": {
+    "gallery": "แกลอรี่",
+    "article": "กิจกรรมและสิ่งของในแกลอรี่",
+    "articleName": "ชื่อหัวข้อ",
+    "category": "หมวดหมู่",
+    "categoryName": "ชื่อหมวดหมู่",
+    "categoryEdit": "แก้ไขหมวดหมู่",
+    "place": "สถานที่",
+    "placeName": "ชื่อสถานที่",
+    "PlaceEdit": "แก้ไขสถานที่",
+    "title": "หัวข้อ",
+    "articleContent": "เนื้อหา",
+    "articleEdit": "แก้ไขกิจกรรมและสิ่งของ"
+  },
+  "general": {
+    "actions": "ดำเนินการ",
+    "date": "วันที่",
+    "description": "รายละเอียด",
+    "pleaseSelect": "กรุณาเลือก",
+    "isRequired": "จำเป็นต้องกรอก",
+    "pickADate": "เลือกวันที่",
+    "select": "เลือก"
+  },
+  "buttons": {
+    "create": "สร้าง",
+    "save": "บันทึก",
+    "logout": "ออกจากระบบ",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "cancel": "ยกเลิก",
+    "confirm": "คุณแน่ใจหรือไม่?",
+    "filter": "กรอง",
+    "clear": "ล้าง",
+    "refresh": "รีเฟรช",
+    "show": "รายละเอียด",
+    "undo": "ย้อนกลับ",
+    "import": "นำเข้า",
+    "clone": "โคลน",
+    "notAccessTitle": "คุณไม่มีสิทธิ์เข้าถึง",
+    "updating": "กำลังอัปเดต...",
+    "update": "อัปเดต",
+    "add": "เพิ่ม",
+    "enter": "กรอก"
+  },
+  "notifications": {
+    "success": "ดำเนินการสำเร็จ",
+    "error": "ไม่สำเร็จ (status code: {{statusCode}})",
+    "undoable": "You have {{seconds}} seconds to undo",
+    "createSuccess": "สร้าง {{resource}} สำเร็จ",
+    "createError": "ขออภัย มีการหาในการสร้าง {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "ดำเนินการลบ {{resource}} สำเร็จ",
+    "deleteError": "เกิดปัญหาในการ ลบ{{resource}} (status code: {{statusCode}})",
+    "editSuccess": "Successfully edited {{resource}}",
+    "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
+    "importProgress": "Importing: {{processed}}/{{total}}"
+  },
+  "relation": {
+    "relation": "ความสัมพันธ์",
+    "people": "ผู้คนรอบตัว"
+  },
+  "people": {
+    "people": "ผู้คนรอบตัว",
+    "name": "ชื่อ นามสกุล",
+    "calledName": "ชื่อที่ใช้เรียก",
+    "callNameHelper": "เช่น ชื่อเล่น หรือ พี่... น้อง...",
+    "nickname": "ชื่อเล่น",
+    "birthday": "วันเกิด",
+    "nationality": "สัญชาติ",
+    "status": "สถานะ",
+    "knownDate": "วันที่รู้จัก",
+    "meetingPlace": "สถานที่พบกัน",
+    "note": "บันทึกเพิ่มเติม",
+    "socialMedia": "โซเชียลมีเดีย",
+    "peopleCreate": "เพิ่มผู้คน",
+    "peopleEdit": "แก้ไขข้อมูลผู้คน",
+    "peopleDelete": "ลบผู้คน"
+  }
+}

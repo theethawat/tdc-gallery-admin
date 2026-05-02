@@ -75,9 +75,6 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
                   <p className="truncate text-sm font-semibold text-foreground">
                     {personName}
                   </p>
-                  <p className="text-xs text-muted-foreground">
-                    {t("people.peopleEdit")}
-                  </p>
                 </div>
               </div>
 
@@ -197,6 +194,7 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
                     </FormLabel>
                     <FormControl>
                       <Select
+                        {...field}
                         onValueChange={(value) => {
                           field.onChange(value);
                         }}
@@ -242,7 +240,6 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
                 label={t("people.birthday")}
                 name="birthday"
                 form={form}
-                defaultDate={new Date()}
               />
               <Datepicker
                 label={t("people.knownDate")}

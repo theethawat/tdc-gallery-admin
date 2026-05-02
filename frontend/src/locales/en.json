@@ -1,0 +1,79 @@
+{
+  "gallery": {
+    "gallery": "Gallery",
+    "article": "Activities and Items in Gallery",
+    "articleName": "Article Name",
+    "category": "Category",
+    "categoryName": "Category Name",
+    "categoryEdit": "Edit Category",
+    "place": "Place",
+    "placeName": "Place Name",
+    "placeEdit": "Edit Place",
+    "title": "Title",
+    "articleContent": "Content",
+    "articleEdit": "Edit Article"
+  },
+  "general": {
+    "actions": "Actions",
+    "date": "Date",
+    "description": "Description",
+    "pleaseSelect": "Please select",
+    "isRequired": "is required",
+    "pickADate": "Pick a date",
+    "select": "Select"
+  },
+  "buttons": {
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Are you sure?",
+    "filter": "Filter",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "show": "Details",
+    "undo": "Undo",
+    "import": "Import",
+    "clone": "Clone",
+    "updating": "Updating...",
+    "update": "Update",
+    "notAccessTitle": "You don't have permission to access",
+    "add": "Add",
+    "enter": "Enter "
+  },
+  "notifications": {
+    "success": "Successful",
+    "error": "Error (status code: {{statusCode}})",
+    "undoable": "You have {{seconds}} seconds to undo",
+    "createSuccess": "Successfully created {{resource}}",
+    "createError": "There was an error creating {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "Successfully deleted {{resource}}",
+    "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
+    "editSuccess": "Successfully edited {{resource}}",
+    "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
+    "importProgress": "Importing: {{processed}}/{{total}}"
+  },
+  "relation": {
+    "relation": "Relationship",
+    "people": "People"
+  },
+  "people": {
+    "people": "People",
+    "name": "Full Name",
+    "calledName": "Called Name",
+    "callNameHelper": "e.g. nickname or with some honorifics like P'... N'...",
+    "nickname": "Nickname",
+    "birthday": "Birthday",
+    "nationality": "Nationality",
+    "status": "Status",
+    "knownDate": "Known Date",
+    "meetingPlace": "Meeting Place",
+    "note": "Additional Note",
+    "socialMedia": "Social Media",
+    "peopleCreate": "Create People",
+    "peopleEdit": "Edit People",
+    "peopleDelete": "Delete People"
+  }
+}
