@@ -25,6 +25,7 @@ export const PeopleEdit = () => {
       resource: "people",
       action: "edit",
       id,
+      redirect: "show",
     },
   });
 

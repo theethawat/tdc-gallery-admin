@@ -12,6 +12,11 @@ import {
   UserIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/th";
+
+dayjs.extend(relativeTime);
 
 interface PeopleProfileCardProps {
   record?: People;
@@ -22,10 +27,12 @@ function InfoRow({
   icon,
   label,
   value,
+  additionalValue,
 }: {
   icon: React.ReactNode;
   label: string;
   value?: string | null;
+  additionalValue?: string | null;
 }) {
   if (!value) return null;
   return (
@@ -35,7 +42,15 @@ function InfoRow({
         <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-0.5">
           {label}
         </p>
-        <p className="text-sm text-foreground wrap-break-word">{value}</p>
+        <p className="text-sm text-foreground wrap-break-word">
+          {value}
+
+          {additionalValue && (
+            <span className="text-sm text-primary wrap-break-word ml-2">
+              {additionalValue}
+            </span>
+          )}
+        </p>
       </div>
     </div>
   );
@@ -80,7 +95,7 @@ export function PeopleProfileCard({
   const imageUrl = record?.image?.url;
 
   const birthdayDisplay = record?.birthday
-    ? new Date(record.birthday).toLocaleDateString(undefined, {
+    ? new Date(record.birthday).toLocaleDateString(i18n.language, {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -88,7 +103,7 @@ export function PeopleProfileCard({
     : null;
 
   const knownDateDisplay = record?.knownDate
-    ? new Date(record.knownDate).toLocaleDateString(undefined, {
+    ? new Date(record.knownDate).toLocaleDateString(i18n.language, {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -109,7 +124,7 @@ export function PeopleProfileCard({
   return (
     <Card className="overflow-hidden">
       {/* Profile Header */}
-      <div className="bg-linear-to-br from-sky-50 to-blue-50 border-b p-6">
+      <div className="bg-linear-to-br from-primary-foreground to-blue-100 border-b p-6">
         <div className="flex flex-col sm:flex-row gap-6 items-start">
           {/* Square Profile Photo */}
           <div className="w-32 h-32 rounded-xl overflow-hidden bg-muted border border-border shrink-0">
@@ -138,22 +153,24 @@ export function PeopleProfileCard({
                   {statusLabel}
                 </span>
               )}
-            </div>
-            <h2 className="text-2xl font-semibold text-foreground leading-tight">
+            </div>{" "}
+            <h2 className="text-xl font-medium text-foreground leading-tight">
+              {record?.calledName && (
+                <span className="text-2xl text-muted-foreground">
+                  <span className="text-foreground font-semibold">
+                    {record.calledName}
+                  </span>
+                </span>
+              )}{" "}
               {record?.name || "-"}
             </h2>
-            {record?.calledName && (
-              <p className="text-sm text-muted-foreground">
-                {t("people.calledName")}:{" "}
-                <span className="text-foreground font-medium">
-                  {record.calledName}
-                </span>
-              </p>
-            )}
             {record?.nickname && (
-              <p className="text-sm text-muted-foreground italic">
-                &ldquo;{record.nickname}&rdquo;
-              </p>
+              <div>
+                <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                  {t("people.nickname")}
+                </span>
+                <p className="text-muted-foreground">{record.nickname}</p>
+              </div>
             )}
           </div>
         </div>
@@ -172,6 +189,13 @@ export function PeopleProfileCard({
                   icon={<CalendarIcon size={14} />}
                   label={t("people.birthday")}
                   value={birthdayDisplay}
+                  additionalValue={
+                    record.birthday
+                      ? `(${dayjs(record.birthday)
+                          .locale(i18n.language)
+                          .fromNow(true)})`
+                      : ""
+                  }
                 />
                 <InfoRow
                   icon={<GlobeIcon size={14} />}
@@ -200,6 +224,9 @@ export function PeopleProfileCard({
                   icon={<CalendarIcon size={14} />}
                   label={t("people.knownDate")}
                   value={knownDateDisplay}
+                  additionalValue={dayjs(record.knownDate)
+                    .locale(i18n.language)
+                    .fromNow()}
                 />
                 <InfoRow
                   icon={<MapPinIcon size={14} />}

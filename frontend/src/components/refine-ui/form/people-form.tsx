@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Datepicker, Upload } from "../custom";
+import { Datepicker, Upload, CountryAutocomplete } from "../custom";
 import { People, PeopleStatusInfo } from "@/types";
 import {
   Select,
@@ -224,6 +224,11 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
                     <FormMessage />
                   </FormItem>
                 )}
+              />
+              <CountryAutocomplete
+                form={form}
+                label={t("people.nationality")}
+                name="nationality"
               />
             </div>
           </section>

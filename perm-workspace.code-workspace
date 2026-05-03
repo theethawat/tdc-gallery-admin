@@ -16,6 +16,7 @@
 "settings": {
 	"i18n-ally.localesPaths": [
 		"D:/tin-dev/tdc-gallery-admin/frontend/src/locales"
-	]
+	],
+	"i18n-ally.keystyle": "nested"
 }
 }

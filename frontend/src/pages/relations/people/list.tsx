@@ -15,6 +15,9 @@ import {
   ListViewHeader,
 } from "@/components/refine-ui/views/list-view";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getCountryData, TCountryCode } from "countries-list";
+import * as FLAGS from "country-flag-icons/react/3x2";
 
 export const PeopleList = () => {
   const { t, i18n } = useTranslation();
@@ -44,7 +47,21 @@ export const PeopleList = () => {
         id: "name",
         header: t("people.name"),
         enableSorting: true,
-        cell: ({ getValue }) => getValue() || "-",
+        cell: ({ getValue, row }) => (
+          <span className="flex items-center gap-2">
+            <Avatar>
+              {row.original?.image?.url ? (
+                <AvatarImage src={row.original?.image?.url} />
+              ) : (
+                <AvatarFallback>
+                  {row.original.name.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              )}
+            </Avatar>
+            {getValue() || "-"}
+          </span>
+        ),
+        size: 220,
       }),
       columnHelper.accessor("calledName", {
         id: "calledName",
@@ -79,7 +96,15 @@ export const PeopleList = () => {
         enableSorting: true,
         cell: ({ getValue }) => {
           const returnData = getValue();
-          return returnData ? returnData : "-";
+          if (!returnData) return "-";
+          const countryData = getCountryData(returnData as TCountryCode);
+          const Flag = FLAGS[returnData as keyof typeof FLAGS];
+          return (
+            <div className="flex items-center gap-2">
+              {Flag && <Flag className="h-4 w-6" />}
+              {countryData.name}
+            </div>
+          );
         },
       }),
       columnHelper.display({
