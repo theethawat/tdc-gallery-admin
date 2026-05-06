@@ -1,6 +1,6 @@
 /* eslint-disable import/no-named-as-default-member */
 import express from 'express';
-import articleController from '../controllers/article';
+import articleController from '../controllers/gallery-article';
 import authMiddleWare from '../middleware/auth';
 
 const router = express.Router();

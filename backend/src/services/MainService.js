@@ -46,7 +46,12 @@ class MainService {
     }
   }
 
-  async aggregation({ page = 1, size = config.defaultLimit, pipeline = [] }) {
+  async aggregation({
+    page = 1,
+    size = config.defaultLimit,
+    pipeline = [],
+    lookupPipeline = [],
+  }) {
     try {
       const allPipeline = pipeline;
 
@@ -55,6 +60,7 @@ class MainService {
         $facet: {
           count: [{ $count: 'total' }],
           data: [
+            ...lookupPipeline,
             {
               $skip: +((size || config.pageLimit) * ((page || 1) - 1)),
             },

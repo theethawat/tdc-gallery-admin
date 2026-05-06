@@ -1,10 +1,14 @@
 import Mongoose from 'mongoose';
 import _ from 'lodash';
 import MainService from '../services/MainService';
-import ArticleModel from '../models/Article';
+import { GalleryArticleModel } from '../models/Article';
 import ImageModel from '../models/Image';
+import { IMAGE_TYPE } from '../configs/constants';
 
-const ArticleService = new MainService(ArticleModel, 'article');
+const GalleryArticleService = new MainService(
+  GalleryArticleModel,
+  'gallery-article',
+);
 
 export const onReadAll = async (req, res) => {
   try {
@@ -80,7 +84,7 @@ export const onReadAll = async (req, res) => {
       $set: { image: { $arrayElemAt: ['$image', -1] } },
     });
 
-    const result = await ArticleService.aggregation({
+    const result = await GalleryArticleService.aggregation({
       page: req?.query?.page,
       size: req?.query?.size,
       pipeline,
@@ -111,9 +115,12 @@ export const onReadOne = async (req, res) => {
         foreignField: 'article',
       },
     });
-    const result = await ArticleService.getOneAggregation(req.params.id, {
-      pipeline,
-    });
+    const result = await GalleryArticleService.getOneAggregation(
+      req.params.id,
+      {
+        pipeline,
+      },
+    );
     res.status(200).send(result);
   } catch (error) {
     res.status(404).send({ error });
@@ -122,7 +129,7 @@ export const onReadOne = async (req, res) => {
 
 export const onCreateOne = async (req, res) => {
   try {
-    const result = await ArticleService.createOne(req.body);
+    const result = await GalleryArticleService.createOne(req.body);
     if (!_.isEmpty(req?.body?.images)) {
       for await (const image of req?.body?.images || []) {
         const imageId = image?._id;
@@ -142,14 +149,14 @@ export const onCreateOne = async (req, res) => {
 
 export const onEditOne = async (req, res) => {
   try {
-    await ArticleService.updateOne(req.params.id, req.body);
+    await GalleryArticleService.updateOne(req.params.id, req.body);
     if (!_.isEmpty(req?.body?.images)) {
       for await (const image of req?.body?.images || []) {
         const imageId = image?._id;
         await ImageModel.findByIdAndUpdate(imageId, {
           $set: {
             article: req?.params?.id,
-            type: 'article',
+            type: IMAGE_TYPE.GALLERY_ARTICLE.type_code,
           },
         });
       }
@@ -162,7 +169,7 @@ export const onEditOne = async (req, res) => {
 
 export const onDeleteOne = async (req, res) => {
   try {
-    await ArticleService.deleteOne(req.params.id);
+    await GalleryArticleService.deleteOne(req.params.id);
     res.status(204).send({ message: 'Delete Success' });
   } catch (error) {
     res.status(400).send({ error });
