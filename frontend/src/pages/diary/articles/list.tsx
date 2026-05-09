@@ -17,7 +17,7 @@ import {
 } from "@/components/refine-ui/views/list-view";
 import { Input } from "@/components/ui/input";
 
-export const ArticleList = () => {
+export const DiaryArticleList = () => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [debouncedSearch, setDebouncedSearch] = React.useState("");
@@ -115,7 +115,7 @@ export const ArticleList = () => {
   const table = useTable({
     columns,
     refineCoreProps: {
-      resource: "article",
+      resource: "diary-article",
       syncWithLocation: true,
       filters: {
         permanent: debouncedSearch
@@ -134,15 +134,15 @@ export const ArticleList = () => {
   return (
     <ListView>
       <ListViewHeader
-        resource="articles"
-        title={t("gallery.article")}
+        resource="diary-articles"
+        title={t("diary.diaryArticle")}
         canCreate
       />
       <div className="relative max-w-md">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           className="pl-9"
-          placeholder={`Search by ${t("gallery.articleName").toLowerCase()}`}
+          placeholder={`Search by ${t("diary.diaryArticleName").toLowerCase()}`}
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />

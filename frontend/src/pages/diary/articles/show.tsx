@@ -15,18 +15,18 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Article } from "@/types";
 
-export const ArticleShow = () => {
+export const DiaryArticleShow = () => {
   const { t } = useTranslation();
   const { id } = useResourceParams();
 
   const { result: record, query } = useShow<Article>({
-    resource: "article",
+    resource: "diary-article",
     id,
   });
   const { isLoading } = query;
   return (
     <ShowView>
-      <ShowViewHeader resource="articles" title={t("gallery.article")} />
+      <ShowViewHeader resource="diary-articles" title={t("gallery.article")} />
       <div className="space-y-6">
         <Card>
           <CardHeader>

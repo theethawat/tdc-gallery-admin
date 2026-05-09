@@ -14,6 +14,13 @@
     "articleEdit": "แก้ไขกิจกรรมและสิ่งของ",
     "articleCreate": "สร้างกิจกรรมและสิ่งของ"
   },
+  "diary": {
+    "diary": "ไดอารี่",
+    "diaryArticle": "บทความไดอารี่",
+    "diaryArticleName": "ชื่อบทความ",
+    "diaryArticleEdit": "แก้ไขบทความ",
+    "diaryArticleCreate": "สร้างบทความ"
+  },
   "general": {
     "actions": "ดำเนินการ",
     "date": "วันที่",

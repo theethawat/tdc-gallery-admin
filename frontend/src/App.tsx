@@ -23,6 +23,8 @@ import {
   FanIcon,
   HeartHandshakeIcon,
   UsersIcon,
+  BookHeartIcon,
+  NotebookIcon,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { I18nProvider } from "@refinedev/core";
@@ -45,6 +47,12 @@ import {
   PeopleList,
   PeopleShow,
 } from "./pages/relations/people";
+import {
+  DiaryArticleCreate,
+  DiaryArticleEdit,
+  DiaryArticleList,
+  DiaryArticleShow,
+} from "./pages/diary/articles";
 import { PlaceCreate, PlaceEdit, PlaceList } from "./pages/galleries/places";
 import { ForgotPassword } from "./pages/forgot-password";
 import { Login } from "./pages/login";
@@ -75,6 +83,27 @@ function App() {
               authProvider={authProvider}
               i18nProvider={i18nProvider}
               resources={[
+                {
+                  name: "diaries",
+                  meta: {
+                    label: t("diary.diary"),
+                    icon: <BookHeartIcon />,
+                  },
+                },
+                {
+                  name: "diary-articles",
+                  list: "/diaries/diary-articles",
+                  create: "/diaries/diary-articles/create",
+                  edit: "/diaries/diary-articles/edit/:id",
+                  show: "/diaries/diary-articles/show/:id",
+                  meta: {
+                    canDelete: true,
+                    label: t("diary.diaryArticle"),
+                    dataProviderName: "diary-article",
+                    parent: "diaries",
+                    icon: <NotebookIcon />,
+                  },
+                },
                 {
                   name: "galleries",
                   meta: {
@@ -198,6 +227,14 @@ function App() {
                       <Route path="edit/:id" element={<PlaceEdit />} />
                     </Route>
                     <Route index element={<ArticleList />} />
+                  </Route>
+                  <Route path="/diaries">
+                    <Route path="diary-articles">
+                      <Route index element={<DiaryArticleList />} />
+                      <Route path="create" element={<DiaryArticleCreate />} />
+                      <Route path="edit/:id" element={<DiaryArticleEdit />} />
+                      <Route path="show/:id" element={<DiaryArticleShow />} />
+                    </Route>
                   </Route>
                   <Route path="/relations">
                     <Route path="people">

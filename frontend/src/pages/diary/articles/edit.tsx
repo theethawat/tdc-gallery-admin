@@ -16,7 +16,7 @@ import {
 } from "@/components/refine-ui/form/article-form";
 import { handleUpload } from "@/lib/upload";
 
-export const ArticleEdit = () => {
+export const DiaryArticleEdit = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { id } = useResourceParams();
@@ -25,7 +25,7 @@ export const ArticleEdit = () => {
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
-      resource: "article",
+      resource: "diary-article",
       action: "edit",
       id,
     },
@@ -69,7 +69,10 @@ export const ArticleEdit = () => {
 
   return (
     <EditView>
-      <EditViewHeader resource="article" title={t("gallery.articleEdit")} />
+      <EditViewHeader
+        resource="diary-article"
+        title={t("gallery.articleEdit")}
+      />
       <ArticleForm
         form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
         onSubmit={onSubmit}

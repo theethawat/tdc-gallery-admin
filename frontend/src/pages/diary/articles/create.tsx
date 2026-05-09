@@ -11,7 +11,7 @@ import {
 } from "@/components/refine-ui/form/article-form";
 import { handleUpload } from "@/lib/upload";
 
-export const ArticleCreate = () => {
+export const DiaryArticleCreate = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 

@@ -2,7 +2,7 @@
   "gallery": {
     "gallery": "Gallery",
     "article": "Activities and Items in Gallery",
-    "articleName": "Article Name",
+    "articleName": "Gallery Article Name",
     "category": "Category",
     "categoryName": "Category Name",
     "categoryEdit": "Edit Category",
@@ -11,8 +11,15 @@
     "placeEdit": "Edit Place",
     "title": "Title",
     "articleContent": "Content",
-    "articleEdit": "Edit Article",
-    "articleCreate": "Create Article"
+    "articleEdit": "Edit Gallery Article",
+    "articleCreate": "Create Gallery Article"
+  },
+  "diary": {
+    "diary": "Diary",
+    "diaryArticle": "Diary Article",
+    "diaryArticleName": "Article Name",
+    "diaryArticleEdit": "Edit Article",
+    "diaryArticleCreate": "Create Article"
   },
   "general": {
     "actions": "Actions",
