@@ -1,18 +1,11 @@
 /* eslint-disable import/no-named-as-default-member */
-import express from 'express';
 import articleController from '../controllers/gallery-article';
 import authMiddleWare from '../middleware/auth';
+import { createCrudRouter } from './RouterFactory';
 
-const router = express.Router();
-
-router.get('/', articleController.onReadAll);
-router.get('/:id', articleController.onReadOne);
-router.put('/:id', authMiddleWare.verifyRequest, articleController.onEditOne);
-router.post('/', authMiddleWare.verifyRequest, articleController.onCreateOne);
-router.delete(
-  '/:id',
-  authMiddleWare.verifyRequest,
-  articleController.onDeleteOne,
-);
+const router = createCrudRouter(articleController, authMiddleWare, {
+  requireAuth: false,
+  readAuth: false,
+});
 
 export default router;

@@ -11,28 +11,28 @@ export const createPipeline = (query) => {
   const pipeline = [];
   const lookupPipeline = [];
 
-  if (req?.query?.name) {
+  if (query?.name) {
     pipeline.push({
       $match: {
         name: {
-          $regex: req?.query?.name,
+          $regex: query?.name,
         },
       },
     });
   }
 
-  if (req?.query?.category) {
+  if (query?.category) {
     pipeline.push({
       $match: {
         $expr: {
-          $in: [Mongoose.Types.ObjectId(req?.query?.category), '$categories'],
+          $in: [Mongoose.Types.ObjectId(query?.category), '$categories'],
         },
       },
     });
   }
 
-  if (req?.query?.date) {
-    const date = new Date(req?.query?.date);
+  if (query?.date) {
+    const date = new Date(query?.date);
     const nextDate = new Date(date);
     nextDate.setDate(nextDate.getDate() + 1);
     pipeline.push({
@@ -45,11 +45,11 @@ export const createPipeline = (query) => {
     });
   }
 
-  if (req?.query?.people) {
+  if (query?.people) {
     pipeline.push({
       $match: {
         $expr: {
-          $in: [Mongoose.Types.ObjectId(req?.query?.people), '$withs'],
+          $in: [Mongoose.Types.ObjectId(query?.people), '$withs'],
         },
       },
     });
@@ -112,7 +112,7 @@ export const onReadOne = async (req, res) => {
     const { pipeline, lookupPipeline } = createPipeline(req?.query);
     const allPipeline = [...pipeline, ...lookupPipeline];
     const result = await DiaryArticleService.getOneAggregation(req.params.id, {
-      pipeline,
+      pipeline: allPipeline,
     });
     res.status(200).send(result);
   } catch (error) {

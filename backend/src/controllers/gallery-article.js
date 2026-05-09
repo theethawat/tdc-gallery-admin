@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 import _ from 'lodash';
 import MainService from '../services/MainService';
-import { GalleryArticleModel } from '../models/Article';
+import { GalleryArticle as GalleryArticleModel } from '../models/Article';
 import ImageModel from '../models/Image';
 import { IMAGE_TYPE } from '../configs/constants';
 

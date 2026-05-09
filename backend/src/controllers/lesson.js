@@ -1,11 +1,11 @@
 import Mongoose from 'mongoose';
 import _ from 'lodash';
 import MainService from '../services/MainService';
-import { SpecialMoment } from '../models/Moment';
+import { Lesson } from '../models/Moment';
 import ImageModel from '../models/Image';
 import { IMAGE_TYPE } from '../configs/constants';
 
-const SpecialMomentService = new MainService(SpecialMoment, 'special-moment');
+const LessonService = new MainService(Lesson, 'lesson');
 
 export const createPipeline = (query) => {
   const pipeline = [];
@@ -46,16 +46,6 @@ export const createPipeline = (query) => {
 
   pipeline.push({ $sort: { date: -1 } });
 
-  // Populating the Images
-  lookupPipeline.push({
-    $lookup: {
-      from: 'images',
-      as: 'image',
-      localField: '_id',
-      foreignField: 'specialMoment',
-    },
-  });
-
   lookupPipeline.push({
     $lookup: {
       from: 'people',
@@ -71,7 +61,7 @@ export const createPipeline = (query) => {
 export const onReadAll = async (req, res) => {
   try {
     const { pipeline, lookupPipeline } = createPipeline(req?.query);
-    const result = await SpecialMomentService.aggregation({
+    const result = await LessonService.aggregation({
       page: req?.query?.page,
       size: req?.query?.size,
       pipeline,
@@ -87,7 +77,7 @@ export const onReadOne = async (req, res) => {
   try {
     const { pipeline, lookupPipeline } = createPipeline(req?.query);
     const allPipeline = [...pipeline, ...lookupPipeline];
-    const result = await SpecialMomentService.getOneAggregation(req.params.id, {
+    const result = await LessonService.getOneAggregation(req.params.id, {
       pipeline: allPipeline,
     });
     res.status(200).send(result);
@@ -98,7 +88,7 @@ export const onReadOne = async (req, res) => {
 
 export const onCreateOne = async (req, res) => {
   try {
-    const result = await SpecialMomentService.createOne(req.body);
+    const result = await LessonService.createOne(req.body);
     if (!_.isEmpty(req?.body?.images)) {
       for await (const image of req?.body?.images || []) {
         const imageId = image?._id;
@@ -118,7 +108,7 @@ export const onCreateOne = async (req, res) => {
 
 export const onEditOne = async (req, res) => {
   try {
-    await SpecialMomentService.updateOne(req.params.id, req.body);
+    await LessonService.updateOne(req.params.id, req.body);
     if (!_.isEmpty(req?.body?.images)) {
       for await (const image of req?.body?.images || []) {
         const imageId = image?._id;
@@ -138,7 +128,7 @@ export const onEditOne = async (req, res) => {
 
 export const onDeleteOne = async (req, res) => {
   try {
-    await SpecialMomentService.deleteOne(req.params.id);
+    await LessonService.deleteOne(req.params.id);
     res.status(204).send({ message: 'Delete Success' });
   } catch (error) {
     res.status(400).send({ error });

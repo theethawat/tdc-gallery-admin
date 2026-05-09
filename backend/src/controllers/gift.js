@@ -11,18 +11,18 @@ export const createPipeline = (query) => {
   const pipeline = [];
   const lookupPipeline = [];
 
-  if (req?.query?.name) {
+  if (query?.name) {
     pipeline.push({
       $match: {
         $or: [
           {
             name: {
-              $regex: req?.query?.name,
+              $regex: query?.name,
             },
           },
           {
             occasion: {
-              $regex: req?.query?.name,
+              $regex: query?.name,
             },
           },
         ],
@@ -30,8 +30,8 @@ export const createPipeline = (query) => {
     });
   }
 
-  if (req?.query?.date) {
-    const date = new Date(req?.query?.date);
+  if (query?.date) {
+    const date = new Date(query?.date);
     const nextDate = new Date(date);
     nextDate.setDate(nextDate.getDate() + 1);
     pipeline.push({
@@ -44,28 +44,28 @@ export const createPipeline = (query) => {
     });
   }
 
-  if (req?.query?.receivers) {
+  if (query?.receivers) {
     pipeline.push({
       $match: {
         $expr: {
-          $in: [Mongoose.Types.ObjectId(req?.query?.people), '$receivers'],
+          $in: [Mongoose.Types.ObjectId(query?.people), '$receivers'],
         },
       },
     });
   }
 
-  if (req?.query?.giver) {
+  if (query?.giver) {
     pipeline.push({
       $match: {
-        giver: Mongoose.Types.ObjectId(req?.query?.giver),
+        giver: Mongoose.Types.ObjectId(query?.giver),
       },
     });
   }
 
-  if (req?.query?.mode) {
+  if (query?.mode) {
     pipeline.push({
       $match: {
-        mode: req?.query?.mode,
+        mode: query?.mode,
       },
     });
   }
@@ -123,7 +123,7 @@ export const onReadOne = async (req, res) => {
     const { pipeline, lookupPipeline } = createPipeline(req?.query);
     const allPipeline = [...pipeline, ...lookupPipeline];
     const result = await GiftService.getOneAggregation(req.params.id, {
-      pipeline,
+      pipeline: allPipeline,
     });
     res.status(200).send(result);
   } catch (error) {

@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default-member */
-import categoryController from '../controllers/category';
+import lessonController from '../controllers/lesson';
 import authMiddleWare from '../middleware/auth';
 import { createCrudRouter } from './RouterFactory';
 
-const router = createCrudRouter(categoryController, authMiddleWare, {
-  requireAuth: false,
-  readAuth: false,
+const router = createCrudRouter(lessonController, authMiddleWare, {
+  requireAuth: true,
+  readAuth: true,
 });
 
 export default router;
