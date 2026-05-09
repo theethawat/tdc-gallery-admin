@@ -1,86 +1,92 @@
 ---
-name: Ethereal Archive
+name: Ethereal Sky
 colors:
-  surface: '#f7fafd'
-  surface-dim: '#d7dadd'
-  surface-bright: '#f7fafd'
+  surface: '#f7fafc'
+  surface-dim: '#d7dadc'
+  surface-bright: '#f7fafc'
   surface-container-lowest: '#ffffff'
-  surface-container-low: '#f1f4f7'
-  surface-container: '#ebeef1'
-  surface-container-high: '#e5e8eb'
-  surface-container-highest: '#e0e3e6'
+  surface-container-low: '#f1f4f6'
+  surface-container: '#ebeef0'
+  surface-container-high: '#e5e9eb'
+  surface-container-highest: '#e0e3e5'
   on-surface: '#181c1e'
-  on-surface-variant: '#43474f'
+  on-surface-variant: '#41484e'
   inverse-surface: '#2d3133'
-  inverse-on-surface: '#eef1f4'
-  outline: '#737781'
-  outline-variant: '#c3c6d1'
-  surface-tint: '#375f97'
-  primary: '#375f97'
+  inverse-on-surface: '#eef1f3'
+  outline: '#71787f'
+  outline-variant: '#c0c7cf'
+  surface-tint: '#1c648e'
+  primary: '#1c648e'
   on-primary: '#ffffff'
-  primary-container: '#7096d1'
-  on-primary-container: '#002d5b'
-  inverse-primary: '#a7c8ff'
-  secondary: '#5b5891'
+  primary-container: '#7cb9e8'
+  on-primary-container: '#00496d'
+  inverse-primary: '#90cdfd'
+  secondary: '#67558c'
   on-secondary: '#ffffff'
-  secondary-container: '#c1bdfe'
-  on-secondary-container: '#4d4a82'
-  tertiary: '#296956'
+  secondary-container: '#d5bffe'
+  on-secondary-container: '#5d4b81'
+  tertiary: '#795465'
   on-tertiary: '#ffffff'
-  tertiary-container: '#63a18c'
-  on-tertiary-container: '#003528'
+  tertiary-container: '#d3a6b9'
+  on-tertiary-container: '#5c3a4b'
   error: '#ba1a1a'
   on-error: '#ffffff'
   error-container: '#ffdad6'
   on-error-container: '#93000a'
-  primary-fixed: '#d5e3ff'
-  primary-fixed-dim: '#a7c8ff'
-  on-primary-fixed: '#001b3b'
-  on-primary-fixed-variant: '#1b477d'
-  secondary-fixed: '#e3dfff'
-  secondary-fixed-dim: '#c4c0ff'
-  on-secondary-fixed: '#17134a'
-  on-secondary-fixed-variant: '#434078'
-  tertiary-fixed: '#aff0d8'
-  tertiary-fixed-dim: '#94d3bd'
-  on-tertiary-fixed: '#002118'
-  on-tertiary-fixed-variant: '#07513f'
-  background: '#f7fafd'
+  primary-fixed: '#cae6ff'
+  primary-fixed-dim: '#90cdfd'
+  on-primary-fixed: '#001e30'
+  on-primary-fixed-variant: '#004b70'
+  secondary-fixed: '#ebddff'
+  secondary-fixed-dim: '#d2bcfb'
+  on-secondary-fixed: '#220f44'
+  on-secondary-fixed-variant: '#4f3d73'
+  tertiary-fixed: '#ffd8e7'
+  tertiary-fixed-dim: '#e9bacd'
+  on-tertiary-fixed: '#2e1221'
+  on-tertiary-fixed-variant: '#5f3c4d'
+  background: '#f7fafc'
   on-background: '#181c1e'
-  surface-variant: '#e0e3e6'
+  surface-variant: '#e0e3e5'
 typography:
-  display-lg:
-    fontFamily: Ibm Plex Sans Thai
+  display:
+    fontFamily: IBM Plex Sans Thai
     fontSize: 48px
-    fontWeight: '700'
-    lineHeight: '1.2'
+    fontWeight: '600'
+    lineHeight: '1.1'
     letterSpacing: -0.02em
-  headline-md:
-    fontFamily: Ibm Plex Sans Thai
+  headline-lg:
+    fontFamily: IBM Plex Sans Thai
     fontSize: 32px
-    fontWeight: '600'
-    lineHeight: '1.3'
+    fontWeight: '500'
+    lineHeight: '1.2'
     letterSpacing: -0.01em
-  title-sm:
-    fontFamily: Ibm Plex Sans Thai
-    fontSize: 20px
-    fontWeight: '600'
-    lineHeight: '1.4'
+  headline-md:
+    fontFamily: IBM Plex Sans Thai
+    fontSize: 24px
+    fontWeight: '500'
+    lineHeight: '1.3'
+  body-lg:
+    fontFamily: IBM Plex Sans Thai
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: '1.6'
   body-md:
-    fontFamily: Nunito Sans
+    fontFamily: IBM Plex Sans Thai
     fontSize: 16px
     fontWeight: '400'
     lineHeight: '1.6'
-  body-sm:
-    fontFamily: Nunito Sans
+  label-md:
+    fontFamily: IBM Plex Sans Thai
     fontSize: 14px
-    fontWeight: '400'
-    lineHeight: '1.6'
-  label-caps:
-    fontFamily: Ibm Plex Sans
+    fontWeight: '500'
+    lineHeight: '1.2'
+    letterSpacing: 0.05em
+  label-sm:
+    fontFamily: IBM Plex Sans Thai
     fontSize: 12px
-    fontWeight: '700'
-    lineHeight: '1'
+    fontWeight: '600'
+    lineHeight: '1.2'
     letterSpacing: 0.08em
 rounded:
   sm: 0.25rem
@@ -91,66 +97,64 @@ rounded:
   full: 9999px
 spacing:
   unit: 8px
-  container-max: 1280px
-  gutter: 24px
-  margin-mobile: 20px
-  margin-desktop: 64px
-  stack-lg: 48px
-  stack-md: 24px
-  stack-sm: 12px
+  xs: 0.5rem
+  sm: 1rem
+  md: 1.5rem
+  lg: 2.5rem
+  xl: 4rem
+  gutter: 1.5rem
+  margin: 2rem
 ---
 
 ## Brand & Style
 
-The design system is built upon the "Digital Sanctuary" philosophy—a high-end editorial approach that prioritizes mental clarity and quiet professionalism. It is designed for discerning users who require a focused environment for consuming and organizing high-value information.
+The visual identity of this design system centers on the concept of "The Atmospheric Sanctuary." It transitions from grounded professionalism to an airy, weightless aesthetic that prioritizes mental clarity and calm. The target audience includes high-level professionals and wellness-oriented users who seek a digital environment that feels like a breath of fresh air.
 
-The aesthetic merges **Minimalism** with **Tonal Layering**. Unlike traditional corporate interfaces, it avoids harsh whites and aggressive shadows, opting instead for a luminous, atmospheric quality. The brand voice is calm, archival, and sophisticated, evoking the feeling of a premium physical gallery translated into a fluid digital medium.
+The style leverages **Modern Minimalism** fused with **Subtle Glassmorphism**. By using translucent layers and soft-focus backgrounds, the interface avoids the clinical coldness of traditional corporate design, opting instead for a premium, ethereal quality. Visual elements should feel as though they are floating in a high-altitude space, utilizing high-key lighting and delicate tonal transitions to guide the eye without causing cognitive fatigue.
 
 ## Colors
 
-The palette is a curated selection of cool, atmospheric tones. To maintain the "Sanctuary" feel, pure #FFFFFF white is strictly forbidden as a background. Instead, the design system utilizes **Off-White (#F4F7FA)** and **Very Light Blue** as its foundational surfaces.
+The palette is anchored by a sophisticated sky-blue primary, supported by muted lavender and soft pink to provide warmth without sacrificing professionalism. 
 
-- **Primary (Sky Blue):** Used for navigation and key structural indicators.
-- **Secondary (Soft Lavender):** Reserved for delicate accents, high-end editorial highlights, and soft gradients.
-- **Tertiary (Mint):** A functional accent for success states and refreshing call-outs.
-- **Surface Strategy:** Depth is created through "Ink-on-Paper" tonal shifts—stacking slightly darker surfaces on lighter bases to create a sense of physical layering without using shadows.
+- **Primary (Sky Blue):** Used for core interactions and brand presence. It must feel expansive and clear.
+- **Secondary (Lavender):** Employed for supporting elements and soft highlights, providing a gentle contrast to the blue.
+- **Tertiary (Light Pink):** Reserved for delicate accents, notifications, or celebratory UI states.
+- **Neutrals:** Backgrounds utilize very light blue tints (Ice Blue) or soft off-whites to reduce screen glare. 
+
+Avoid any saturation of green or teal to prevent the interface from shifting into a "playful" or "tropical" mood. All gradients should be linear and low-contrast, mimicking the natural transition of a horizon.
 
 ## Typography
 
-The design system pairs the technical precision of **IBM Plex Sans** with the approachable clarity of **Nunito Sans**. 
+This design system uses **IBM Plex Sans** for its exceptional clarity and technical precision in both English and Thai scripts. The typography is balanced between industrial structure and humanistic curves.
 
-IBM Plex Sans is used for headlines, titles, and labels to provide a structured, archival authority. Nunito Sans is reserved for body text, where its softer terminals provide a high degree of comfort for long-form reading.
-
-The type scale follows an editorial rhythm with generous line heights to ensure a "breathable" reading experience. Headlines use a tighter letter-spacing for a premium, custom-set appearance, while small labels use increased letter-spacing and uppercase styling to denote archival metadata. Body text must maintain a line height of at least 1.6 to prevent visual fatigue during long-form reading.
+Large display headings use a tighter tracking and medium weights to establish a confident presence. Body text utilizes a generous line-height (1.6) to enhance readability and contribute to the "airy" feel of the sanctuary style. Label styles should be primarily uppercase with slight letter spacing to differentiate them from body content, ensuring a clean hierarchy. For Thai characters, ensure line heights are strictly maintained to accommodate tall vowel marks without clipping.
 
 ## Layout & Spacing
 
-The system employs a **Fixed Grid** philosophy for desktop to maintain editorial integrity, transitioning to a fluid model for mobile. 
+The layout philosophy is built on a **Fluid 12-Column Grid** with high margins to allow the content to "breathe." Spacing is rhythmic, based on an 8px base unit, but applied with a preference for larger gaps to emphasize the minimalist aesthetic.
 
-A 12-column grid is used with expansive margins (64px) to create the "Airy Layout" central to the brand. Whitespace is treated as an active design element, not "empty" space. Vertical rhythm is governed by a strict 8px baseline, with large section breaks typically utilizing `stack-lg` (48px) to clearly separate archival collections.
+Whitespace is treated as a structural element rather than empty space. Containers should have generous internal padding (MD or LG) to prevent content from feeling cramped. Alignment should be rigorous, favoring left-aligned text for readability, while using centered layouts for high-impact, sparse landing moments.
 
 ## Elevation & Depth
 
-In this design system, depth is achieved through **Tonal Layers** and **Subtle Tinted Shadows**. 
+Hierarchy is established through **Tonal Layers** and **Ambient Shadows** rather than harsh borders. Surfaces are tiered using subtle shifts in background tint:
+- **Level 0 (Base):** Off-white or lightest sky-blue tint.
+- **Level 1 (Card):** Pure white with a delicate, large-radius shadow (#7CB9E8 at 8% opacity) to create a floating effect.
+- **Level 2 (Modals/Popovers):** Semi-transparent white with a background blur (12px to 20px) and a subtle 1px border in a slightly darker blue tint.
 
-1.  **Level 0 (Base):** The primary surface color (`#F4F7FA`).
-2.  **Level 1 (Cards/Containers):** Elevated by using a secondary surface color or a 1px border of a slightly darker tone.
-3.  **Level 2 (Interactive):** Elements that float above the surface use an extremely diffused shadow (Blur: 30px, Opacity: 4%) tinted with the Primary Sky Blue color rather than black.
-
-The use of backdrop blurs (15px-20px) is encouraged for overlays and navigation bars to maintain the "Ethereal" feeling of light passing through glass.
+Shadows must never be black or neutral gray; they should always carry a hint of the primary sky-blue color to maintain the atmospheric theme.
 
 ## Shapes
 
-The shape language is defined by a **Structured Rounded** aesthetic. This approach balances professional stability with a contemporary, accessible feel.
+The shape language is **Rounded**, reflecting the softness of clouds and organic forms found in nature. 
 
-All interactive elements—buttons, chips, and input fields—must use a `rounded-DEFAULT` (8px) radius. Non-interactive containers like cards should use a `rounded-lg` (16px) or `rounded-xl` (24px) radius to maintain harmony with the navigation elements while providing enough structure for content organization.
+Primary containers and buttons use a 0.5rem base radius. Larger cards and sections should scale up to 1rem or 1.5rem to emphasize the sanctuary-like softness. Avoid sharp 90-degree corners, as they conflict with the "calm and airy" goal. Conversely, avoid full pill-shapes for primary buttons to maintain a professional, architectural edge; reserve pill-shapes exclusively for status chips and tags.
 
 ## Components
 
-- **Buttons:** Rounded (8px). Primary buttons use a subtle gradient from Sky Blue to Soft Lavender. Text is semi-bold IBM Plex Sans.
-- **Input Fields:** Rounded (8px) with a 1px soft blue border. Focus states use a subtle mint-tinted outer glow.
-- **Chips/Tags:** Used for archival categorization. Small, rounded (8px), with a background color that is a 10% opacity version of the accent colors.
-- **Cards:** Large corner radius (16px-24px). No heavy shadows; depth is conveyed via a subtle tonal shift from the background or a very light, tinted stroke.
-- **Lists:** High vertical padding (16px-24px per item) with hair-line separators in the secondary surface color. Body text uses Nunito Sans.
-- **Progress Indicators:** Soft, rounded bars using the Mint accent to denote "active" or "fresh" archival processes.
-- **Navigation:** A floating rounded "Island" bar at the top or bottom of the viewport using glassmorphism effects and a 16px corner radius.
+- **Buttons:** Primary buttons use a very subtle linear gradient (Sky Blue to a slightly lighter tint) with white text. Secondary buttons are ghost-style with a 1px lavender border.
+- **Chips & Tags:** Small, pill-shaped elements using the tertiary light pink or lavender at low saturation (10-15% opacity) for the background.
+- **Cards:** White backgrounds, rounded-lg corners, and ambient sky-blue shadows. Borders should be avoided unless the card is placed on a white background, in which case a 1px "Ice Blue" border is used.
+- **Input Fields:** Soft gray-blue backgrounds that shift to white on focus, highlighted by a subtle glow in the primary blue.
+- **Lists:** High-density lists are discouraged. Items should have clear vertical separation and use soft dividers that fade out at the edges.
+- **Glass Overlays:** For navigation bars or headers, use a 70% transparent white background with a backdrop blur to maintain the sense of depth as users scroll content.

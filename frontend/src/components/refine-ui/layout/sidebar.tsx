@@ -412,21 +412,13 @@ function SidebarButton({
   return (
     <Button
       asChild={!!(asLink && item.route)}
-      variant="ghost"
+      variant={isSelected ? undefined : "ghost"}
       size="lg"
       className={cn(
         "flex w-full items-center justify-start gap-2 rounded-xl py-2.5 px-3 text-sm transition-all duration-200",
-        {
-          "bg-[linear-gradient(135deg,color-mix(in_oklab,var(--sidebar-primary)_82%,white),var(--sidebar-primary))] shadow-[0_10px_20px_-14px_color-mix(in_oklab,var(--sidebar-primary)_65%,transparent)]":
-            isSelected,
-          "hover:bg-[linear-gradient(135deg,color-mix(in_oklab,var(--sidebar-primary)_86%,white),var(--sidebar-primary))]":
-            isSelected,
-          "text-sidebar-primary-foreground": isSelected,
-          "hover:text-sidebar-primary-foreground": isSelected,
-          "text-sidebar-foreground": !isSelected,
-          "hover:bg-sidebar-accent/78": !isSelected,
-          "hover:translate-x-0.5": !isSelected,
-        },
+        isSelected
+          ? "bg-[linear-gradient(90deg,_var(--primary),_var(--chart-1))] text-[var(--on-primary)] shadow-[0_4px_16px_-4px_rgba(124,185,232,0.18)] hover:brightness-105 hover:shadow-[0_8px_24px_-4px_rgba(124,185,232,0.24)]"
+          : "text-sidebar-foreground hover:bg-sidebar-accent/78 hover:translate-x-0.5",
         className,
       )}
       onClick={onClick}
