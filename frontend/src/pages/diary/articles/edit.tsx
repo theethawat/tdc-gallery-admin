@@ -25,7 +25,7 @@ export const ArticleEdit = () => {
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
-      resource: "gallery-article",
+      resource: "article",
       action: "edit",
       id,
     },

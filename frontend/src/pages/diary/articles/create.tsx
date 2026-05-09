@@ -1,14 +1,9 @@
-import { useResourceParams } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
-import {
-  EditView,
-  EditViewHeader,
-} from "@/components/refine-ui/views/edit-view";
+import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
@@ -16,29 +11,18 @@ import {
 } from "@/components/refine-ui/form/article-form";
 import { handleUpload } from "@/lib/upload";
 
-export const ArticleEdit = () => {
+export const ArticleCreate = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { id } = useResourceParams();
+
   const {
-    refineCore: { onFinish, query },
+    refineCore: { onFinish },
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
-      resource: "gallery-article",
-      action: "edit",
-      id,
+      resource: "diary-article",
     },
   });
-
-  useEffect(() => {
-    if (query?.data?.data?.date) {
-      const date = new Date(query.data.data.date);
-      form.setValue("date", date);
-    }
-
-    return () => {};
-  }, [query?.data]);
 
   const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
     try {
@@ -50,7 +34,9 @@ export const ArticleEdit = () => {
             typeof cat === "string" ? cat : cat._id,
           ) || [],
         date: values.date || new Date(),
+        images: [], // Placeholder for image URLs or IDs after upload
       };
+
       const images = (values as any).images;
       if (images) {
         console.log("Images to upload:", images);
@@ -63,24 +49,23 @@ export const ArticleEdit = () => {
       await onFinish(payload);
       navigate(-1);
     } catch (error) {
-      console.error("Error updating article:", error);
+      console.error("Error creating article:", error);
     }
   };
 
   return (
-    <EditView>
-      <EditViewHeader resource="article" title={t("gallery.articleEdit")} />
+    <CreateView>
       <ArticleForm
         form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
         onSubmit={onSubmit}
         isLoading={form.formState.isSubmitting}
-        submitLabel={t("buttons.save")}
+        submitLabel={t("buttons.create")}
       />
       <div className="mt-6">
         <Button type="button" variant="outline" onClick={() => navigate(-1)}>
           {t("buttons.cancel")}
         </Button>
       </div>
-    </EditView>
+    </CreateView>
   );
 };

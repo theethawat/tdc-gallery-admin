@@ -11,7 +11,8 @@
     "PlaceEdit": "แก้ไขสถานที่",
     "title": "หัวข้อ",
     "articleContent": "เนื้อหา",
-    "articleEdit": "แก้ไขกิจกรรมและสิ่งของ"
+    "articleEdit": "แก้ไขกิจกรรมและสิ่งของ",
+    "articleCreate": "สร้างกิจกรรมและสิ่งของ"
   },
   "general": {
     "actions": "ดำเนินการ",

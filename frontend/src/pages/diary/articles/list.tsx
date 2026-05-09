@@ -115,7 +115,7 @@ export const ArticleList = () => {
   const table = useTable({
     columns,
     refineCoreProps: {
-      resource: "gallery-article",
+      resource: "article",
       syncWithLocation: true,
       filters: {
         permanent: debouncedSearch

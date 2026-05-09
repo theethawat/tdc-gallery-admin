@@ -11,7 +11,8 @@
     "placeEdit": "Edit Place",
     "title": "Title",
     "articleContent": "Content",
-    "articleEdit": "Edit Article"
+    "articleEdit": "Edit Article",
+    "articleCreate": "Create Article"
   },
   "general": {
     "actions": "Actions",

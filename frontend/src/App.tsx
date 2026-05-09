@@ -92,7 +92,7 @@ function App() {
                   meta: {
                     canDelete: true,
                     label: t("gallery.article"),
-                    dataProviderName: "article",
+                    dataProviderName: "gallery-article",
                     parent: "galleries",
                     icon: <ImageIcon />,
                   },

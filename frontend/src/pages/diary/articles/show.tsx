@@ -20,7 +20,7 @@ export const ArticleShow = () => {
   const { id } = useResourceParams();
 
   const { result: record, query } = useShow<Article>({
-    resource: "gallery-article",
+    resource: "article",
     id,
   });
   const { isLoading } = query;

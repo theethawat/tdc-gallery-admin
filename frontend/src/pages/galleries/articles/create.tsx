@@ -3,7 +3,10 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
-import { CreateView } from "@/components/refine-ui/views/create-view";
+import {
+  CreateView,
+  CreateViewHeader,
+} from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
@@ -20,7 +23,8 @@ export const ArticleCreate = () => {
     ...form
   } = useForm<ArticleFormValue>({
     refineCoreProps: {
-      resource: "article",
+      resource: "gallery-article",
+      redirect: "list",
     },
   });
 
@@ -55,6 +59,10 @@ export const ArticleCreate = () => {
 
   return (
     <CreateView>
+      <CreateViewHeader
+        resource="articles"
+        title={t("gallery.articleCreate")}
+      />
       <ArticleForm
         form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
         onSubmit={onSubmit}
