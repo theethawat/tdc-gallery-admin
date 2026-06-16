@@ -89,17 +89,17 @@ export const DiaryArticleList = () => {
           return (
             <div className="flex gap-2">
               <EditButton
-                resource="articles"
+                resource="diary-articles"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <ShowButton
-                resource="articles"
+                resource="diary-articles"
                 recordItemId={recordItemId}
                 size="sm"
               />
               <DeleteButton
-                resource="article"
+                resource="diary-articles"
                 recordItemId={recordItemId}
                 size="sm"
               />

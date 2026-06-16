@@ -3,13 +3,25 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
 
-import { CreateView } from "@/components/refine-ui/views/create-view";
+import {
+  CreateView,
+  CreateViewHeader,
+} from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
 import {
   ArticleForm,
   ArticleFormValue,
 } from "@/components/refine-ui/form/article-form";
+import {
+  DiaryArticleExtensionForm,
+  DiaryArticleExtensionValue,
+} from "@/components/refine-ui/form/diary-article-extension-form";
 import { handleUpload } from "@/lib/upload";
+
+type DiaryArticleFormValue = ArticleFormValue & DiaryArticleExtensionValue;
+type DiaryArticleSubmitValue = DiaryArticleFormValue & {
+  images?: FileList | File[];
+};
 
 export const DiaryArticleCreate = () => {
   const navigate = useNavigate();
@@ -18,13 +30,13 @@ export const DiaryArticleCreate = () => {
   const {
     refineCore: { onFinish },
     ...form
-  } = useForm<ArticleFormValue>({
+  } = useForm<DiaryArticleFormValue>({
     refineCoreProps: {
       resource: "diary-article",
     },
   });
 
-  const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
+  const onSubmit: SubmitHandler<DiaryArticleSubmitValue> = async (values) => {
     try {
       const payload: Record<string, unknown> = {
         name: values.name,
@@ -35,9 +47,22 @@ export const DiaryArticleCreate = () => {
           ) || [],
         date: values.date || new Date(),
         images: [], // Placeholder for image URLs or IDs after upload
+        withs:
+          values.withs
+            ?.map((person) =>
+              typeof person === "string" ? person : person?._id,
+            )
+            .filter(Boolean) || [],
       };
 
-      const images = (values as any).images;
+      if (values.gallery) {
+        payload.gallery =
+          typeof values.gallery === "string"
+            ? values.gallery
+            : (values.gallery as { _id?: string })?._id;
+      }
+
+      const images = values.images;
       if (images) {
         console.log("Images to upload:", images);
         // Here you would typically handle the file upload logic,
@@ -55,11 +80,23 @@ export const DiaryArticleCreate = () => {
 
   return (
     <CreateView>
+      <CreateViewHeader
+        resource="diary-articles"
+        title={t("diary.diaryArticleCreate")}
+      />
       <ArticleForm
         form={form as unknown as UseFormReturn<ArticleFormValue, unknown>}
         onSubmit={onSubmit}
         isLoading={form.formState.isSubmitting}
         submitLabel={t("buttons.create")}
+      />
+      <DiaryArticleExtensionForm
+        form={
+          form as unknown as UseFormReturn<
+            ArticleFormValue & DiaryArticleExtensionValue,
+            unknown
+          >
+        }
       />
       <div className="mt-6">
         <Button type="button" variant="outline" onClick={() => navigate(-1)}>

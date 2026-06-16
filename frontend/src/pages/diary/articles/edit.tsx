@@ -14,7 +14,16 @@ import {
   ArticleForm,
   ArticleFormValue,
 } from "@/components/refine-ui/form/article-form";
+import {
+  DiaryArticleExtensionForm,
+  DiaryArticleExtensionValue,
+} from "@/components/refine-ui/form/diary-article-extension-form";
 import { handleUpload } from "@/lib/upload";
+
+type DiaryArticleFormValue = ArticleFormValue & DiaryArticleExtensionValue;
+type DiaryArticleSubmitValue = DiaryArticleFormValue & {
+  images?: FileList | File[];
+};
 
 export const DiaryArticleEdit = () => {
   const navigate = useNavigate();
@@ -23,7 +32,7 @@ export const DiaryArticleEdit = () => {
   const {
     refineCore: { onFinish, query },
     ...form
-  } = useForm<ArticleFormValue>({
+  } = useForm<DiaryArticleFormValue>({
     refineCoreProps: {
       resource: "diary-article",
       action: "edit",
@@ -32,15 +41,43 @@ export const DiaryArticleEdit = () => {
   });
 
   useEffect(() => {
-    if (query?.data?.data?.date) {
-      const date = new Date(query.data.data.date);
+    const queryData = query?.data?.data as
+      | {
+          date?: string | Date;
+          gallery?: string | { _id?: string };
+          withs?: Array<string | { _id?: string }>;
+        }
+      | undefined;
+
+    if (queryData?.date) {
+      const date = new Date(queryData.date);
       form.setValue("date", date);
     }
 
-    return () => {};
-  }, [query?.data]);
+    if (queryData?.gallery) {
+      const gallery =
+        typeof queryData.gallery === "string"
+          ? queryData.gallery
+          : queryData.gallery._id;
+      form.setValue("gallery", gallery);
+    }
 
-  const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
+    if (queryData?.withs) {
+      const withs = queryData.withs
+        .map((person: { _id?: string } | string) =>
+          typeof person === "string" ? person : person?._id,
+        )
+        .filter(Boolean);
+      form.setValue(
+        "withs",
+        withs as unknown as DiaryArticleFormValue["withs"],
+      );
+    }
+
+    return () => {};
+  }, [form, query?.data]);
+
+  const onSubmit: SubmitHandler<DiaryArticleSubmitValue> = async (values) => {
     try {
       const payload: Record<string, unknown> = {
         name: values.name,
@@ -50,8 +87,22 @@ export const DiaryArticleEdit = () => {
             typeof cat === "string" ? cat : cat._id,
           ) || [],
         date: values.date || new Date(),
+        withs:
+          values.withs
+            ?.map((person) =>
+              typeof person === "string" ? person : person?._id,
+            )
+            .filter(Boolean) || [],
       };
-      const images = (values as any).images;
+
+      if (values.gallery) {
+        payload.gallery =
+          typeof values.gallery === "string"
+            ? values.gallery
+            : (values.gallery as { _id?: string })?._id;
+      }
+
+      const images = values.images;
       if (images) {
         console.log("Images to upload:", images);
         // Here you would typically handle the file upload logic,
@@ -78,6 +129,14 @@ export const DiaryArticleEdit = () => {
         onSubmit={onSubmit}
         isLoading={form.formState.isSubmitting}
         submitLabel={t("buttons.save")}
+      />
+      <DiaryArticleExtensionForm
+        form={
+          form as unknown as UseFormReturn<
+            ArticleFormValue & DiaryArticleExtensionValue,
+            unknown
+          >
+        }
       />
       <div className="mt-6">
         <Button type="button" variant="outline" onClick={() => navigate(-1)}>

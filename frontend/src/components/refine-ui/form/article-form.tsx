@@ -139,7 +139,12 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
             <FormItem>
               <FormLabel>{t("gallery.articleContent")}</FormLabel>
               <FormControl>
-                <Textarea {...field} value={field.value || ""} rows={20} />
+                <Textarea
+                  {...field}
+                  value={field.value || ""}
+                  rows={20}
+                  style={{ height: "300px" }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
