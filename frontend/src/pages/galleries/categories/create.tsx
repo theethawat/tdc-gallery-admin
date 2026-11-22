@@ -1,6 +1,10 @@
-import { useSelect } from "@refinedev/core";
+import { HttpError, useSelect } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import { Category, Place } from "@/types";
+import { translatedValue } from "@/lib/translations";
+import { TranslatedNameFields } from "@/components/refine-ui/form/translated-name-fields";
 
 import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
@@ -12,7 +16,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -22,35 +25,40 @@ import {
 } from "@/components/ui/select";
 
 type CategoryFormValues = {
-  name: string;
+  name?: string;
+  translation?: Category["translation"];
   place: string;
 };
 
 export const CategoryCreate = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const {
     refineCore: { onFinish },
     ...form
-  } = useForm<CategoryFormValues>({
+  } = useForm<Category, HttpError, CategoryFormValues>({
     refineCoreProps: {
       resource: "category",
     },
   });
 
-  const { options: placeOptions } = useSelect({
+  const { query: placeQuery } = useSelect<Place>({
     resource: "place",
-    optionLabel: "name",
     optionValue: "_id",
     pagination: {
       currentPage: 1,
       pageSize: 1000,
     },
   });
+  const placeOptions = (placeQuery.data?.data || []).map((place) => ({
+    value: place._id,
+    label: translatedValue(place, "name", i18n.language) || "-",
+  }));
 
   function onSubmit(values: CategoryFormValues) {
     onFinish({
-      name: values.name,
+      translation: values.translation,
       place: values.place,
     }).then(() => {
       navigate(-1);
@@ -92,29 +100,11 @@ export const CategoryCreate = () => {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="name"
-            rules={{ required: "Category name is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value || ""}
-                    placeholder="Enter category name"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <TranslatedNameFields label={t("gallery.categoryName")} />
 
           <div className="flex gap-2">
             <Button
               type="submit"
-              {...form.saveButtonProps}
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting ? "Creating..." : "Create"}

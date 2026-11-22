@@ -11,14 +11,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Autocomplete, Datepicker, Upload } from "../custom";
+import { translatedValue } from "@/lib/translations";
+import { TranslatedNameFields } from "./translated-name-fields";
 
 export interface ArticleFormValue {
-  name: string;
+  name?: string;
+  translation?: {
+    en?: { name?: string; description?: string };
+    th?: { name?: string; description?: string };
+  };
   categories: Category[];
-  description: string;
+  description?: string;
   date?: Date;
 }
 
@@ -35,49 +40,31 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
   isLoading = false,
   submitLabel = "Save",
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { control, handleSubmit } = form;
   const { append, fields, remove } = useFieldArray({
     name: "categories",
     control,
   });
 
-  const { options: categoryOptions } = useSelect({
+  const { query: categoryQuery } = useSelect<Category>({
     resource: "category",
-    optionLabel: "name",
     optionValue: "_id",
     pagination: {
       currentPage: 1,
       pageSize: 1000,
     },
   });
+  const categoryOptions = (categoryQuery.data?.data || []).map((category) => ({
+    value: category._id,
+    label: translatedValue(category, "name", i18n.language) || "-",
+  }));
 
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        {/* Article Name */}
-        <FormField
-          control={control}
-          name="name"
-          rules={{
-            required: t("gallery.articleName") + " " + t("general.isRequired"),
-          }}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("gallery.articleName")}</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  value={field.value || ""}
-                  placeholder={`${t("buttons.enter")}${t(
-                    "gallery.articleName",
-                  )?.toLowerCase()}`}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <TranslatedNameFields label={t("gallery.articleName")} />
+        {form.watch("name") && <p>{t("general.legacyValue")}: {form.watch("name")}</p>}
 
         {/* Category */}
 
@@ -132,24 +119,25 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
         <Datepicker label={t("general.date")} name="date" form={form} />
 
         {/* Description */}
-        <FormField
-          control={control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("gallery.articleContent")}</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  value={field.value || ""}
-                  rows={20}
-                  style={{ height: "300px" }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {(["en", "th"] as const).map((language) => (
+          <FormField
+            key={language}
+            control={control}
+            name={`translation.${language}.description`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {t("gallery.articleContent")} ({t(language === "en" ? "general.languageEn" : "general.languageTh")})
+                </FormLabel>
+                <FormControl>
+                  <Textarea {...field} value={field.value || ""} rows={20} style={{ height: "300px" }} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        ))}
+        {form.watch("description") && <p className="whitespace-pre-wrap">{t("general.legacyValue")}: {form.watch("description")}</p>}
 
         {/* Upload */}
         <Upload name="images" form={form} />

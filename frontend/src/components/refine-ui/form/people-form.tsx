@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { translatedValue } from "@/lib/translations";
 
 // As Same as ArticleFormValue but with People type and status field
 export type PeopleFormValue = Omit<
@@ -50,7 +51,7 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
   const { control, handleSubmit } = form;
   const language = i18n.language || "en";
 
-  const personName = form.watch("name") || t("people.name");
+  const personName = translatedValue(form.watch(), "name", language) || t("people.name");
   const statusValue = form.watch("status");
 
   return (
@@ -119,70 +120,39 @@ export const PeopleForm: React.FC<PeopleFormProps> = ({
             />
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-              <FormField
-                control={control}
-                name="name"
-                rules={{
-                  required: t("people.name") + " " + t("general.isRequired"),
-                }}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClassName}>
-                      {t("people.name")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        value={field.value || ""}
-                        placeholder={`${t("buttons.enter")}${t(
-                          "people.name",
-                        )?.toLowerCase()}`}
-                        className={inputClassName}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={control}
-                name="calledName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClassName}>
-                      {t("people.calledName")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        value={field.value || ""}
-                        placeholder={`${t("buttons.enter")}${t(
-                          "people.callNameHelper",
-                        )?.toLowerCase()}`}
-                        className={inputClassName}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={control}
-                name="nickname"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className={labelClassName}>
-                      {t("people.nickname")}
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} className={inputClassName} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {(["en", "th", "ja"] as const).map((lang) =>
+                (["name", "calledName", "nickname"] as const).map((name) => (
+                  <FormField
+                    key={`${lang}-${name}`}
+                    control={control}
+                    name={`translation.${lang}.${name}`}
+                    rules={lang === "en" && name === "name" ? {
+                      validate: (value) => Boolean(
+                        value?.trim() ||
+                        form.getValues("translation.th.name")?.trim() ||
+                        form.getValues("translation.ja.name")?.trim() ||
+                        form.getValues("name")?.trim()
+                      ) || t("general.nameRequired"),
+                    } : undefined}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className={labelClassName}>
+                          {t(`people.${name}`)} ({t(lang === "en" ? "general.languageEn" : lang === "th" ? "general.languageTh" : "general.languageJa")})
+                        </FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value || ""} className={inputClassName} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )),
+              )}
+              {(["name", "calledName", "nickname"] as const).map((name) =>
+                form.watch(name) ? (
+                  <p key={name} className="text-sm">{t("general.legacyValue")} - {t(`people.${name}`)}: {form.watch(name)}</p>
+                ) : null,
+              )}
 
               <FormField
                 control={control}

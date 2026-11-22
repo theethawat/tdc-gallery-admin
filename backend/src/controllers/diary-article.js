@@ -4,6 +4,7 @@ import MainService from '../services/MainService';
 import { DiaryArticle } from '../models/Article';
 import ImageModel from '../models/Image';
 import { IMAGE_TYPE } from '../configs/constants';
+import { nameSearch } from '../services/nameSearch';
 
 const DiaryArticleService = new MainService(DiaryArticle, 'diary-article');
 
@@ -13,11 +14,7 @@ export const createPipeline = (query) => {
 
   if (query?.name) {
     pipeline.push({
-      $match: {
-        name: {
-          $regex: query?.name,
-        },
-      },
+      $match: nameSearch(query.name),
     });
   }
 

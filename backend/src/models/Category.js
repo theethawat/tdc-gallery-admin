@@ -4,6 +4,15 @@ const { Schema } = Mongoose;
 
 const CategorySchema = new Schema(
   {
+    translation: {
+      th: {
+        name: String,
+      },
+      en: {
+        name: String,
+      },
+    },
+    // @deprecated, use translation instead
     name: String,
     place: { type: Mongoose.Types.ObjectId, ref: 'Place' },
   },

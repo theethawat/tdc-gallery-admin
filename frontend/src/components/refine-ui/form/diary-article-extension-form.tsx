@@ -10,10 +10,10 @@ import {
   Form,
   FormField,
   FormMessage,
-  FormControl,
 } from "@/components/ui/form";
 import { ArticleFormValue } from "./article-form";
 import { People } from "@/types";
+import { translatedValue } from "@/lib/translations";
 
 export interface DiaryArticleExtensionValue {
   gallery?: string;
@@ -27,43 +27,28 @@ interface DiaryArticleExtensionFormProps {
 export const DiaryArticleExtensionForm: React.FC<
   DiaryArticleExtensionFormProps
 > = ({ form }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { control } = form;
   const { append, fields, remove } = useFieldArray({
     name: "withs",
     control,
   });
 
-  const { options: galleryOptions } = useSelect({
-    resource: "gallery-article",
-    optionLabel: "name",
-    optionValue: "_id",
-    pagination: {
-      currentPage: 1,
-      pageSize: 1000,
-    },
-  });
-
-  const { options: peopleOptions } = useSelect({
+  const { query: peopleQuery } = useSelect<People>({
     resource: "people",
-    optionLabel: "name",
     optionValue: "_id",
     pagination: {
       currentPage: 1,
       pageSize: 1000,
     },
   });
-  console.log("People Options:", peopleOptions);
+  const peopleOptions = (peopleQuery.data?.data || []).map((person) => ({
+    value: person._id,
+    label: translatedValue(person, "name", i18n.language) || "-",
+  }));
   return (
     <Form {...form}>
       <div className="space-y-8 mt-8">
-        {/* <Autocomplete
-        form={form}
-        label={t("gallery.article")}
-        name="gallery"
-        options={galleryOptions}
-      /> */}
-
         <FormItem>
           <FormLabel>{t("relation.people")}</FormLabel>
 

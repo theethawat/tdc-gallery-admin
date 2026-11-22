@@ -56,8 +56,28 @@ export const PeopleStatusInfo = {
 
 export interface People {
   _id: string;
-  name: string;
+  translation?: {
+    th?: {
+      name?: string;
+      nickname?: string;
+      calledName?: string;
+    };
+    en?: {
+      name?: string;
+      nickname?: string;
+      calledName?: string;
+    };
+    ja?: {
+      name?: string;
+      nickname?: string;
+      calledName?: string;
+    };
+  };
+  // @deprecated, use translation instead
+  name?: string;
+  // @deprecated, use translation instead
   calledName?: string;
+  // @deprecated, use translation instead
   nickname?: string;
   birthday?: Date;
   nationality?: string;

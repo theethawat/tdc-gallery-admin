@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getCountryData, TCountryCode } from "countries-list";
 import * as FLAGS from "country-flag-icons/react/3x2";
+import { translatedValue } from "@/lib/translations";
 
 export const PeopleList = () => {
   const { t, i18n } = useTranslation();
@@ -43,31 +44,31 @@ export const PeopleList = () => {
         cell: ({ row }) => row.index + 1,
         size: 90,
       }),
-      columnHelper.accessor("name", {
+      columnHelper.accessor((person) => translatedValue(person, "name", i18n.language), {
         id: "name",
         header: t("people.name"),
         enableSorting: true,
-        cell: ({ getValue, row }) => (
+        cell: ({ row }) => (
           <span className="flex items-center gap-2">
             <Avatar>
               {row.original?.image?.url ? (
                 <AvatarImage src={row.original?.image?.url} />
               ) : (
                 <AvatarFallback>
-                  {row.original.name.charAt(0).toUpperCase()}
+                  {translatedValue(row.original, "name", i18n.language).charAt(0).toUpperCase()}
                 </AvatarFallback>
               )}
             </Avatar>
-            {getValue() || "-"}
+            {translatedValue(row.original, "name", i18n.language) || "-"}
           </span>
         ),
         size: 220,
       }),
-      columnHelper.accessor("calledName", {
+      columnHelper.accessor((person) => translatedValue(person, "calledName", i18n.language), {
         id: "calledName",
         header: t("people.calledName") || "-",
         enableSorting: false,
-        cell: ({ getValue }) => getValue() || "-",
+        cell: ({ row }) => translatedValue(row.original, "calledName", i18n.language) || "-",
       }),
       columnHelper.accessor("status", {
         id: "status",
@@ -83,9 +84,9 @@ export const PeopleList = () => {
                 statusInfo?.color || "bg-gray-200 text-gray-800"
               }`}
             >
-              {statusInfo.translation[
-                i18n.language as keyof typeof statusInfo.translation
-              ] || peopleStatus}
+              {statusInfo?.translation[
+                i18n.language as keyof typeof PeopleStatusInfo[People["status"]]["translation"]
+              ] || peopleStatus || "-"}
             </span>
           );
         },
@@ -137,7 +138,7 @@ export const PeopleList = () => {
         size: 290,
       }),
     ];
-  }, [t]);
+  }, [t, i18n.language]);
 
   const table = useTable({
     columns,

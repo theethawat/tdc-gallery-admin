@@ -22,6 +22,11 @@
     "diaryArticleCreate": "Create Article"
   },
   "general": {
+    "languageEn": "English",
+    "languageTh": "Thai",
+    "languageJa": "Japanese",
+    "legacyValue": "Legacy value",
+    "nameRequired": "Enter a name in at least one language",
     "actions": "Actions",
     "date": "Date",
     "description": "Description",

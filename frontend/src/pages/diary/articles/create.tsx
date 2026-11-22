@@ -39,8 +39,7 @@ export const DiaryArticleCreate = () => {
   const onSubmit: SubmitHandler<DiaryArticleSubmitValue> = async (values) => {
     try {
       const payload: Record<string, unknown> = {
-        name: values.name,
-        description: values.description,
+        translation: values.translation,
         categories:
           values.categories?.map((cat) =>
             typeof cat === "string" ? cat : cat._id,

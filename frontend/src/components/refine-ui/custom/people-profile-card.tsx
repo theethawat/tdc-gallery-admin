@@ -15,6 +15,8 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/th";
+import { translatedValue } from "@/lib/translations";
+import { TranslatedFields } from "@/components/refine-ui/views/translated-fields";
 
 dayjs.extend(relativeTime);
 
@@ -114,8 +116,6 @@ export function PeopleProfileCard({
     record?.socialMedia?.facebook || record?.socialMedia?.instagram;
 
   const hasPersonalInfo =
-    record?.calledName ||
-    record?.nickname ||
     record?.birthday ||
     record?.nationality;
 
@@ -131,7 +131,7 @@ export function PeopleProfileCard({
             {imageUrl ? (
               <img
                 src={imageUrl}
-                alt={record?.name}
+                alt={translatedValue(record, "name", i18n.language)}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -155,28 +155,19 @@ export function PeopleProfileCard({
               )}
             </div>{" "}
             <h2 className="text-xl font-medium text-foreground leading-tight">
-              {record?.calledName && (
-                <span className="text-2xl text-muted-foreground">
-                  <span className="text-foreground font-semibold">
-                    {record.calledName}
-                  </span>
-                </span>
-              )}{" "}
-              {record?.name || "-"}
+              {translatedValue(record, "name", i18n.language) || "-"}
             </h2>
-            {record?.nickname && (
-              <div>
-                <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                  {t("people.nickname")}
-                </span>
-                <p className="text-muted-foreground">{record.nickname}</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
 
       <CardContent className="pt-6 space-y-6">
+        <TranslatedFields record={record} japanese fields={[
+          { key: "name", label: t("people.name") },
+          { key: "calledName", label: t("people.calledName") },
+          { key: "nickname", label: t("people.nickname") },
+        ]} />
+        <Separator />
         {/* Personal Info */}
         {hasPersonalInfo && (
           <>

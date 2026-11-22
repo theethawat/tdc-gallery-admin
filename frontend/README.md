@@ -15,6 +15,17 @@ A React Framework for building internal tools, admin panels, dashboards & B2B ap
 
 Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
 
+## Multilingual content
+
+People, categories, places, and gallery and diary articles store Thai and
+English content in `translation.th` and `translation.en`. People also have
+Japanese name, called-name, and nickname fields; Japanese is not an interface
+language. Forms and detail pages show every applicable language. Lists and
+related-record selectors prefer the current interface language, then the
+legacy field, then the other language (and Japanese for people). Existing legacy fields remain visible
+on edit and detail pages and are not automatically assigned to a language.
+Name searches match translated and legacy names.
+
 ## Available Scripts
 
 ### Running the development server.

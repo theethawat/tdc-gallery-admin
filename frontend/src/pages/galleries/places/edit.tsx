@@ -1,49 +1,40 @@
-import { useOne, useResourceParams } from "@refinedev/core";
+import { HttpError, useResourceParams } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
 
 import { EditView } from "@/components/refine-ui/views/edit-view";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 
 import { ListViewHeader } from "@/components/refine-ui/views/list-view";
 import { useTranslation } from "react-i18next";
+import { Place } from "@/types";
+import { TranslatedNameFields } from "@/components/refine-ui/form/translated-name-fields";
 
 type PlaceFormValues = {
-  name: string;
+  name?: string;
+  translation?: Place["translation"];
 };
 
 export const PlaceEdit = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { id } = useResourceParams();
-  const { result: record } = useOne({ resource: "place", id });
-
-  console.log("Record in Edit:", record);
   const {
     refineCore: { onFinish },
     ...form
-  } = useForm<PlaceFormValues>({
+  } = useForm<Place, HttpError, PlaceFormValues>({
     refineCoreProps: {
       resource: "place",
       action: "edit",
       id,
       redirect: "list",
     },
-    defaultValues: record,
   });
 
   function onSubmit(values: PlaceFormValues) {
     onFinish({
-      name: values.name,
+      translation: values.translation,
     });
   }
 
@@ -56,29 +47,12 @@ export const PlaceEdit = () => {
       />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            rules={{ required: "Place name is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("gallery.placeName")}</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value || ""}
-                    placeholder="Enter Place name"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <TranslatedNameFields label={t("gallery.placeName")} />
+          {form.watch("name") && <p>{t("general.legacyValue")}: {form.watch("name")}</p>}
 
           <div className="flex gap-2">
             <Button
               type="submit"
-              {...form.saveButtonProps}
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting ? "Updating..." : t("buttons.save")}

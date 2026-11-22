@@ -4,7 +4,16 @@ const { Schema } = Mongoose;
 
 const ArticleSchema = new Schema(
   {
-    name: String,
+    translation: {
+      th: {
+        name: String,
+        description: String,
+      },
+      en: {
+        name: String,
+        description: String,
+      },
+    },
     categories: [
       {
         type: Mongoose.Types.ObjectId,
@@ -12,6 +21,9 @@ const ArticleSchema = new Schema(
       },
     ],
     date: { type: Date },
+    // @deprecated, use translation instead
+    name: String,
+    // @deprecated, use translation instead
     description: { type: String },
     high_privacy: { type: Boolean, default: false },
   },

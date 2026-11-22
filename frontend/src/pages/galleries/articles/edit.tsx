@@ -43,8 +43,7 @@ export const ArticleEdit = () => {
   const onSubmit: SubmitHandler<ArticleFormValue> = async (values) => {
     try {
       const payload: Record<string, unknown> = {
-        name: values.name,
-        description: values.description,
+        translation: values.translation,
         categories:
           values.categories?.map((cat) =>
             typeof cat === "string" ? cat : cat._id,

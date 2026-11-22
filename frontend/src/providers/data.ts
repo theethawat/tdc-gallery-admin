@@ -13,12 +13,15 @@ export const createDataProvider = (): DataProvider => ({
   },
 
   getList: async ({ resource, pagination, filters, meta = {} }) => {
-    const queryParams = new URLSearchParams({
-      page: pagination?.currentPage,
-      size: pagination?.pageSize,
-      // name,
-      // ...query,
-    });
+    const queryParams = new URLSearchParams();
+    if (pagination?.currentPage !== undefined) queryParams.set("page", String(pagination.currentPage));
+    if (pagination?.pageSize !== undefined) queryParams.set("size", String(pagination.pageSize));
+    const nameFilter = filters?.find(
+      (filter) => "field" in filter && filter.field === "name" && filter.operator === "contains",
+    );
+    if (nameFilter && typeof nameFilter.value === "string" && nameFilter.value) {
+      queryParams.set("name", nameFilter.value);
+    }
 
     const { data } = await api.get(`${resource}?${queryParams.toString()}`);
     return {

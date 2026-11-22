@@ -22,6 +22,11 @@
     "diaryArticleCreate": "สร้างบทความ"
   },
   "general": {
+    "languageEn": "อังกฤษ",
+    "languageTh": "ไทย",
+    "languageJa": "ญี่ปุ่น",
+    "legacyValue": "ข้อมูลเดิม",
+    "nameRequired": "กรุณาระบุชื่ออย่างน้อยหนึ่งภาษา",
     "actions": "ดำเนินการ",
     "date": "วันที่",
     "description": "รายละเอียด",

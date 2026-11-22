@@ -4,6 +4,7 @@ import MainService from '../services/MainService';
 import { GalleryArticle as GalleryArticleModel } from '../models/Article';
 import ImageModel from '../models/Image';
 import { IMAGE_TYPE } from '../configs/constants';
+import { nameSearch } from '../services/nameSearch';
 
 const GalleryArticleService = new MainService(
   GalleryArticleModel,
@@ -18,11 +19,7 @@ export const onReadAll = async (req, res) => {
 
     if (req?.query?.name) {
       pipeline.push({
-        $match: {
-          name: {
-            $regex: req?.query?.name,
-          },
-        },
+        $match: nameSearch(req.query.name),
       });
     }
 

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import MainService from '../services/MainService';
 import PeopleModel from '../models/People';
+import { nameSearch } from '../services/nameSearch';
 
 const PeopleService = new MainService(PeopleModel, 'article');
 
@@ -12,20 +13,7 @@ export const onReadAll = async (req, res) => {
 
     if (req?.query?.name) {
       pipeline.push({
-        $match: {
-          $or: [
-            {
-              name: {
-                $regex: req?.query?.name,
-              },
-            },
-            {
-              called_name: {
-                $regex: req?.query?.name,
-              },
-            },
-          ],
-        },
+        $match: nameSearch(req.query.name, { people: true }),
       });
     }
 

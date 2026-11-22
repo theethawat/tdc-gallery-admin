@@ -14,16 +14,17 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Article } from "@/types";
+import { translatedValue } from "@/lib/translations";
+import { TranslatedFields } from "@/components/refine-ui/views/translated-fields";
 
 export const ArticleShow = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useResourceParams();
 
-  const { result: record, query } = useShow<Article>({
+  const { result: record } = useShow<Article>({
     resource: "gallery-article",
     id,
   });
-  const { isLoading } = query;
   return (
     <ShowView>
       <ShowViewHeader resource="articles" title={t("gallery.article")} />
@@ -32,7 +33,7 @@ export const ArticleShow = () => {
           <CardHeader>
             <div className="flex justify-between items-start">
               <div>
-                <CardTitle>{record?.name}</CardTitle>
+                <CardTitle>{translatedValue(record, "name", i18n.language) || "-"}</CardTitle>
                 <CardDescription>ID: {record?._id}</CardDescription>
               </div>
             </div>
@@ -43,11 +44,11 @@ export const ArticleShow = () => {
               <h4 className="text-sm font-medium mb-2">
                 {t("gallery.category")}
               </h4>
-              <p className="text-sm text-muted-foreground">
-                {record?.categories && record.categories.length > 0
-                  ? record.categories.map((cat: any) => cat?.name).join(", ")
-                  : "-"}
-              </p>
+              {record?.categories?.length
+                ? record.categories.map((category) => (
+                    <TranslatedFields key={category._id} record={category} fields={[{ key: "name", label: t("gallery.categoryName") }]} />
+                  ))
+                : "-"}
             </div>
 
             <Separator />
@@ -83,22 +84,10 @@ export const ArticleShow = () => {
             )}
 
             {/* Description */}
-            <div>
-              <h4 className="text-sm font-medium mb-4">
-                {t("gallery.articleContent")}
-              </h4>
-              <div className="prose prose-sm max-w-none">
-                {record?.description ? (
-                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                    {record.description}
-                  </p>
-                ) : (
-                  <p className="text-muted-foreground">
-                    No description available
-                  </p>
-                )}
-              </div>
-            </div>
+            <TranslatedFields record={record} fields={[
+              { key: "name", label: t("gallery.articleName") },
+              { key: "description", label: t("gallery.articleContent") },
+            ]} />
           </CardContent>
         </Card>
       </div>

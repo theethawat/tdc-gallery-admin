@@ -4,14 +4,25 @@ import { People } from "./People";
 
 export interface Article {
   _id: string;
-  name: string;
-  categories: Category[];
+  translation?: {
+    th?: {
+      name?: string;
+      description?: string;
+    };
+    en?: {
+      name?: string;
+      description?: string;
+    };
+  };
   date?: Date;
-  description: string;
+  categories: Category[];
   high_privacy?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
   images?: Image[];
+  // @deprecated, use translation instead
+  name?: string;
+  description?: string;
 }
 
 export interface GalleryArticle extends Article {}

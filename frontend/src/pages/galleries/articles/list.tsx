@@ -16,9 +16,10 @@ import {
   ListViewHeader,
 } from "@/components/refine-ui/views/list-view";
 import { Input } from "@/components/ui/input";
+import { translatedValue } from "@/lib/translations";
 
 export const ArticleList = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [debouncedSearch, setDebouncedSearch] = React.useState("");
 
@@ -41,18 +42,18 @@ export const ArticleList = () => {
         cell: ({ row }) => row.index + 1,
         size: 90,
       }),
-      columnHelper.accessor("name", {
+      columnHelper.accessor((article) => translatedValue(article, "name", i18n.language), {
         id: "name",
         header: t("gallery.articleName"),
         enableSorting: true,
-        cell: ({ getValue }) => getValue() || "-",
+        cell: ({ row }) => translatedValue(row.original, "name", i18n.language) || "-",
       }),
-      columnHelper.accessor("description", {
+      columnHelper.accessor((article) => translatedValue(article, "description", i18n.language), {
         id: "description",
         header: t("general.description") || "Description",
         enableSorting: false,
-        cell: ({ getValue }) => {
-          const description = getValue();
+        cell: ({ row }) => {
+          const description = translatedValue(row.original, "description", i18n.language);
           if (!description) return "-";
           return (
             <div className="max-w-xs truncate">
@@ -68,7 +69,7 @@ export const ArticleList = () => {
         cell: ({ getValue }) => {
           const categories = getValue();
           if (!categories || categories.length === 0) return "-";
-          return categories.map((cat: any) => cat?.name).join(", ") || "-";
+          return categories.map((cat) => translatedValue(cat, "name", i18n.language)).filter(Boolean).join(", ") || "-";
         },
       }),
       columnHelper.accessor("date", {
@@ -110,7 +111,7 @@ export const ArticleList = () => {
         size: 290,
       }),
     ];
-  }, [t]);
+  }, [t, i18n.language]);
 
   const table = useTable({
     columns,

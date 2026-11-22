@@ -4,6 +4,15 @@ const { Schema } = Mongoose;
 
 const PlaceSchema = new Schema(
   {
+    translation: {
+      th: {
+        name: String,
+      },
+      en: {
+        name: String,
+      },
+    },
+    // @deprecated, use translation instead
     name: String,
     type_code: { type: String, index: true },
   },

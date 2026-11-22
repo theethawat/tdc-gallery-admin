@@ -4,6 +4,24 @@ const { Schema } = Mongoose;
 
 const PeopleSchema = new Schema(
   {
+    translation: {
+      th: {
+        name: String,
+        nickname: String,
+        calledName: String,
+      },
+      en: {
+        name: String,
+        nickname: String,
+        calledName: String,
+      },
+      ja: {
+        name: String,
+        nickname: String,
+        calledName: String,
+      },
+    },
+    // @deprecated, use translation instead
     name: String,
     calledName: String,
     nickname: String,

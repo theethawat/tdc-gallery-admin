@@ -16,6 +16,7 @@ import {
   ListViewHeader,
 } from "@/components/refine-ui/views/list-view";
 import { Input } from "@/components/ui/input";
+import { translatedValue } from "@/lib/translations";
 
 export const CategoryList = () => {
   const { t, i18n } = useTranslation();
@@ -41,23 +42,23 @@ export const CategoryList = () => {
         cell: ({ row }) => row.index + 1,
         size: 90,
       }),
-      columnHelper.accessor("name", {
+      columnHelper.accessor((category) => translatedValue(category, "name", i18n.language), {
         id: "name",
         header: t("gallery.categoryName"),
         enableSorting: true,
-        cell: ({ getValue }) => getValue() || "-",
+        cell: ({ row }) => translatedValue(row.original, "name", i18n.language) || "-",
       }),
-      columnHelper.accessor("place.name", {
+      columnHelper.accessor((category) => translatedValue(category.place, "name", i18n.language), {
         id: "place",
         header: t("gallery.place"),
         enableSorting: false,
-        cell: ({ row }) => row.original.place?.name || "-",
+        cell: ({ row }) => translatedValue(row.original.place, "name", i18n.language) || "-",
       }),
       columnHelper.display({
         id: "actions",
         header: t("general.actions"),
         cell: ({ row }) => {
-          const recordItemId = row.original.id ?? row.original._id;
+          const recordItemId = row.original._id;
 
           return (
             <div className="flex gap-2">
@@ -83,7 +84,7 @@ export const CategoryList = () => {
         size: 290,
       }),
     ];
-  }, []);
+  }, [t, i18n.language]);
 
   const table = useTable({
     columns,

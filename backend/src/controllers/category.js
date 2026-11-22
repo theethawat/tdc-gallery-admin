@@ -1,6 +1,7 @@
 import Mongoose from 'mongoose';
 import MainService from '../services/MainService';
 import CategoryModel from '../models/Category';
+import { nameSearch } from '../services/nameSearch';
 
 const CategoryService = new MainService(CategoryModel, 'category');
 
@@ -8,30 +9,11 @@ export const onReadAll = async (req, res) => {
   try {
     let query = {};
     if (req?.query?.name) {
-      query = {
-        $or: [
-          {
-            name: {
-              $regex: req?.query?.name,
-            },
-          },
-          {
-            type_code: {
-              $regex: req?.query?.name,
-            },
-          },
-        ],
-      };
+      query = nameSearch(req.query.name, { typeCode: true });
     }
 
     if (req?.query?.place) {
-      query = {
-        $or: [
-          {
-            place: Mongoose.Types.ObjectId(req?.query?.place),
-          },
-        ],
-      };
+      query.place = Mongoose.Types.ObjectId(req?.query?.place);
     }
 
     const result = await CategoryService.getAll({

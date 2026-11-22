@@ -53,7 +53,7 @@ import {
   DiaryArticleList,
   DiaryArticleShow,
 } from "./pages/diary/articles";
-import { PlaceCreate, PlaceEdit, PlaceList } from "./pages/galleries/places";
+import { PlaceCreate, PlaceEdit, PlaceList, PlaceShow } from "./pages/galleries/places";
 import { ForgotPassword } from "./pages/forgot-password";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -145,6 +145,7 @@ function App() {
                   list: "/galleries/places",
                   create: "/galleries/places/create",
                   edit: "/galleries/places/edit/:id",
+                  show: "/galleries/places/show/:id",
                   meta: {
                     canDelete: true,
                     label: t("gallery.place"),
@@ -225,6 +226,7 @@ function App() {
                       <Route index element={<PlaceList />} />
                       <Route path="create" element={<PlaceCreate />} />
                       <Route path="edit/:id" element={<PlaceEdit />} />
+                      <Route path="show/:id" element={<PlaceShow />} />
                     </Route>
                     <Route index element={<ArticleList />} />
                   </Route>

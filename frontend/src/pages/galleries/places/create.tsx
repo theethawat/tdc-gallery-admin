@@ -1,21 +1,17 @@
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { HttpError } from "@refinedev/core";
+import { Place } from "@/types";
+import { TranslatedNameFields } from "@/components/refine-ui/form/translated-name-fields";
 
 import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 
 type PlaceFormValues = {
-  name: string;
+  name?: string;
+  translation?: Place["translation"];
 };
 
 export const PlaceCreate = () => {
@@ -24,7 +20,7 @@ export const PlaceCreate = () => {
   const {
     refineCore: { onFinish },
     ...form
-  } = useForm<PlaceFormValues>({
+  } = useForm<Place, HttpError, PlaceFormValues>({
     refineCoreProps: {
       resource: "place",
     },
@@ -32,7 +28,7 @@ export const PlaceCreate = () => {
 
   function onSubmit(values: PlaceFormValues) {
     onFinish({
-      name: values.name,
+      translation: values.translation,
     }).then(() => {
       navigate(-1);
     });
@@ -42,29 +38,11 @@ export const PlaceCreate = () => {
     <CreateView>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            rules={{ required: "Category name is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("gallery.placeName")}</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    value={field.value || ""}
-                    placeholder="Enter place name"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <TranslatedNameFields label={t("gallery.placeName")} />
 
           <div className="flex gap-2">
             <Button
               type="submit"
-              {...form.saveButtonProps}
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting
